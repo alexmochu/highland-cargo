@@ -61,11 +61,11 @@ export const Footer = () => {
               </div>
               <div className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
-                <span className="text-sm">+254 700 123 456</span>
+                <span className="text-sm">+254 746 888 942</span>
               </div>
               <div className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
-                <span className="text-sm">info@highlandcargo.com</span>
+                <span className="text-sm">support@highlandcargoafrica.com</span>
               </div>
             </div>
           </div>

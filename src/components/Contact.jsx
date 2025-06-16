@@ -25,7 +25,7 @@ export const Contact = () => {
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-gray-600">
-                123 Business District<br />
+                Eastgate Rd. Mombasa Road<br />
                 Nairobi, Kenya<br />
                 P.O. Box 12345-00100
               </p>
@@ -41,9 +41,9 @@ export const Contact = () => {
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-gray-600">
-                +254 700 123 456<br />
-                +254 20 123 4567<br />
-                24/7 Customer Support
+                +254 746 888 942<br />
+                +254 707 126 666<br />
+                {/* 24/7 Customer Support */}
               </p>
             </CardContent>
           </Card>
@@ -57,9 +57,9 @@ export const Contact = () => {
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-gray-600">
-                info@highlandcargo.com<br />
-                quotes@highlandcargo.com<br />
-                support@highlandcargo.com
+                support@highlandcargoafrica.com<br />
+                {/* quotes@highlandcargo.com<br />
+                support@highlandcargo.com */}
               </p>
             </CardContent>
           </Card>
