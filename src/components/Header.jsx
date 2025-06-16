@@ -1,12 +1,14 @@
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Button } from "@/components/ui/button";
 import { Menu, Globe, User } from "lucide-react";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from 'next-i18next';
 import LanguageToggle from "./LanguageToggle";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
+  console.log('ge', t("brand"))
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -67,3 +69,11 @@ export const Header = () => {
     </header>
   );
 };
+
+// export async function getStaticProps({ locale }) {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale, ['common'])),
+//     },
+//   };
+// }

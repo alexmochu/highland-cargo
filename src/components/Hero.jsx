@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Truck, Ship, Plane, MapPin } from "lucide-react";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation, Trans } from 'next-i18next';
 
 export const Hero = () => {
   const { t } = useTranslation();
