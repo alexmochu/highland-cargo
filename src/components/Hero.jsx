@@ -1,9 +1,10 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { Truck, Ship, Plane, MapPin } from "lucide-react";
-import { useTranslation, Trans } from 'next-i18next';
+// import { useTranslation } from 'next-i18next';
 
 export const Hero = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   return (
     <section 
       className="relative text-white py-28 bg-cover bg-center overflow-hidden flex items-center min-h-[600px]"
@@ -15,13 +16,25 @@ export const Hero = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="opacity-99 animate-fade-in-up [animation-fill-mode:forwards]">
             <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow animate-pulse">
-              <Trans i18nKey="hero_title" components={{
+              {/* <Trans i18nKey="hero_title" components={{
                 1: <span className="text-orange-300 bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent" />,
                 2: <span className="text-orange-400" />
-              }} />
+              }} /> */}
+              <h1 className="text-4xl font-bold">
+                {'Move' + ' '}
+                <span className="text-orange-300 bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent">
+                  {'Anything '}
+                </span>{' '}
+                <br/>
+                  {'Anywhere, '}
+                <span className="text-orange-300 bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent">
+                  {'Fast'}
+                </span>{' '}
+              </h1>
             </h1>
             <p className="text-xl mb-9 text-blue-100 font-light animate-fade-in-up [animation-delay:150ms]">
-              {t("hero_desc")}
+              {/* {t("hero_desc")} */}
+              Trusted by 10,000+ businesses for international air, sea, and local shipping. Experience global connections and personal attention — with Highland Cargo.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:300ms]">
               <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white shadow-lg animate-scale-in">

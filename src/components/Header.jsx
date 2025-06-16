@@ -8,7 +8,6 @@ import LanguageToggle from "./LanguageToggle";
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
-  console.log('ge', t("brand"))
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -20,8 +19,14 @@ export const Header = () => {
               </div>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-blue-600">{t("brand")}</h1>
-              <p className="text-sm text-gray-600">{t("tagline")}</p>
+              <h1 className="text-2xl font-bold text-blue-600">
+                {/* {t("brand")} */}
+                Highland Cargo
+                </h1>
+              <p className="text-sm text-gray-600">
+                {/* {t("tagline")} */}
+                Global Logistics Solutions
+                </p>
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-8">
@@ -37,7 +42,8 @@ export const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             <LanguageToggle />
             <Button className="bg-orange-500 hover:bg-orange-600">
-              {t("get_quote")}
+              {/* {t("get_quote")} */}
+              Get Quote
             </Button>
           </div>
           <Button

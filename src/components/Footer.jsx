@@ -16,7 +16,10 @@ export const Footer = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold">{t("brand")}</h3>
-                <p className="text-sm text-gray-400">{t("tagline")}</p>
+                <p className="text-sm text-gray-400">
+                  {/* {t("tagline")} */}
+                  Global Logistics Solutions
+                  </p>
               </div>
             </div>
             <p className="text-gray-400 mb-4">
@@ -73,7 +76,10 @@ export const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>
-            &copy; 2024 {t("brand")}. {t("copyright")} | {t("privacy")} | {t("terms")}
+            &copy; 2024 
+            {/* {t("brand")} */}
+            Highland Cargo
+            . {t("copyright")} | {t("privacy")} | {t("terms")}
           </p>
         </div>
       </div>
