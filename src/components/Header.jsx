@@ -37,7 +37,7 @@ export const Header = () => {
           </nav>
           <div className="hidden md:flex items-center space-x-4">
             <LanguageToggle />
-            <Button className="bg-orange-500 hover:bg-orange-600">
+            <Button className="bg-orange-500 text-white hover:bg-orange-600">
               {/* {t("get_quote")} */}
               Get Quote
             </Button>

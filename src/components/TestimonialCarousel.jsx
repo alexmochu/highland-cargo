@@ -41,7 +41,7 @@ export const TestimonialCarousel = () => (
                   {[...Array(5 - t.rating)].map((_, i) => <Star key={i} className="w-4 h-4 text-gray-300" />)}
                 </div>
                 <div className="flex items-center gap-3 mt-3">
-                  <img src={t.image} className="w-12 h-12 rounded-full border-2 border-orange-200" alt={t.name} />
+                  {/* <img src={t.image} className="w-12 h-12 rounded-full border-2 border-orange-200" alt={t.name} /> */}
                   <div>
                     <div className="font-semibold text-gray-900">{t.name}</div>
                     <div className="text-sm text-gray-500">{t.title}</div>

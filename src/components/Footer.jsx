@@ -15,7 +15,10 @@ export const Footer = () => {
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-bold">{t("brand")}</h3>
+                <h3 className="text-xl font-bold">
+                  {/* {t("brand")} */}
+                  Highland Cargo
+                  </h3>
                 <p className="text-sm text-gray-400">
                   {/* {t("tagline")} */}
                   Global Logistics Solutions
@@ -23,7 +26,8 @@ export const Footer = () => {
               </div>
             </div>
             <p className="text-gray-400 mb-4">
-              {t("footer_text")}
+              {/* {t("footer_text")} */}
+              Your trusted partner for international shipping and logistics solutions across the globe.
             </p>
             <div className="flex space-x-4">
               <Facebook className="w-5 h-5 text-gray-400 hover:text-blue-500 cursor-pointer" />
@@ -76,7 +80,7 @@ export const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>
-            &copy; 2024 
+            &copy; 2025 
             {/* {t("brand")} */}
             Highland Cargo
             . {t("copyright")} | {t("privacy")} | {t("terms")}

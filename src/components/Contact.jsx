@@ -79,7 +79,7 @@ export const Contact = () => {
               <Input placeholder="Phone Number" />
               <Input placeholder="Service Type" />
               <Textarea placeholder="Describe your shipping requirements..." className="min-h-24" />
-              <Button className="w-full bg-orange-500 hover:bg-orange-600">
+              <Button className="w-full bg-orange-500 text-white hover:bg-orange-600">
                 Request Quote
               </Button>
             </CardContent>
@@ -120,7 +120,7 @@ export const Contact = () => {
                   Ready to start shipping? Create an account and get access to our online shipping platform.
                 </p>
                 <div className="space-y-3">
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                  <Button className="w-full bg-blue-600 text-white hover:bg-blue-700">
                     Create Account
                   </Button>
                   <Button variant="outline" className="w-full">

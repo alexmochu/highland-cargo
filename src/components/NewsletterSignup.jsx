@@ -31,7 +31,7 @@ export const NewsletterSignup = () => {
               onChange={e=>setEmail(e.target.value)}
               required
             />
-            <Button type="submit" className="bg-orange-500 rounded-r-lg" disabled={submitted}>
+            <Button type="submit" className="bg-orange-500 text-white rounded-r-lg" disabled={submitted}>
               {submitted ? "Subscribed!" : "Sign Up"}
             </Button>
           </form>

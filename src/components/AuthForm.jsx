@@ -162,14 +162,14 @@ export function AuthForm({ onAuth }) {
           Email + Password
         </Button> */}
         <Button
-          variant={tab === "magic_link" ? "default" : "outline"}
+          variant={tab === "magic_link" ? "dark" : "outline"}
           size="sm"
           onClick={() => { resetAll(); setTab("magic_link"); }}
         >
           Magic Link
         </Button>
         <Button
-          variant={tab === "phone" ? "default" : "outline"}
+          variant={tab === "phone" ? "dark" : "outline"}
           size="sm"
           onClick={() => { resetAll(); setTab("phone"); }}
         >
@@ -194,7 +194,7 @@ export function AuthForm({ onAuth }) {
             />
           </div>
           {error && <div className="text-red-600 text-sm">{error}</div>}
-          <Button className="w-full mt-4" type="submit" disabled={loading}>
+          <Button variant={"dark"} className="w-full mt-4" type="submit" disabled={loading}>
             {loading ? "Sending Magic Link…" : "Send Magic Link"}
           </Button>
         </form>
@@ -282,7 +282,7 @@ export function AuthForm({ onAuth }) {
             />
           </div>
           {!otpSent ? (
-            <Button className="w-full mt-4" type="submit" disabled={loading}>
+            <Button variant="dark" className="w-full mt-4" type="submit" disabled={loading}>
               {loading ? "Sending OTP…" : "Send OTP"}
             </Button>
           ) : (

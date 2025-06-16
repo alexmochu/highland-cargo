@@ -62,7 +62,7 @@ export const Support = () => {
                 <CardTitle className="text-xl">{item.title}</CardTitle>
                 <CardDescription>{item.description}</CardDescription>
               </CardHeader>
-              <CardContent className="text-center">
+              <CardContent className="text-center text-white">
                 <Button className="bg-blue-600 hover:bg-blue-700 animate-fade-in">
                   Click to Know More
                 </Button>

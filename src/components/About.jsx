@@ -3,10 +3,10 @@ import { Globe, Users, Award, Clock } from "lucide-react";
 
 export const About = () => {
   const stats = [
-    { icon: Globe, value: "50+", label: "Countries Served" },
-    { icon: Users, value: "10K+", label: "Happy Clients" },
+    { icon: Globe, value: "5+", label: "Countries Served" },
+    { icon: Users, value: "1K+", label: "Happy Clients" },
     { icon: Award, value: "15+", label: "Years Experience" },
-    { icon: Clock, value: "99.9%", label: "On-Time Delivery" }
+    // { icon: Clock, value: "99.9%", label: "On-Time Delivery" }
   ];
 
   return (
@@ -22,18 +22,18 @@ export const About = () => {
               Who We Are
             </h2>
             <p className="text-lg text-gray-700">
-              Highland Cargo is a leading logistics and freight forwarding company with over <span className="font-bold text-orange-500">15 years</span> of experience in international trade.
+              Highland Cargo is a leading logistics and freight forwarding company with over <span className="font-bold text-orange-500">15 years</span> (since 2009) of experience in international trade.
             </p>
             <p className="text-lg text-gray-600">
-              We connect Africa’s businesses to the world with smart solutions for air and sea freight, warehousing, and delivery. Join <span className="font-bold text-blue-600">10,000+ clients</span> who trust us with their cargo journeys!
+              We connect Africa’s businesses to the world with smart solutions for air and sea freight, warehousing, and delivery. Join <span className="font-bold text-blue-600">1000+ clients</span> who trust us with their cargo journeys!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button className="bg-blue-600 hover:bg-blue-700 shadow-lg animate-pulse">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg animate-pulse">
                 Learn More About Us
               </Button>
-              <Button variant="outline" className="font-semibold">
+              {/* <Button variant="outline" className="font-semibold">
                 View Our Certifications
-              </Button>
+              </Button> */}
             </div>
           </div>
           <div className="relative w-full h-full group">
@@ -47,7 +47,7 @@ export const About = () => {
             <div className="absolute bottom-10 right-10 w-6 h-6 bg-blue-400 opacity-30 rounded-full blur-3xl animate-pulse-slow" />
           </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-in">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in">
             {stats.map((stat, index) => (
               <div key={index} className="bg-white rounded-2xl p-6 text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300 group">
                 <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse group-hover:scale-110 transition-transform">
