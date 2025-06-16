@@ -21,7 +21,8 @@ export const Header = () => {
             <div>
               <h1 className="text-2xl font-bold text-blue-600">
                 {/* {t("brand")} */}
-                Highland Cargo
+                <span className="text-blue-600">Highland{' '}</span>
+                <span className="text-orange-500">Cargo</span>
                 </h1>
               <p className="text-sm text-gray-600">
                 {/* {t("tagline")} */}
