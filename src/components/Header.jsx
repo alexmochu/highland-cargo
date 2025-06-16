@@ -4,6 +4,7 @@ import { Menu, Globe, User } from "lucide-react";
 // import { useState } from "react";
 // import { useTranslation } from 'next-i18next';
 import LanguageToggle from "./LanguageToggle";
+import Link from 'next/link'
 
 export const Header = () => {
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +13,7 @@ export const Header = () => {
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2">
             <div className="bg-blue-600 text-white p-2 rounded-lg">
               <div className="w-8 h-8 flex items-center justify-center font-bold text-lg">
                 HC
@@ -29,12 +30,12 @@ export const Header = () => {
                 Global Logistics Solutions
                 </p>
             </div>
-          </div>
+          </Link>
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="/services" className="text-gray-700 hover:text-blue-600 transition-colors">{"Services"}</a>
-            <a href="/about" className="text-gray-700 hover:text-blue-600 transition-colors">{"About"}</a>
-            <a href="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">{"Contact"}</a>
-            <a href="/auth" className="text-gray-700 hover:text-orange-500 transition-colors">{'Login'}</a>
+            <Link href="/services" className="text-gray-700 hover:text-blue-600 transition-colors">{"Services"}</Link>
+            <Link href="/about" className="text-gray-700 hover:text-blue-600 transition-colors">{"About"}</Link>
+            <Link href="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">{"Contact"}</Link>
+            <Link href="/auth" className="text-gray-700 hover:text-orange-500 transition-colors">{'Login'}</Link>
           </nav>
           <div className="hidden md:flex items-center space-x-4">
             <LanguageToggle />
