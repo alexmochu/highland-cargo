@@ -1,13 +1,13 @@
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Button } from "@/components/ui/button";
 import { Menu, Globe, User } from "lucide-react";
-import { useState } from "react";
-import { useTranslation } from 'next-i18next';
+// import { useState } from "react";
+// import { useTranslation } from 'next-i18next';
 import LanguageToggle from "./LanguageToggle";
 
 export const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t } = useTranslation();
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const { t } = useTranslation();
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -30,14 +30,10 @@ export const Header = () => {
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="/services" className="text-gray-700 hover:text-blue-600 transition-colors">{t("services")}</a>
-            <a href="/support" className="text-gray-700 hover:text-blue-600 transition-colors">{t("support")}</a>
-            <a href="/about" className="text-gray-700 hover:text-blue-600 transition-colors">{t("about")}</a>
-            <a href="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">{t("contact")}</a>
-            <a href="/dashboard" className="text-gray-700 hover:text-blue-500 transition-colors">{t("dashboard")}</a>
-            <a href="/admin" className="text-gray-700 hover:text-orange-600 transition-colors">{t("admin")}</a>
-            <a href="/login" className="text-gray-700 hover:text-orange-500 transition-colors">{t("login")}</a>
-            <a href="/signup" className="text-gray-700 hover:text-blue-400 transition-colors">{t("signup")}</a>
+            <a href="/services" className="text-gray-700 hover:text-blue-600 transition-colors">{"Services"}</a>
+            <a href="/about" className="text-gray-700 hover:text-blue-600 transition-colors">{"About"}</a>
+            <a href="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">{"Contact"}</a>
+            <a href="/auth" className="text-gray-700 hover:text-orange-500 transition-colors">{'Login'}</a>
           </nav>
           <div className="hidden md:flex items-center space-x-4">
             <LanguageToggle />
@@ -46,16 +42,16 @@ export const Header = () => {
               Get Quote
             </Button>
           </div>
-          <Button
+          {/* <Button
             variant="outline"
             size="sm"
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <Menu className="w-4 h-4" />
-          </Button>
+          </Button> */}
         </div>
-        {isMenuOpen && (
+        {/* {false && (
           <div className="md:hidden mt-4 py-4 border-t">
             <nav className="flex flex-col space-y-4">
               <a href="/services" className="text-gray-700 hover:text-blue-600">{t("services")}</a>
@@ -70,7 +66,7 @@ export const Header = () => {
               </div>
             </nav>
           </div>
-        )}
+        )} */}
       </div>
     </header>
   );
