@@ -46,7 +46,7 @@ export function AuthForm({ onAuth }) {
       setLoading(false);
       return;
     }
-    const redirectTo = `${window.location.origin}/`;
+    const redirectTo = `${window.location.origin}/auth/callback`;
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: redirectTo },
