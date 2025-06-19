@@ -167,7 +167,7 @@ export const Header = () => {
                 </span>
                 </>
               ) : (
-              <Link href="/login" className="text-gray-700 hover:text-orange-500">{"Login"}</Link>
+              <Link href="/auth" className="text-gray-700 hover:text-orange-500">{"Login"}</Link>
               )}
               <div className="flex flex-col space-y-2 pt-4">
                 <LanguageToggle />
