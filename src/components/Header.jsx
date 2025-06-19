@@ -24,7 +24,7 @@ export const Header = () => {
   const router = useRouter()
   const pathname = usePathname()
 
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const { t } = useTranslation();
 
   const handleLogout = async () => {
@@ -138,31 +138,44 @@ export const Header = () => {
               Get Quote
             </Button>
           </div>
-          {/* <Button
+          <Button
             variant="outline"
             size="sm"
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <Menu className="w-4 h-4" />
-          </Button> */}
+          </Button>
         </div>
-        {/* {false && (
+        {isMenuOpen && (
           <div className="md:hidden mt-4 py-4 border-t">
             <nav className="flex flex-col space-y-4">
-              <a href="/services" className="text-gray-700 hover:text-blue-600">{t("services")}</a>
-              <a href="/support" className="text-gray-700 hover:text-blue-600">{t("support")}</a>
-              <a href="/about" className="text-gray-700 hover:text-blue-600">{t("about")}</a>
-              <a href="/contact" className="text-gray-700 hover:text-blue-600">{t("contact")}</a>
-              <a href="/login" className="text-gray-700 hover:text-orange-500">{t("login")}</a>
-              <a href="/signup" className="text-gray-700 hover:text-blue-400">{t("signup")}</a>
+              <Link href="/services" className="text-gray-700 hover:text-blue-600">{"Services"}</Link>
+              <Link href="/about" className="text-gray-700 hover:text-blue-600">{"About"}</Link>
+              <Link href="/contact" className="text-gray-700 hover:text-blue-600">{"Contact"}</Link>
+              {user ? (
+                <>
+                <Link href="/admin" className="text-gray-700 hover:text-blue-600">{"Administrator"}</Link>
+                <Link href="/dashboard" className="text-gray-700 hover:text-blue-600">{"Dashboard"}</Link>
+                <Link href="/Partner" className="text-gray-700 hover:text-blue-600">{"Partner"}</Link>
+                <span
+                  onClick={handleLogout}
+                  disabled={isPending}
+                  className="text-red-600 flex dark:text-red-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                >
+                  Logout
+                </span>
+                </>
+              ) : (
+              <Link href="/login" className="text-gray-700 hover:text-orange-500">{"Login"}</Link>
+              )}
               <div className="flex flex-col space-y-2 pt-4">
                 <LanguageToggle />
-                <Button className="bg-orange-500 hover:bg-orange-600">{t("get_quote")}</Button>
+                <Button className="bg-orange-500 hover:bg-orange-600">{"Get Quote"}</Button>
               </div>
             </nav>
           </div>
-        )} */}
+        )}
       </div>
     </header>
   );
