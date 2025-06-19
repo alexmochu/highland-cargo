@@ -20,7 +20,7 @@ export const Hero = () => {
                 1: <span className="text-orange-300 bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent" />,
                 2: <span className="text-orange-400" />
               }} /> */}
-              <h1 className="text-4xl font-bold">
+              <p className="text-4xl font-bold">
                 {'Move' + ' '}
                 <span className="text-orange-300 bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent">
                   {'Anything '}
@@ -30,7 +30,7 @@ export const Hero = () => {
                 <span className="text-orange-300 bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent">
                   {'Fast'}
                 </span>{' '}
-              </h1>
+              </p>
             </h1>
             <p className="text-xl mb-9 text-blue-100 font-light animate-fade-in-up [animation-delay:150ms]">
               {/* {t("hero_desc")} */}

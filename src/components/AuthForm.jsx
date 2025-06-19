@@ -1,5 +1,6 @@
 import { useState } from "react";
 // import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -8,6 +9,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 export function AuthForm({ onAuth }) {
   // State for auth method selection
   const [tab, setTab] = useState("magic_link");
+  const supabase = createClient();
 
   // Common states
   const { toast } = useToast();
@@ -44,20 +46,20 @@ export function AuthForm({ onAuth }) {
       setLoading(false);
       return;
     }
-    // const redirectTo = `${window.location.origin}/`;
-    // const { error } = await supabase.auth.signInWithOtp({
-    //   email,
-    //   options: { emailRedirectTo: redirectTo },
-    // });
-    // if (error) {
-    //   setError(error.message);
-    // } else {
-    //   toast({
-    //     title: "Magic Link Sent!",
-    //     description: "Check your email for a login link.",
-    //   });
-    //   setEmail("");
-    // }
+    const redirectTo = `${window.location.origin}/`;
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: redirectTo },
+    });
+    if (error) {
+      setError(error.message);
+    } else {
+    toast({
+        title: "Magic Link Sent!",
+        description: "Check your email for a login link."
+      });
+    setEmail("");
+    }
     setLoading(false);
   }
 
@@ -107,18 +109,18 @@ export function AuthForm({ onAuth }) {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    // if (!phone) {
-    //   setError("Please enter your phone number.");
-    //   setLoading(false);
-    //   return;
-    // }
-    // const { error } = await supabase.auth.signInWithOtp({ phone });
-    // if (error) {
-    //   setError(error.message);
-    // } else {
-    //   setOtpSent(true);
-    //   toast({ title: "OTP sent!", description: "Check your phone for the code." });
-    // }
+    if (!phone) {
+      setError("Please enter your phone number.");
+      setLoading(false);
+      return;
+    }
+    const { error } = await supabase.auth.signInWithOtp({ phone });
+    if (error) {
+      setError(error.message);
+    } else {
+      setOtpSent(true);
+      toast({ title: "OTP sent!", description: "Check your phone for the code." });
+    }
     setLoading(false);
   }
 
@@ -126,23 +128,23 @@ export function AuthForm({ onAuth }) {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    // if (!phone || !otp) {
-    //   setError("Phone and OTP code required.");
-    //   setLoading(false);
-    //   return;
-    // }
-    // const { error } = await supabase.auth.verifyOtp({
-    //   phone,
-    //   token: otp,
-    //   type: "sms"
-    // });
-    // if (error) {
-    //   setError(error.message);
-    // } else {
-    //   toast({ title: "Logged in successfully via SMS!" });
-    //   onAuth && onAuth();
-    //   resetAll();
-    // }
+    if (!phone || !otp) {
+      setError("Phone and OTP code required.");
+      setLoading(false);
+      return;
+    }
+    const { error } = await supabase.auth.verifyOtp({
+      phone,
+      token: otp,
+      type: "sms"
+    });
+    if (error) {
+      setError(error.message);
+    } else {
+      toast({ title: "Logged in successfully via SMS!" });
+      onAuth && onAuth();
+      resetAll();
+    }
     setLoading(false);
   }
 
@@ -161,20 +163,20 @@ export function AuthForm({ onAuth }) {
         >
           Email + Password
         </Button> */}
-        <Button
+        {/* <Button
           variant={tab === "magic_link" ? "dark" : "outline"}
           size="sm"
           onClick={() => { resetAll(); setTab("magic_link"); }}
         >
           Magic Link
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           variant={tab === "phone" ? "dark" : "outline"}
           size="sm"
           onClick={() => { resetAll(); setTab("phone"); }}
         >
           Phone (SMS OTP)
-        </Button>
+        </Button> */}
       </div>
       {/* Tab Forms */}
       {tab === "magic_link" && (
@@ -264,7 +266,7 @@ export function AuthForm({ onAuth }) {
           </form>
         </>
       )} */}
-      {tab === "phone" && (
+      {/* {tab === "phone" && (
         <form className="space-y-5" onSubmit={otpSent ? handleVerifyOtp : handleSendOtp}>
           <div>
             <label className="block text-sm mb-1 font-semibold text-gray-700" htmlFor="phone-num">
@@ -322,7 +324,7 @@ export function AuthForm({ onAuth }) {
             </div>
           )}
         </form>
-      )}
+      )} */}
     </div>
   );
 }
