@@ -11,73 +11,87 @@ export default function AuthCallbackPage() {
   const { setUser, setProfile } = useAuthStore()
 
   useEffect(() => {
-    // const createUserProfile = async (user, role) => {
-    //   try {
-    //     const fullName = user.user_metadata.full_name || ""
-    //     const firstName = user.user_metadata.first_name || (fullName ? fullName.split(" ")[0] : "")
-    //     const lastName = user.user_metadata.last_name || (fullName ? fullName.split(" ").slice(1).join(" ") : "")
-    //     const avatarUrl = user.user_metadata.avatar_url || ""
-    //     const email = user.user_metadata.email || ""
+    const createUserProfile = async (user) => {
+      try {
+        const fullName = user.user_metadata.full_name || ""
+        const firstName = user.user_metadata.first_name || (fullName ? fullName.split(" ")[0] : "")
+        const lastName = user.user_metadata.last_name || (fullName ? fullName.split(" ").slice(1).join(" ") : "")
+        const avatarUrl = user.user_metadata.avatar_url || ""
+        const email = user.user_metadata.email || ""
 
-    //     const { data: existingProfile, error: selectError } = await supabase
-    //       .from("users")
-    //       .select("*")
-    //       .eq("user_id", user.id)
-    //       .maybeSingle()
+        const { data: existingProfile, error: selectError } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("user_id", user.id)
+          .maybeSingle()
 
-    //     if (selectError) {
-    //       console.error("Error checking for existing profile:", selectError.message)
-    //       return
-    //     }
+        if (selectError) {
+          console.error("Error checking for existing profile:", selectError.message)
+          return
+        }
 
-    //     if (existingProfile) {
-    //       console.log("Profile already exists. Skipping creation.")
-    //       setProfile(existingProfile)
-    //       return
-    //     }
+        if (existingProfile) {
+          console.log("Profile already exists. Skipping creation.")
+          setProfile(existingProfile)
+          return
+        }
 
-    //     const { data: insertedUser, error: insertUserError } = await supabase
-    //       .from("users")
-    //       .insert({
-    //         user_id: user.id,
-    //         email: email,
-    //         profile_image_url: avatarUrl,
-    //         full_name: fullName,
-    //         user_type: role,
-    //         password: "",
-    //       })
-    //       .select()
+        const { data: insertedUser, error: insertUserError } = await supabase
+          .from("profiles")
+          .insert({
+            email: email,
+            avatar_url: avatarUrl,
+            full_name: fullName,
+          })
+          .select()
 
-    //     if (insertUserError) {
-    //       console.error("Error creating profile:", insertUserError.message)
-    //     } else {
-    //       console.log("Profile created successfully.")
-    //       if (insertedUser && insertedUser.length > 0) {
-    //         setProfile(insertedUser[0])
-    //       }
-    //     }
+        if (insertUserError) {
+          console.error("Error creating profile:", insertUserError.message)
+        } else {
+          console.log("Profile created successfully.")
+          if (insertedUser && insertedUser.length > 0) {
+            setProfile(insertedUser[0])
+          }
+        }
 
-    //     // Verify the inserted user exists before inserting the role.
-    //     if (!insertedUser || insertedUser.length === 0) {
-    //       console.error("User insertion did not return a valid user row.")
-    //       return
-    //     }
+        // Verify the inserted user exists before inserting the role.
+        if (!insertedUser || insertedUser.length === 0) {
+          console.error("User insertion did not return a valid user row.")
+          return
+        }
 
-    //     // Insert corresponding user role into the "user_roles" table.
-    //     const { error: insertRoleError } = await supabase.from("user_roles").insert({
-    //       role: role,
-    //     })
+        // Insert corresponding user role into the "user_roles" table.
+        // const { error: insertRoleError } = await supabase.from("user_roles").insert({
+        //   role: role,
+        // })
 
-    //     if (insertRoleError) {
-    //       console.error("Error inserting user role:", insertRoleError.message)
-    //     } else {
-    //       console.log("User role inserted successfully in the user_roles table.")
-    //     }
-    //   } catch (error) {
-    //     console.error("Error in createUserProfile:", error)
-    //   }
+        // if (insertRoleError) {
+        //   console.error("Error inserting user role:", insertRoleError.message)
+        // } else {
+        //   console.log("User role inserted successfully in the user_roles table.")
+        // }
+      } catch (error) {
+        console.error("Error in createUserProfile:", error)
+      }
+    }
+    // const syncProfile = async (user) => {
+
+    // try {if (user) {
+    //     // Call Edge Function to sync profile
+    //     await fetch(`
+    //       /api/sync-profile`, {
+    //       method: 'POST',
+    //       body: JSON.stringify({ user: user }),
+    //       headers: { 'Content-Type': 'application/json' }
+    //     });
+
+    //     // Redirect to dashboard after syncing
+    //     router.push('/dashboard');
+    //   } 
+    // } catch (error){
+    //     console.error("Error inrofile syncProfile:", error)
     // }
-
+    // };
     const handleAuthCallback = async () => {
       try {
         const { hash, searchParams } = new URL(window.location.href)
@@ -101,7 +115,7 @@ export default function AuthCallbackPage() {
             } = await supabase.auth.getSession()
             if (session?.user) {
               setUser(session.user)
-            //   await createUserProfile(session.user, role)
+              await createUserProfile(session.user)
             }
 
             router.refresh()
@@ -119,7 +133,7 @@ export default function AuthCallbackPage() {
           } = await supabase.auth.getSession()
           if (session?.user) {
             setUser(session.user)
-            // await createUserProfile(session.user, role)
+            await createUserProfile(session.user)
           }
 
           router.refresh()
