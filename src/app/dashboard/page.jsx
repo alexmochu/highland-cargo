@@ -8,7 +8,6 @@ import Link from "next/link";
 
 export default function ClientDashboard() {
   const { user, profile, loading, logout } = useAuth()
-  console.log('oyee', profile)
   return (
     <div className="min-h-screen bg-gradient-to-tr from-blue-50 via-orange-50 to-blue-100 py-8">
       <div className="max-w-5xl mx-auto px-4">

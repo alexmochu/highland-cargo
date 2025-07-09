@@ -1,10 +1,22 @@
+"use client"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Users, Truck, BarChart2, Settings, LogOut, Warehouse } from "lucide-react";
 import Link from 'next/link'
+import { useAsyncError } from "react-router-dom";
+import { useState } from "react";
+import UserModal from "@/components/Modals/UserModal";
 
 export default function AdminDashboard() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleSave = (data) => {
+    console.log('User data saved:', data)
+    // You can trigger Supabase update/insert here
+  }
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-blue-50 to-orange-100 py-8">
       <div className="max-w-6xl mx-auto px-4">
@@ -13,16 +25,16 @@ export default function AdminDashboard() {
             <Settings className="w-8 h-8 text-orange-500" />
             <h2 className="text-3xl font-bold text-gray-900">Admin Dashboard</h2>
           </div>
-          <Button variant="outline" size="sm">
+          {/* <Button variant="outline" size="sm">
             <LogOut className="w-4 h-4 mr-1" /> Logout
-          </Button>
+          </Button> */}
         </div>
         <Tabs defaultValue="analytics">
           <TabsList className="mb-4 flex flex-wrap gap-2">
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="shipments">Shipments</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
-            <TabsTrigger value="settings">Settings</TabsTrigger>
+            {/* <TabsTrigger value="settings">Settings</TabsTrigger> */}
             <TabsTrigger value="catalogs">Product Catalogs</TabsTrigger>
           </TabsList>
           <TabsContent value="analytics">
@@ -51,7 +63,7 @@ export default function AdminDashboard() {
                   <p className="text-xs mt-2 text-muted-foreground">All time</p>
                 </CardContent>
               </Card>
-              <Card>
+              {/* <Card>
                 <CardHeader>
                   <CardTitle>Monthly Stats</CardTitle>
                 </CardHeader>
@@ -62,7 +74,7 @@ export default function AdminDashboard() {
                   </div>
                   <p className="text-xs mt-2 text-muted-foreground">Month over month</p>
                 </CardContent>
-              </Card>
+              </Card> */}
               <Card>
                 <CardHeader>
                   <CardTitle>Partner Product Catalogs</CardTitle>
@@ -164,16 +176,11 @@ export default function AdminDashboard() {
                       <td><span className="text-green-600 font-medium">Active</span></td>
                       <td>12</td>
                       <td>
-                        <Button size="sm" variant="ghost">View</Button>
-                        <Button size="sm" variant="outline">Disable</Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>jane@example.com</td>
-                      <td><span className="text-blue-600 font-medium">Pending</span></td>
-                      <td>8</td>
-                      <td>
-                        <Button size="sm" variant="ghost">View</Button>
+                        <Button 
+                          size="sm" 
+                          variant="ghost"
+                          onClick={() => setIsModalOpen(true)}
+                          >View</Button>
                         <Button size="sm" variant="outline">Disable</Button>
                       </td>
                     </tr>
@@ -196,6 +203,11 @@ export default function AdminDashboard() {
           </TabsContent>
         </Tabs>
       </div>
+       <UserModal 
+       isOpen={isModalOpen} 
+       onClose={() => setIsModalOpen(false)} 
+       onSave={handleSave}
+      />
     </div>
   );
 }

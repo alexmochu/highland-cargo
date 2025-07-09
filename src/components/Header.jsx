@@ -36,7 +36,7 @@ export const Header = () => {
   }
 
   const getInitials = (name) => {
-    if (!name) return "U"
+    if (!name) return ""
     return name
       .split(" ")
       .map((n) => n[0])
@@ -94,6 +94,16 @@ export const Header = () => {
                   >
                     <User className="mr-2 h-4 w-4" />
                     Administrator
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/supplier"
+                    className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                  >
+                    <User className="mr-2 h-4 w-4" />
+                    Supplier
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
