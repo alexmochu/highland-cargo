@@ -44,7 +44,6 @@ export const Header = () => {
       .toUpperCase()
       .substring(0, 2)
   }
-  
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -69,6 +68,7 @@ export const Header = () => {
           </Link>
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="/services" className="text-gray-700 hover:text-blue-600 transition-colors">{"Services"}</Link>
+            <Link href="/products" className="text-gray-700 hover:text-blue-600 transition-colors">{"Products"}</Link>
             <Link href="/about" className="text-gray-700 hover:text-blue-600 transition-colors">{"About"}</Link>
             <Link href="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">{"Contact"}</Link>
             {user ? (
@@ -132,7 +132,7 @@ export const Header = () => {
             )}
           </nav>
           <div className="hidden md:flex items-center space-x-4">
-            <LanguageToggle />
+            {/* <LanguageToggle /> */}
             <Button className="bg-orange-500 text-white hover:bg-orange-600">
               {/* {t("get_quote")} */}
               Get Quote

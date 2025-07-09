@@ -1,10 +1,14 @@
+"use client"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { LogOut, Truck, HelpCircle, LayoutDashboard, Warehouse } from "lucide-react";
+import { useAuth } from "@/components/auth-provider"
 import Link from "next/link";
 
 export default function ClientDashboard() {
+  const { user, profile, loading, logout } = useAuth()
+  console.log('oyee', profile)
   return (
     <div className="min-h-screen bg-gradient-to-tr from-blue-50 via-orange-50 to-blue-100 py-8">
       <div className="max-w-5xl mx-auto px-4">
@@ -13,20 +17,20 @@ export default function ClientDashboard() {
             <LayoutDashboard className="w-8 h-8 text-blue-500" />
             <h2 className="text-3xl font-bold text-gray-800">My Dashboard</h2>
           </div>
-          <Button variant="outline" size="sm">
+          {/* <Button variant="outline" size="sm">
             <LogOut className="w-4 h-4 mr-1" /> Logout
-          </Button>
+          </Button> */}
         </div>
         <Tabs defaultValue="overview">
           <TabsList className="mb-4 flex flex-wrap gap-2">
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="shipments">My Shipments</TabsTrigger>
+            {/* <TabsTrigger value="shipments">My Shipments</TabsTrigger> */}
             <TabsTrigger value="profile">Profile</TabsTrigger>
-            <TabsTrigger value="support">Support</TabsTrigger>
+            {/* <TabsTrigger value="support">Support</TabsTrigger> */}
           </TabsList>
           <TabsContent value="overview">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <Card>
+              {/* <Card>
                 <CardHeader>
                   <CardTitle>Active Shipments</CardTitle>
                 </CardHeader>
@@ -40,7 +44,7 @@ export default function ClientDashboard() {
                   </p>
                   <Button className="mt-2" size="sm">View Shipments</Button>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               <Card>
                 <CardHeader>
@@ -63,7 +67,7 @@ export default function ClientDashboard() {
                 </CardContent>
               </Card>
 
-              <Card>
+              {/* <Card>
                 <CardHeader>
                   <CardTitle>Quick Actions</CardTitle>
                 </CardHeader>
@@ -72,7 +76,7 @@ export default function ClientDashboard() {
                   <Button variant="outline" className="mb-2 w-full">Request Quote</Button>
                   <Button variant="outline" className="w-full">Contact Support</Button>
                 </CardContent>
-              </Card>
+              </Card> */}
             </div>
           </TabsContent>
           <TabsContent value="shipments">
@@ -119,16 +123,16 @@ export default function ClientDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
+                  {/* <div>
+                    <span className="font-semibold">Name:</span> {profile.full_Name}
+                  </div> */}
                   <div>
-                    <span className="font-semibold">Name:</span> Jane Doe
+                    <span className="font-semibold">Email:</span> {profile.email}
                   </div>
-                  <div>
-                    <span className="font-semibold">Email:</span> jane@example.com
-                  </div>
-                  <div>
-                    <span className="font-semibold">Phone:</span> +1 234 567 8901
-                  </div>
-                  <Button size="sm" className="mt-2">Edit Profile</Button>
+                  {/* <div>
+                    <span className="font-semibold">Phone:</span> {""}
+                  </div> */}
+                  {/* <Button size="sm" className="mt-2">Edit Profile</Button> */}
                 </div>
               </CardContent>
             </Card>

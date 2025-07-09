@@ -19,6 +19,7 @@
     "accept-language": "^3.0.20",
     "class-variance-authority": "^0.7.1",
     "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.19.1",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.515.0",
     "next": "15.3.3",

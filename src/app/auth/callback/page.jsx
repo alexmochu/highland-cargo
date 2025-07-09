@@ -42,6 +42,7 @@ export default function AuthCallbackPage() {
             email: email,
             avatar_url: avatarUrl,
             full_name: fullName,
+            user_id: user.id
           })
           .select()
 

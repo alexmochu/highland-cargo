@@ -31,19 +31,19 @@ export function AuthProvider({ children }) {
         setUser(userData.user ?? null)
 
         if (userData.user) {
-          // const { data: profileData, error: profileError } = await supabase
-          //   .from("users")
-          //   .select("*")
-          //   .eq("user_id", userData.user.id)
-          //   .maybeSingle()
+          const { data: profileData, error: profileError } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("user_id", userData.user.id)
+            .maybeSingle()
 
-          // if (profileError) {
-          //   console.error("Error fetching profile:", profileError.message)
-          // } 
-          // else if (profileData) {
-            // setProfile(profileData)
-          // }
-          setProfile(userData.user)
+          if (profileError) {
+            console.error("Error fetching profile:", profileError.message)
+          } 
+          else if (profileData) {
+            setProfile(profileData)
+          }
+          // setProfile(userData.user)
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred during authentication")
