@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://higlandcargoafrica.com
+
+# Sitemaps
+Sitemap: https://higlandcargoafrica.com/sitemap.xml

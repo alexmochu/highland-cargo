@@ -53,6 +53,8 @@ export default function ClientLayout({
     <html lang="en" suppressHydrationWarning>
       <Head>
         <title>{metadata.title}</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+
         <meta name="description" content={metadata.description} />
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
