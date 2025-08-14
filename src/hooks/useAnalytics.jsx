@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAnalytics, fetchCategories } from "@/services/supabaseService";
+import { fetchAnalytics, fetchCategories } from "@/services/adminService";
 
 export default function useAnalytics() {
   const [data, setData] = useState({ usersCount: 0, shipmentsCount: 0, trending: [], byStatus: [], byCategory: [] });

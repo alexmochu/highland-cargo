@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import * as svc from "@/services/supabaseService";
+import * as svc from "@/services/adminService";
 import { toast } from "sonner";
 
 export default function useUsers({ pageSize = 10 } = {}) {

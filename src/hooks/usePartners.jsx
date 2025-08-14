@@ -1,6 +1,6 @@
 // hooks/usePartners.js
 import { useState, useEffect } from "react";
-import * as svc from "@/services/supabaseService";
+import * as svc from "@/services/adminService";
 import { toast } from "sonner";
 
 export default function usePartners({ pageSize = 10 } = {}) {

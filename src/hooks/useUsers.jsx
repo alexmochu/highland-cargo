@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchUsers, saveUserProfile, deleteUserProfile } from "@/services/supabaseService";
+import { fetchUsers, saveUserProfile, deleteUserProfile } from "@/services/adminService";
 
 export default function useUsers() {
   const [users, setUsers] = useState([]);
