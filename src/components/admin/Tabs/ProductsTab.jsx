@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import useProducts from "@/hooks/useProductsPaginated";
+import useProducts from "@/hooks/admin/useProductsPaginated";
 import ProductModal from "@/components/admin/Modals/ProductModal";
 import Pagination from "@/components/admin/Pagination";
 

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import useSuppliers from "@/hooks/useSuppliers";
+import useSuppliers from "@/hooks/admin/useSuppliers";
 import SupplierModal from "@/components/admin/Modals/SupplierModal";
 import Pagination from "@/components/admin/Pagination";
 

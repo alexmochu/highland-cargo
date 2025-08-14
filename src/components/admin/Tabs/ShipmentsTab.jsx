@@ -52,7 +52,7 @@ import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import useShipments from "@/hooks/useShipmentsPaginated";
+import useShipments from "@/hooks/admin/useShipmentsPaginated";
 import ShipmentModal from "@/components/admin/Modals/ShipmentModal";
 import Pagination from "@/components/admin/Pagination";
 

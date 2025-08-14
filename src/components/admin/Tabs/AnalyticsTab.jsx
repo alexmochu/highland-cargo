@@ -59,7 +59,7 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Users, Truck, Warehouse, Factory } from "lucide-react";
-import useAnalytics from "@/hooks/useAnalytics";
+import useAnalytics from "@/hooks/admin/useAnalytics";
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#8dd1e1", "#a4de6c"];

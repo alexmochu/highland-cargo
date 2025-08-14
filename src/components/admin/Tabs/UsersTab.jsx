@@ -86,7 +86,7 @@ import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import useUsers from "@/hooks/useUsersPaginated";
+import useUsers from "@/hooks/admin/useUsersPaginated";
 import UserModal from "@/components/admin/Modals/UserModal";
 import Pagination from "@/components/admin/Pagination";
 

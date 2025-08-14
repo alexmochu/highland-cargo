@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import useCategories from "@/hooks/useCategoriesPaginated";
+import useCategories from "@/hooks/admin/useCategoriesPaginated";
 import CategoryModal from "@/components/admin/Modals/CategoryModal";
 import Pagination from "@/components/admin/Pagination";
 
