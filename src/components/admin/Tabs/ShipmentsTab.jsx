@@ -53,8 +53,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import useShipments from "@/hooks/useShipmentsPaginated";
-import ShipmentModal from "@/components/Modals/ShipmentModal";
-import Pagination from "@/components/Pagination";
+import ShipmentModal from "@/components/admin/Modals/ShipmentModal";
+import Pagination from "@/components/admin/Pagination";
 
 export default function ShipmentsTab() {
   const { shipments, partners, suppliers, products, total, page, setPage, pageSize, loading, editing, setEditing, addOrUpdate, remove } = useShipments({ pageSize: 10 });

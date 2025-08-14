@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import useProducts from "@/hooks/useProductsPaginated";
-import ProductModal from "@/components/Modals/ProductModal";
-import Pagination from "@/components/Pagination";
+import ProductModal from "@/components/admin/Modals/ProductModal";
+import Pagination from "@/components/admin/Pagination";
 
 export default function ProductsTab() {
   const {

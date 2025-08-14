@@ -4,8 +4,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import usePartners from "@/hooks/usePartners";
-import PartnerModal from "@/components/Modals/PartnerModal";
-import Pagination from "@/components/Pagination";
+import PartnerModal from "@/components/admin/Modals/PartnerModal";
+import Pagination from "@/components/admin/Pagination";
 
 export default function PartnersTab() {
   const { partners, total, page, setPage, pageSize, loading, editing, setEditing, addOrUpdate, remove } = usePartners({ pageSize: 10 });

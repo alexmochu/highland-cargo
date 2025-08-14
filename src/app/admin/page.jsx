@@ -1,12 +1,12 @@
 "use client";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import AnalyticsTab from "@/components/Tabs/AnalyticsTab";
-import CategoriesTab from "@/components/Tabs/CategoriesTab";
-import ShipmentsTab from "@/components/Tabs/ShipmentsTab";
-import UsersTab from "@/components/Tabs/UsersTab";
-import PartnersTab from "@/components/Tabs/PartnersTab";
-import ProductsTab from "@/components/Tabs/ProductsTab";
-import SuppliersTab from "@/components/Tabs/SuppliersTab";
+import AnalyticsTab from "@/components/admin/Tabs/AnalyticsTab";
+import CategoriesTab from "@/components/admin/Tabs/CategoriesTab";
+import ShipmentsTab from "@/components/admin/Tabs/ShipmentsTab";
+import UsersTab from "@/components/admin/Tabs/UsersTab";
+import PartnersTab from "@/components/admin/Tabs/PartnersTab";
+import ProductsTab from "@/components/admin/Tabs/ProductsTab";
+import SuppliersTab from "@/components/admin/Tabs/SuppliersTab";
 import { Settings } from "lucide-react";
 
 export default function AdminDashboard() {

@@ -4,8 +4,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import useCategories from "@/hooks/useCategoriesPaginated";
-import CategoryModal from "@/components/Modals/CategoryModal";
-import Pagination from "@/components/Pagination";
+import CategoryModal from "@/components/admin/Modals/CategoryModal";
+import Pagination from "@/components/admin/Pagination";
 
 export default function CategoriesTab() {
   const { categories, total, page, setPage, pageSize, loading, editing, setEditing, addOrUpdate, remove } = useCategories({ pageSize: 50 });

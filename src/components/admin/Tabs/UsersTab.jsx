@@ -87,8 +87,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import useUsers from "@/hooks/useUsersPaginated";
-import UserModal from "@/components/Modals/UserModal";
-import Pagination from "@/components/Pagination";
+import UserModal from "@/components/admin/Modals/UserModal";
+import Pagination from "@/components/admin/Pagination";
 
 export default function UsersTab() {
   const { users, partners, suppliers, total, page, setPage, pageSize, loading, editing, setEditing, addOrUpdate, remove } = useUsers({ pageSize: 10 });

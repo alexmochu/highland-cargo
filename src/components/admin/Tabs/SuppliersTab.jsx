@@ -4,8 +4,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import useSuppliers from "@/hooks/useSuppliers";
-import SupplierModal from "@/components/Modals/SupplierModal";
-import Pagination from "@/components/Pagination";
+import SupplierModal from "@/components/admin/Modals/SupplierModal";
+import Pagination from "@/components/admin/Pagination";
 
 export default function SuppliersTab() {
   const { suppliers, total, page, setPage, pageSize, loading, editing, setEditing, addOrUpdate, remove } = useSuppliers({ pageSize: 10 });
