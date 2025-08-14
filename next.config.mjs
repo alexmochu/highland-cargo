@@ -6,6 +6,7 @@ const { i18n } = pkg;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   i18n,
   experimental: {
     forceLocale: false, // Important for manual locale handling via middleware
