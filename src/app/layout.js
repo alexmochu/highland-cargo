@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import { CSPostHogProvider } from './providers'
+import { CSPostHogProvider } from './provider'
 
 import Head from 'next/head';
 // import { ThemeProvider } from '@/components/theme-provider'
