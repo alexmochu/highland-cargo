@@ -26,7 +26,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function Products() {
+export default function ProductsPage() {
+  return(
+    <Suspense>
+      <Products/>
+    </Suspense>
+  )
+}
+
+function Products() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const supabase = createClient();
@@ -100,7 +108,7 @@ export default function Products() {
   };
 
   return (
-    <Suspense>
+    // <Suspense>
       <div className="min-h-screen py-10 px-4 bg-gradient-to-br from-blue-50 via-white to-orange-50">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           
@@ -177,7 +185,7 @@ export default function Products() {
           </main>
         </div>
       </div>
-    </Suspense>
+    // </Suspense>
   );
 }
 
