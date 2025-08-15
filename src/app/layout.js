@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-// import { CSPostHogProvider } from './providers'
+import { CSPostHogProvider } from './providers'
 
 import Head from 'next/head';
 // import { ThemeProvider } from '@/components/theme-provider'
@@ -67,7 +67,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
-      {/* <CSPostHogProvider> */}
+      <CSPostHogProvider>
       <body
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -83,7 +83,7 @@ export default function RootLayout({ children }) {
           {/* </QueryProvider> */}
         {/* </ThemeProvider> */}
       </body>
-      {/* </CSPostHogProvider> */}
+      </CSPostHogProvider>
     </html>
   );
 }
