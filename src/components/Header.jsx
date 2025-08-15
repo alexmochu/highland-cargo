@@ -109,7 +109,7 @@ export const Header = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link
-                    href="/dashboard"
+                    href="/products"
                     className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
                   >
                     <User className="mr-2 h-4 w-4" />
