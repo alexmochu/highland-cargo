@@ -75,7 +75,7 @@ export const Header = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center gap-2 ml-2">
-                  <Avatar className="h-8 w-8 border border-input ">
+                  <Avatar className="h-8 w-8 border ">
                     <AvatarImage
                       src={profile.profile_image_url || "/placeholder.svg"}
                       alt={profile.full_name || "User"}
