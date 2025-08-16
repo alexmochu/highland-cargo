@@ -153,7 +153,7 @@ function Products() {
                       <Card className="border-blue-200 shadow hover:shadow-lg transition">
                         {/* Image carousel */}
                         <div className="relative overflow-hidden">
-                          <div className="flex overflow-x-auto snap-x snap-mandatory">
+                          <div className="flex overflow-x-auto snap-x snap-mandatory h-48">
                             {product.product_images?.slice(0,4).map((img, i) => (
                               <Image key={i} src={img.image_url} alt={product.name} width={300} height={200} className="snap-center object-cover w-full" />
                             ))}

@@ -81,7 +81,7 @@ export default function AuthCallbackPage() {
     const handleAuthCallback = async () => {
       try {
         const { hash, searchParams } = new URL(window.location.href)
-        const next = searchParams.get("next") || "/dashboard"
+        const next = searchParams.get("next") || "/products"
         const role = searchParams.get("role")
 
         // Handle email confirmation with hash parameters
