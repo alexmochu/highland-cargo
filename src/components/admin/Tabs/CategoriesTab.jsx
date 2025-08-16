@@ -16,7 +16,7 @@ export default function CategoriesTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Product Categories</CardTitle>
-          <Button onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Category</Button>
+          <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Category</Button>
         </CardHeader>
 
         <CardContent>

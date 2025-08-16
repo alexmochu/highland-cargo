@@ -99,7 +99,7 @@ export default function UsersTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Users & Roles</CardTitle>
-          <Button onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Invite User</Button>
+          <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Invite User</Button>
         </CardHeader>
 
         <CardContent>

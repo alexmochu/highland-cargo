@@ -16,7 +16,7 @@ export default function PartnersTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Partners</CardTitle>
-          <Button onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2"/>Add Partner</Button>
+          <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2"/>Add Partner</Button>
         </CardHeader>
         <CardContent>
           <table className="min-w-full text-sm">

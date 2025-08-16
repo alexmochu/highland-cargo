@@ -23,14 +23,14 @@ export default function ProductsTab() {
           <CardTitle>Products</CardTitle>
           <div className="flex gap-2">
             <Select onValueChange={(v)=>setFilterCategory(v)} value={filterCategory || ""}>
-              <SelectTrigger className="w-56"><SelectValue placeholder="Filter by Category" /></SelectTrigger>
+              <SelectTrigger className="bg-orange-500 text-white w-56"><SelectValue placeholder="Filter by Category" /></SelectTrigger>
               <SelectContent className="bg-white">
                 <SelectItem value="all">All</SelectItem>
                 {categories.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
               </SelectContent>
             </Select>
 
-            <Button onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2"/>Add Product</Button>
+            <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2"/>Add Product</Button>
           </div>
         </CardHeader>
 
