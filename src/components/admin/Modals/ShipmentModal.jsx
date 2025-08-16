@@ -53,7 +53,7 @@ export default function ShipmentModal({ isOpen, onClose, onSave, shipment, partn
           <Controller name="product_id" control={control} render={({ field }) => (
             <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger><SelectValue placeholder="Select product" /></SelectTrigger>
-              <SelectContent>{products.map(p => <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>)}</SelectContent>
+              <SelectContent className="bg-white">{products.map(p => <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>)}</SelectContent>
             </Select>
           )}/>
           {errors.product_id && <p className="text-red-500 text-sm">{errors.product_id.message}</p>}
@@ -61,7 +61,7 @@ export default function ShipmentModal({ isOpen, onClose, onSave, shipment, partn
           <Controller name="partner_id" control={control} render={({ field }) => (
             <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger><SelectValue placeholder="Select partner" /></SelectTrigger>
-              <SelectContent>{partners.map(p => <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>)}</SelectContent>
+              <SelectContent className="bg-white">{partners.map(p => <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>)}</SelectContent>
             </Select>
           )}/>
           {errors.partner_id && <p className="text-red-500 text-sm">{errors.partner_id.message}</p>}
@@ -69,7 +69,7 @@ export default function ShipmentModal({ isOpen, onClose, onSave, shipment, partn
           <Controller name="supplier_id" control={control} render={({ field }) => (
             <Select onValueChange={(v)=>field.onChange(v || null)} value={field.value || ""}>
               <SelectTrigger><SelectValue placeholder="Supplier (optional)" /></SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="all">None</SelectItem>
                 {suppliers.map(s => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}
               </SelectContent>
@@ -79,7 +79,7 @@ export default function ShipmentModal({ isOpen, onClose, onSave, shipment, partn
           <Controller name="source_location" control={control} render={({ field }) => (
             <Select onValueChange={field.onChange} value={field.value || "Dubai"}>
               <SelectTrigger><SelectValue placeholder="Source location" /></SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="Dubai">Dubai</SelectItem>
                 <SelectItem value="China">China</SelectItem>
               </SelectContent>
@@ -93,7 +93,7 @@ export default function ShipmentModal({ isOpen, onClose, onSave, shipment, partn
           <Controller name="status" control={control} render={({ field }) => (
             <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger><SelectValue placeholder="Status" /></SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 {["Pending Payment","Payment Confirmed","Sourcing from Supplier","In Transit to Kenya","At Kenya Warehouse","Out for Delivery","Delivered"]
                   .map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
               </SelectContent>

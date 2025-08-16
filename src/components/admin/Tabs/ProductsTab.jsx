@@ -24,7 +24,7 @@ export default function ProductsTab() {
           <div className="flex gap-2">
             <Select onValueChange={(v)=>setFilterCategory(v)} value={filterCategory || ""}>
               <SelectTrigger className="w-56"><SelectValue placeholder="Filter by Category" /></SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="all">All</SelectItem>
                 {categories.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
               </SelectContent>

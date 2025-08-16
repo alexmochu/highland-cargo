@@ -181,7 +181,7 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
             render={({ field }) => (
               <Select onValueChange={field.onChange} value={field.value || ""}>
                 <SelectTrigger><SelectValue placeholder="Select category" /></SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   {categories.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
                 </SelectContent>
               </Select>

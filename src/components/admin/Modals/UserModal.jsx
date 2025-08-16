@@ -303,7 +303,7 @@ export default function UserModal({ isOpen, onClose, onSave, user, partners, sup
             render={({ field }) => (
               <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger><SelectValue placeholder="Role" /></SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   <SelectItem value="admin">Admin</SelectItem>
                   <SelectItem value="partner">Partner</SelectItem>
                   <SelectItem value="supplier">Supplier</SelectItem>
@@ -320,7 +320,7 @@ export default function UserModal({ isOpen, onClose, onSave, user, partners, sup
               render={({ field }) => (
                 <Select onValueChange={(v)=>field.onChange(v || null)} value={field.value || ""}>
                   <SelectTrigger><SelectValue placeholder="Assign Partner (optional)" /></SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white">
                     <SelectItem value="all">None</SelectItem>
                     {partners.map(p => <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>)}
                   </SelectContent>
@@ -336,7 +336,7 @@ export default function UserModal({ isOpen, onClose, onSave, user, partners, sup
               render={({ field }) => (
                 <Select onValueChange={(v)=>field.onChange(v || null)} value={field.value || ""}>
                   <SelectTrigger><SelectValue placeholder="Assign Supplier (optional)" /></SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white">
                     <SelectItem value="all">None</SelectItem>
                     {suppliers.map(s => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}
                   </SelectContent>
