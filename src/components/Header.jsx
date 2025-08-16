@@ -75,14 +75,14 @@ export const Header = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center gap-2 ml-2">
-                  <Avatar className="h-8 w-8">
+                  <Avatar className="h-8 w-8 border border-input ">
                     <AvatarImage
                       src={profile.profile_image_url || "/placeholder.svg"}
                       alt={profile.full_name || "User"}
                     />
-                    <AvatarFallback>{getInitials(profile?.full_name || "")}</AvatarFallback>
+                    <AvatarFallback>{getInitials(profile?.full_name || "") || user.email[0].toUpperCase()}</AvatarFallback>
                   </Avatar>
-                  <span className="hidden md:inline">{profile?.full_name || user.email}</span>
+                  {/* <span className="hidden md:inline">{profile?.full_name || user.email}</span> */}
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -141,13 +141,12 @@ export const Header = () => {
             <Link href="/auth" className="text-gray-700 hover:text-orange-500 transition-colors">{'Login'}</Link>
             )}
           </nav>
-          <div className="hidden md:flex items-center space-x-4">
-            {/* <LanguageToggle /> */}
+          {/* <div className="hidden md:flex items-center space-x-4">
             <Button className="bg-orange-500 text-white hover:bg-orange-600">
-              {/* {t("get_quote")} */}
               Get Quote
             </Button>
-          </div>
+          </div> */}
+
           <Button
             variant="outline"
             size="sm"
@@ -166,7 +165,7 @@ export const Header = () => {
               {user ? (
                 <>
                 <Link href="/admin" className="text-gray-700 hover:text-blue-600">{"Administrator"}</Link>
-                <Link href="/dashboard" className="text-gray-700 hover:text-blue-600">{"Dashboard"}</Link>
+                <Link href="/products" className="text-gray-700 hover:text-blue-600">{"Dashboard"}</Link>
                 <Link href="/Partner" className="text-gray-700 hover:text-blue-600">{"Partner"}</Link>
                 <span
                   onClick={handleLogout}
