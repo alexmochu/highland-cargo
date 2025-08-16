@@ -42,7 +42,12 @@ export default function PartnersTab() {
         </CardContent>
       </Card>
 
-      <PartnerModal isOpen={open} onClose={() => { setOpen(false); setEditing(null); }} onSave={(vals) => addOrUpdate(vals)} partner={editing} />
+      {open && (
+        <div className="fixed inset-0 flex items-center justify-center p-4 z-50">
+          <div className="rounded shadow max-w-md w-full">
+            <PartnerModal isOpen={open} onClose={() => { setOpen(false); setEditing(null); }} onSave={(vals) => addOrUpdate(vals)} partner={editing} />
+          </div>
+      </div>)}
     </>
   );
 }

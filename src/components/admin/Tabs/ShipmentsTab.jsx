@@ -95,8 +95,13 @@ export default function ShipmentsTab() {
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>
       </Card>
-
-      <ShipmentModal isOpen={open} onClose={() => { setOpen(false); setEditing(null); }} onSave={(vals) => addOrUpdate(vals)} shipment={editing} partners={partners} suppliers={suppliers} products={products} />
+      
+      {open && (
+        <div className="fixed inset-0 flex items-center justify-center p-4 z-50">
+          <div className="rounded shadow max-w-md w-full">
+            <ShipmentModal isOpen={open} onClose={() => { setOpen(false); setEditing(null); }} onSave={(vals) => addOrUpdate(vals)} shipment={editing} partners={partners} suppliers={suppliers} products={products} />
+          </div>
+      </div>)}    
     </>
   );
 }

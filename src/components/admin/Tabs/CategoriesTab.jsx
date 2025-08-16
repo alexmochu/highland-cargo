@@ -42,7 +42,12 @@ export default function CategoriesTab() {
         </CardContent>
       </Card>
 
-      <CategoryModal isOpen={open} onClose={() => { setOpen(false); setEditing(null); }} onSave={(vals)=>addOrUpdate(vals)} category={editing} />
+      {open && (
+        <div className="fixed inset-0 flex items-center justify-center p-4 z-50">
+          <div className="rounded shadow max-w-md w-full">
+            <CategoryModal isOpen={open} onClose={() => { setOpen(false); setEditing(null); }} onSave={(vals)=>addOrUpdate(vals)} category={editing} />
+          </div>
+        </div>)}
     </>
   );
 }

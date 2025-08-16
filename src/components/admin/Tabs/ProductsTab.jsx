@@ -60,15 +60,21 @@ export default function ProductsTab() {
         </CardContent>
       </Card>
 
-      <ProductModal
-        isOpen={open}
-        onClose={() => { setOpen(false); setEditing(null); }}
-        onSave={(vals) => addOrUpdate(vals)}
-        product={editing}
-        categories={categories}
-        partners={partners}
-        suppliers={suppliers}
-      />
+      {open && (
+        <div className="fixed inset-0 flex items-center justify-center p-4 z-50">
+          <div className="rounded shadow max-w-md w-full">
+            <ProductModal
+              isOpen={open}
+              onClose={() => { setOpen(false); setEditing(null); }}
+              onSave={(vals) => addOrUpdate(vals)}
+              product={editing}
+              categories={categories}
+              partners={partners}
+              suppliers={suppliers}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }

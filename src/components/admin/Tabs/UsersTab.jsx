@@ -128,14 +128,19 @@ export default function UsersTab() {
         </CardContent>
       </Card>
 
-      <UserModal
-        isOpen={open}
-        onClose={() => { setOpen(false); setEditing(null); }}
-        onSave={(vals) => addOrUpdate(vals)}
-        user={editing}
-        partners={partners}
-        suppliers={suppliers}
-      />
+      {open && (
+        <div className="fixed inset-0 flex items-center justify-center p-4 z-50">
+          <div className="rounded shadow max-w-md w-full">
+            <UserModal
+              isOpen={open}
+              onClose={() => { setOpen(false); setEditing(null); }}
+              onSave={(vals) => addOrUpdate(vals)}
+              user={editing}
+              partners={partners}
+              suppliers={suppliers}
+            />
+          </div>
+      </div>)}
     </>
   );
 }
