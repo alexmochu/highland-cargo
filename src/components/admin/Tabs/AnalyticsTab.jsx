@@ -78,7 +78,7 @@ export default function AnalyticsTab() {
 
       <Card><CardHeader><CardTitle>Partners</CardTitle></CardHeader><CardContent className="flex items-center gap-3"><Warehouse className="w-7 h-7 text-green-600"/><span className="text-3xl font-bold">{loading ? "…" : partnersCount}</span></CardContent></Card>
 
-      <Card><CardHeader><CardTitle>Suppliers</CardTitle></CardHeader><CardContent className="flex items-center gap-3"><Factory className="w-7 h-7 text-blue-600"/><span className="text-3xl font-bold">{loading ? "…" : partnersCount}</span></CardContent></Card>
+      <Card><CardHeader><CardTitle>Suppliers</CardTitle></CardHeader><CardContent className="flex items-center gap-3"><Factory className="w-7 h-7 text-blue-600"/><span className="text-3xl font-bold">{loading ? "…" : suppliersCount}</span></CardContent></Card>
 
       <Card className="lg:col-span-2">
         <CardHeader><CardTitle>Trending Products</CardTitle></CardHeader>
