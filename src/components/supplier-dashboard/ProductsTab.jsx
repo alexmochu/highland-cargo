@@ -88,7 +88,7 @@ export default function ProductsTab({ supplierId }) {
                   <th>Category</th>
                   <th>Region</th>
                   <th>Price</th>
-                  <th>Actions</th>
+                  {/* <th>Actions</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -98,14 +98,14 @@ export default function ProductsTab({ supplierId }) {
                     <td>{p.product_categories?.name}</td>
                     <td className="uppercase">{p.region}</td>
                     <td>{p.price}</td>
-                    <td className="flex gap-2">
+                    {/* <td className="flex gap-2">
                       <Button size="sm" variant="outline" onClick={() => setEditing(p)}>
                         <Pencil className="w-4 h-4" />
                       </Button>
                       <Button size="sm" variant="destructive" onClick={() => onDelete(p.id)}>
                         <Trash2 className="w-4 h-4" />
                       </Button>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
                 {loading && <tr><td colSpan={5}>Loading…</td></tr>}
