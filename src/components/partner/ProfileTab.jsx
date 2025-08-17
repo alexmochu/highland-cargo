@@ -44,7 +44,7 @@ export default function ProfileTab({ profile, onUpdate }) {
             <div><strong>Name:</strong> {profile?.full_name || "-"}</div>
             <div><strong>Email:</strong> {profile?.email || "-"}</div>
             <div className="mt-2">
-              <Button onClick={() => setEditing(true)}>Edit Profile</Button>
+              {/* <Button onClick={() => setEditing(true)}>Edit Profile</Button> */}
             </div>
           </>
         )}

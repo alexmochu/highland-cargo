@@ -24,7 +24,7 @@ export default function PartnerDashboardPage() {
           <TabsList className="mb-4 flex flex-wrap gap-2">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="shipments">My Shipments</TabsTrigger>
-            <TabsTrigger value="messages">Messages</TabsTrigger>
+            {/* <TabsTrigger value="messages">Messages</TabsTrigger> */}
             <TabsTrigger value="profile">Profile</TabsTrigger>
           </TabsList>
 
