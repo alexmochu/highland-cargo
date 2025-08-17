@@ -27,7 +27,7 @@ export default function SupplierDashboard() {
             <TabsTrigger value="shipments">Shipments</TabsTrigger>
             <TabsTrigger value="products">Products</TabsTrigger>
             <TabsTrigger value="team">Team</TabsTrigger>
-            <TabsTrigger value="messages">Messages</TabsTrigger>
+            {/* <TabsTrigger value="messages">Messages</TabsTrigger> */}
             <TabsTrigger value="profile">Profile</TabsTrigger>
           </TabsList>
 

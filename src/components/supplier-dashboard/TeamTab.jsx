@@ -53,20 +53,22 @@ export default function TeamTab({ supplierId }) {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Team Members</CardTitle>
-          <Button onClick={() => setAdding(true)}><Plus className="w-4 h-4 mr-2"/>Add Member</Button>
+          {/* <Button onClick={() => setAdding(true)}><Plus className="w-4 h-4 mr-2"/>Add Member</Button> */}
         </CardHeader>
         <CardContent>
           <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Email</th><th>Can manage products</th><th>Can manage team</th><th>Actions</th></tr></thead>
+            <thead><tr className="text-left"><th>Email</th><th>Can manage products</th><th>Can manage team</th>
+            {/* <th>Actions</th> */}
+            </tr></thead>
             <tbody>
               {!loading && team.map(m => (
                 <tr key={m.id} className="border-t">
                   <td>{m.profiles?.email || "-"}</td>
                   <td>{m.can_manage_products ? "Yes" : "No"}</td>
                   <td>{m.can_manage_team ? "Yes" : "No"}</td>
-                  <td className="flex gap-2">
+                  {/* <td className="flex gap-2">
                     <Button size="sm" variant="destructive" onClick={() => onRemove(m.id)}><Trash2 className="w-4 h-4" /></Button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
               {loading && <tr><td colSpan={4}>Loading…</td></tr>}

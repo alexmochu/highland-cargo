@@ -75,7 +75,7 @@ export default function ProductsTab({ supplierId }) {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Products</CardTitle>
-          <Button onClick={() => { setEditing(null); reset(); setOpen(true); }}>
+          <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); reset(); setOpen(true); }}>
             <Plus className="w-4 h-4 mr-2" />Add Product
           </Button>
         </CardHeader>

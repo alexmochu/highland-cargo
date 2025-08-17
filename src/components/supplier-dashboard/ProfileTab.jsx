@@ -12,9 +12,9 @@ export default function ProfileTab({ profile }) {
           <div><span className="font-semibold">Name:</span> {profile?.full_name || "-"}</div>
           <div><span className="font-semibold">Email:</span> {profile?.email || "-"}</div>
           <div><span className="font-semibold">Role:</span> {profile?.role || "-"}</div>
-          <div className="mt-3">
+          {/* <div className="mt-3">
             <Button variant="outline">Edit Profile</Button>
-          </div>
+          </div> */}
         </div>
       </CardContent>
     </Card>
