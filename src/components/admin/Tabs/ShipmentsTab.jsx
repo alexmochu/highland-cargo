@@ -65,12 +65,14 @@ export default function ShipmentsTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Shipments</CardTitle>
-          <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Shipment</Button>
+          {/* <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Shipment</Button> */}
         </CardHeader>
 
         <CardContent>
           <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>ID</th><th>Product</th><th>Partner</th><th>Supplier</th><th>Source</th><th>Dest</th><th>Status</th><th>Updated</th><th>Actions</th></tr></thead>
+            <thead><tr className="text-left"><th>ID</th><th>Product</th><th>Partner</th><th>Supplier</th><th>Source</th><th>Dest</th><th>Status</th><th>Updated</th>
+            {/* <th>Actions</th> */}
+            </tr></thead>
             <tbody>
               {!loading && shipments.map(s => (
                 <tr key={s.id} className="border-t">
@@ -82,10 +84,10 @@ export default function ShipmentsTab() {
                   <td>{s.destination_location || "-"}</td>
                   <td>{s.status}</td>
                   <td>{s.updated_at ? new Date(s.updated_at).toLocaleString() : "-"}</td>
-                  <td className="flex gap-2">
+                  {/* <td className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => { setEditing(s); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
                     <Button size="sm" variant="destructive" onClick={() => remove(s.id)}><Trash2 className="w-4 h-4" /></Button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
               {loading && <tr><td colSpan={9}>Loading…</td></tr>}

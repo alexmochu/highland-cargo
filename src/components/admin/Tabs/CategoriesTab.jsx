@@ -16,22 +16,24 @@ export default function CategoriesTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Product Categories</CardTitle>
-          <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Category</Button>
+          {/* <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Category</Button> */}
         </CardHeader>
 
         <CardContent>
           <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Name</th><th>Description</th><th>Created</th><th>Actions</th></tr></thead>
+            <thead><tr className="text-left"><th>Name</th><th>Description</th><th>Created</th>
+            {/* <th>Actions</th> */}
+            </tr></thead>
             <tbody>
               {!loading && categories.map(c => (
                 <tr key={c.id} className="border-t">
                   <td>{c.name}</td>
                   <td>{c.description || "-"}</td>
                   <td>{c.created_at ? new Date(c.created_at).toLocaleString() : "-"}</td>
-                  <td className="flex gap-2">
+                  {/* <td className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => { setEditing(c); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
                     <Button size="sm" variant="destructive" onClick={() => remove(c.id)}><Trash2 className="w-4 h-4" /></Button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
               {loading && <tr><td colSpan={4}>Loading…</td></tr>}

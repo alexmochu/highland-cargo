@@ -104,7 +104,9 @@ export default function UsersTab() {
 
         <CardContent>
           <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Email</th><th>Name</th><th>Role</th><th>Partner</th><th>Supplier</th><th>Created</th><th>Actions</th></tr></thead>
+            <thead><tr className="text-left"><th>Email</th><th>Name</th><th>Role</th><th>Partner</th><th>Supplier</th><th>Created</th>
+            {/* <th>Actions</th> */}
+            </tr></thead>
             <tbody>
               {!loading && users.map(u => (
                 <tr key={u.id} className="border-t">
@@ -114,10 +116,10 @@ export default function UsersTab() {
                   <td>{u.partners?.name || "-"}</td>
                   <td>{u.suppliers?.name || "-"}</td>
                   <td>{u.created_at ? new Date(u.created_at).toLocaleString() : "-"}</td>
-                  <td className="flex gap-2">
+                  {/* <td className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => { setEditing(u); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
                     <Button size="sm" variant="destructive" onClick={() => remove(u.id)}><Trash2 className="w-4 h-4" /></Button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
               {loading && <tr><td colSpan={7}>Loading…</td></tr>}

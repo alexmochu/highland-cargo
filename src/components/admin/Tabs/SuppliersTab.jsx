@@ -16,22 +16,24 @@ export default function SuppliersTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Suppliers</CardTitle>
-          <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Supplier</Button>
+          {/* <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Supplier</Button> */}
         </CardHeader>
 
         <CardContent>
           <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Name</th><th>Location</th><th>Contact</th><th>Actions</th></tr></thead>
+            <thead><tr className="text-left"><th>Name</th><th>Location</th><th>Contact</th>
+            {/* <th>Actions</th> */}
+            </tr></thead>
             <tbody>
               {!loading && suppliers.map(s => (
                 <tr key={s.id} className="border-t">
                   <td>{s.name}</td>
                   <td>{s.location || "-"}</td>
                   <td>{s.contact_email || "-"}</td>
-                  <td className="flex gap-2">
+                  {/* <td className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => { setEditing(s); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
                     <Button size="sm" variant="destructive" onClick={() => remove(s.id)}><Trash2 className="w-4 h-4" /></Button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
               {loading && <tr><td colSpan={4}>Loading…</td></tr>}
