@@ -275,7 +275,7 @@ export default function UserModal({ isOpen, onClose, onSave, user, partners, sup
     if (user?.id) {
       await onSave(vals);
     } else {
-      await fetch("/api/admin/invite", {
+      await fetch("/api/invite-user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(vals),

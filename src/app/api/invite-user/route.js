@@ -53,14 +53,7 @@ export async function POST(req) {
 
     const supabase = createServerSupabaseClient();
 
-    // 1) Create auth user (service role) — set password to random and send invite via your own email flow if desired
-    const tempPassword = Math.random().toString(36).slice(2, 10) + "A!"; // small temp pw
-    const { data: createdUser, error: createErr } = await supabase.auth.admin.createUser({
-      email,
-      password: tempPassword,
-      email_confirm: true, // or false depending on your flow
-      user_metadata: { full_name, role },
-    });
+    const { data: createdUser, error: createErr } = await supabase.auth.admin.inviteUserByEmail(email);
 
     if (createErr) {
       console.error("create user error", createErr);
@@ -72,7 +65,6 @@ export async function POST(req) {
       return NextResponse.json({ error: "No user id returned" }, { status: 500 });
     }
 
-    // 2) Insert profile record (profiles.user_id -> auth.users.id)
     const { error: profErr } = await supabase.from("profiles").insert([{
       user_id: userId,
       email,
@@ -88,15 +80,12 @@ export async function POST(req) {
       return NextResponse.json({ error: profErr.message || "Failed to create profile" }, { status: 500 });
     }
 
-    // 3) Add to team tables where appropriate
     if (role === "admin") {
       await supabase.from("admin_team_members").insert([{ user_id: userId }]);
     }
     if (role === "supplier" && supplier_id) {
       await supabase.from("supplier_team_members").insert([{ user_id: userId, supplier_id }]);
     }
-
-    // Optionally: send an email / send password reset link — not covered here
 
     return NextResponse.json({ ok: true });
   } catch (err) {
