@@ -11,14 +11,9 @@ export default function AuthCallbackPage() {
   const { setUser, setProfile } = useAuthStore()
 
   useEffect(() => {
-    const createUserProfile = async (user) => {
+    const createProfileIfNeeded = async (user) => {
       try {
-        const fullName = user.user_metadata.full_name || ""
-        const firstName = user.user_metadata.first_name || (fullName ? fullName.split(" ")[0] : "")
-        const lastName = user.user_metadata.last_name || (fullName ? fullName.split(" ").slice(1).join(" ") : "")
-        const avatarUrl = user.user_metadata.avatar_url || ""
-        const email = user.user_metadata.email || ""
-
+        // 1. Check if profile already exists
         const { data: existingProfile, error: selectError } = await supabase
           .from("profiles")
           .select("*")
@@ -27,96 +22,67 @@ export default function AuthCallbackPage() {
 
         if (selectError) {
           console.error("Error checking for existing profile:", selectError.message)
-          return
+          return null
         }
 
         if (existingProfile) {
-          console.log("Profile already exists. Skipping creation.")
-          setProfile(existingProfile)
-          return
+          console.log("Profile already exists, using it.")
+          return existingProfile
         }
 
-        const { data: insertedUser, error: insertUserError } = await supabase
+        // 2. Create new profile (for passwordless signups, not invited ones)
+        const fullName = user.user_metadata.full_name || ""
+        const firstName = user.user_metadata.first_name || (fullName ? fullName.split(" ")[0] : "")
+        const lastName = user.user_metadata.last_name || (fullName ? fullName.split(" ").slice(1).join(" ") : "")
+        const avatarUrl = user.user_metadata.avatar_url || ""
+        const email = user.email || ""
+
+        const { data: newProfile, error: insertError } = await supabase
           .from("profiles")
           .insert({
-            email: email,
+            user_id: user.id,
+            email,
+            full_name: fullName || `${firstName} ${lastName}`.trim(),
             avatar_url: avatarUrl,
-            full_name: fullName,
-            user_id: user.id
           })
           .select()
+          .single()
 
-        if (insertUserError) {
-          console.error("Error creating profile:", insertUserError.message)
-        } else {
-          console.log("Profile created successfully.")
-          if (insertedUser && insertedUser.length > 0) {
-            setProfile(insertedUser[0])
-          }
+        if (insertError) {
+          console.error("Error creating profile:", insertError.message)
+          return null
         }
 
-        // Verify the inserted user exists before inserting the role.
-        if (!insertedUser || insertedUser.length === 0) {
-          console.error("User insertion did not return a valid user row.")
-          return
-        }
-
-        // Insert corresponding user role into the "user_roles" table.
-        // const { error: insertRoleError } = await supabase.from("user_roles").insert({
-        //   role: role,
-        // })
-
-        // if (insertRoleError) {
-        //   console.error("Error inserting user role:", insertRoleError.message)
-        // } else {
-        //   console.log("User role inserted successfully in the user_roles table.")
-        // }
+        console.log("Profile created successfully.")
+        return newProfile
       } catch (error) {
-        console.error("Error in createUserProfile:", error)
+        console.error("Error in createProfileIfNeeded:", error)
+        return null
       }
     }
-    // const syncProfile = async (user) => {
 
-    // try {if (user) {
-    //     // Call Edge Function to sync profile
-    //     await fetch(`
-    //       /api/sync-profile`, {
-    //       method: 'POST',
-    //       body: JSON.stringify({ user: user }),
-    //       headers: { 'Content-Type': 'application/json' }
-    //     });
-
-    //     // Redirect to dashboard after syncing
-    //     router.push('/dashboard');
-    //   } 
-    // } catch (error){
-    //     console.error("Error inrofile syncProfile:", error)
-    // }
-    // };
     const handleAuthCallback = async () => {
       try {
         const { hash, searchParams } = new URL(window.location.href)
         const next = searchParams.get("next") || "/products"
-        const role = searchParams.get("role")
 
-        // Handle email confirmation with hash parameters
+        // Email invite or magic link flow
         if (hash) {
           const params = new URLSearchParams(hash.replace("#", "?"))
           const access_token = params.get("access_token")
           const refresh_token = params.get("refresh_token")
 
           if (access_token && refresh_token) {
-            await supabase.auth.setSession({
-              access_token,
-              refresh_token,
-            })
+            await supabase.auth.setSession({ access_token, refresh_token })
 
             const {
               data: { session },
             } = await supabase.auth.getSession()
+
             if (session?.user) {
               setUser(session.user)
-              await createUserProfile(session.user)
+              const profile = await createProfileIfNeeded(session.user)
+              if (profile) setProfile(profile)
             }
 
             router.refresh()
@@ -124,7 +90,7 @@ export default function AuthCallbackPage() {
           }
         }
 
-        // Handle OAuth flow with code parameter
+        // OAuth / PKCE flow
         const code = searchParams.get("code")
         if (code) {
           await supabase.auth.exchangeCodeForSession(code)
@@ -132,9 +98,11 @@ export default function AuthCallbackPage() {
           const {
             data: { session },
           } = await supabase.auth.getSession()
+
           if (session?.user) {
             setUser(session.user)
-            await createUserProfile(session.user)
+            const profile = await createProfileIfNeeded(session.user)
+            if (profile) setProfile(profile)
           }
 
           router.refresh()
@@ -144,7 +112,7 @@ export default function AuthCallbackPage() {
         throw new Error("No authentication tokens found in URL")
       } catch (error) {
         console.error("Authentication error:", error)
-        router.push(`/auth/error?message=${encodeURIComponent((error).message)}`)
+        router.push(`/auth/error?message=${encodeURIComponent(error.message)}`)
       }
     }
 
