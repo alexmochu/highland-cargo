@@ -79,9 +79,9 @@ export const Contact = () => {
               <Input placeholder="Phone Number" />
               <Input placeholder="Service Type" />
               <Textarea placeholder="Describe your shipping requirements..." className="min-h-24" />
-              <Button className="w-full bg-orange-500 text-white hover:bg-orange-600">
+              {/* <Button className="w-full bg-orange-500 text-white hover:bg-orange-600">
                 Request Quote
-              </Button>
+              </Button> */}
             </CardContent>
           </Card>
 

@@ -171,10 +171,10 @@ function Products() {
                               {product.product_pricing.map(p => `${p.min_quantity}-${p.max_quantity} pcs: $${p.price}`).join(", ")}
                             </p>
                           )}
-                          <div className="mt-4 flex gap-2">
+                          {/* <div className="mt-4 flex gap-2">
                             <Button className="bg-blue-600 text-white w-full">Request Quote</Button>
                             <Button onClick={() => handleChatClick(product.suppliers?.id)} variant="outline">Chat Now</Button>
-                          </div>
+                          </div> */}
                         </CardContent>
                       </Card>
                     </motion.div>

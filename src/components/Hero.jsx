@@ -36,14 +36,14 @@ export const Hero = () => {
               {/* {t("hero_desc")} */}
               Trusted by 10,000+ businesses for international air, sea, and local shipping. Experience global connections and personal attention — with Highland Cargo.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:300ms]">
+            {/* <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:300ms]">
               <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white shadow-lg animate-scale-in">
                 Request Quote
               </Button>
               <Button size="lg" variant="outline" className="border-white hover:bg-orange-500 hover:text-white text-blue-600 animate-scale-in [animation-delay:200ms]">
                 Track Package
               </Button>
-            </div>
+            </div> */}
           </div>
           <div className="relative opacity-99 animate-fade-in-up [animation-delay:400ms]">
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-orange-100 shadow-xl">
