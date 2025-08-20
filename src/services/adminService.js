@@ -169,7 +169,8 @@ export async function fetchProducts({ page = 1, pageSize = 10, category_id } = {
     *,
     product_categories!products_category_id_fkey(name),
     partners!products_partner_id_fkey(name),
-    suppliers!products_supplier_id_fkey(name)
+    suppliers!products_supplier_id_fkey(name),
+    product_images(image_url)
   `;
   const { data, error, count } = await paginatedSelect({
     table: "products",

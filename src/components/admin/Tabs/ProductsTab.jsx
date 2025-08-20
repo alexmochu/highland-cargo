@@ -7,6 +7,7 @@ import { Plus, Pencil, Trash2 } from "lucide-react";
 import useProducts from "@/hooks/admin/useProductsPaginated";
 import ProductModal from "@/components/admin/Modals/ProductModal";
 import Pagination from "@/components/admin/Pagination";
+import Image from 'next/image';
 
 export default function ProductsTab() {
   const {
@@ -15,7 +16,6 @@ export default function ProductsTab() {
   } = useProducts({ pageSize: 10 });
 
   const [open, setOpen] = useState(false);
-
   return (
     <>
       <Card>
@@ -36,12 +36,18 @@ export default function ProductsTab() {
 
         <CardContent>
           <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Name</th><th>Category</th><th>Region</th><th>Price</th><th>Partner</th><th>Supplier</th>
+            <thead>
+              <tr className="text-left">
+                <th>Image</th>
+                <th>Name</th><th>Category</th><th>Region</th><th>Price</th><th>Partner</th><th>Supplier</th>
             {/* <th>Actions</th> */}
             </tr></thead>
             <tbody>
               {!loading && products.map(p => (
                 <tr key={p.id} className="border-t">
+                  <td className="flex overflow-x-auto snap-x snap-mandatory h-16 w-16">
+                  <Image key={p.id} src={p.product_images[0].image_url} alt={p.description + ' image'} width={300} height={200} className="snap-center object-cover w-full" />
+                  </td>
                   <td>{p.name}</td>
                   <td>{p.product_categories?.name || "-"}</td>
                   <td className="uppercase">{p.region}</td>
