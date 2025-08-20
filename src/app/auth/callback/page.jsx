@@ -64,7 +64,7 @@ export default function AuthCallbackPage() {
     const handleAuthCallback = async () => {
       try {
         const { hash, searchParams } = new URL(window.location.href)
-        const next = searchParams.get("next") || "/products"
+        const next = searchParams.get("next") || "/dashboard"
 
         // Email invite or magic link flow
         if (hash) {
