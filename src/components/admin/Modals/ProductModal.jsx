@@ -1,119 +1,3 @@
-// "use client";
-
-// import { useEffect, useState } from "react";
-// import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-// import { Input } from "@/components/ui/input";
-// import { Button } from "@/components/ui/button";
-// import { Label } from "@/components/ui/label";
-// // import { toast } from "sonner";
-// import { createClient } from "@/lib/supabase/client";
-
-// export default function ProductModal({ isOpen, onClose, product = null, onSave }) {
-//   const supabase = createClient();
-
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     region: "",
-//     price: "",
-//     description: "",
-//   });
-
-//   const isEditing = !!product;
-
-//   useEffect(() => {
-//     if (product) {
-//       setFormData({
-//         name: product.name || "",
-//         region: product.region || "",
-//         price: product.price || "",
-//         description: product.description || "",
-//       });
-//     } else {
-//       setFormData({ name: "", region: "", price: "", description: "" });
-//     }
-//   }, [product]);
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = async () => {
-//     const { name, region, price } = formData;
-
-//     if (!name || !region || !price) {
-//       alert("Please fill in required fields.");
-//       return;
-//     }
-
-//     try {
-//       if (isEditing) {
-//         const { error } = await supabase
-//           .from("products")
-//           .update(formData)
-//           .eq("id", product.id);
-
-//         if (error) throw error;
-//         alert("Product updated successfully.");
-//       } else {
-//         const { error } = await supabase.from("products").insert([formData]);
-//         if (error) throw error;
-//         alert("Product created successfully.");
-//       }
-
-//       onClose();
-//       if (onSave) onSave(); // Optionally trigger a refresh in parent
-//     } catch (err) {
-//       console.error(err);
-//       alert("Something went wrong.");
-//     }
-//   };
-
-//   return (
-//     <Dialog open={isOpen} onOpenChange={onClose}>
-//       <DialogContent className="max-w-md">
-//         <DialogHeader>
-//           <DialogTitle>{isEditing ? "Edit Product" : "Add Product"}</DialogTitle>
-//         </DialogHeader>
-
-//         <div className="space-y-4">
-//           <div>
-//             <Label htmlFor="name">Name</Label>
-//             <Input name="name" value={formData.name} onChange={handleChange} />
-//           </div>
-//           <div>
-//             <Label htmlFor="region">Region</Label>
-//             <Input name="region" value={formData.region} onChange={handleChange} />
-//           </div>
-//           <div>
-//             <Label htmlFor="price">Price</Label>
-//             <Input
-//               name="price"
-//               type="number"
-//               min="0"
-//               value={formData.price}
-//               onChange={handleChange}
-//             />
-//           </div>
-//           <div>
-//             <Label htmlFor="description">Description</Label>
-//             <Input name="description" value={formData.description} onChange={handleChange} />
-//           </div>
-//         </div>
-
-//         <div className="pt-4 flex justify-end gap-2">
-//           <Button variant="ghost" onClick={onClose}>
-//             Cancel
-//           </Button>
-//           <Button onClick={handleSubmit}>
-//             {isEditing ? "Update" : "Create"}
-//           </Button>
-//         </div>
-//       </DialogContent>
-//     </Dialog>
-//   );
-// }
-
 "use client";
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -135,13 +19,14 @@ const schema = z.object({
   supplier_id: z.string().uuid().nullable().optional(),
   region: z.enum(["dubai", "china", "uk"], { required_error: "Region is required" }),
   added_by_admin: z.boolean().optional(),
+  images: z.any().optional(), // will handle validation in componen
 });
 
 export default function ProductModal({ isOpen, onClose, onSave, product, categories, partners, suppliers }) {
   const { control, register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: "", price: "", info: "", description: "", category_id: "", partner_id: null, supplier_id: null, region: "dubai", added_by_admin: true,
+      name: "", price: "", info: "", description: "", category_id: "", partner_id: null, supplier_id: null, region: null, added_by_admin: true, images: [],
     },
   });
 
@@ -154,16 +39,39 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
       category_id: product.category_id || "",
       partner_id: product.partner_id || null,
       supplier_id: product.supplier_id || null,
-      region: product.region || "dubai",
+      region: product.region || null,
       added_by_admin: product.added_by_admin ?? true,
+      images: product.product_images 
+      ? product.product_images.map(img => ({ previewUrl: img.image_url, file: null }))
+      : [],
     } : undefined);
   }, [product, reset]);
 
-  const submit = async (vals) => { await onSave(vals); onClose(); };
+  const submit = async (vals) => { 
+    const formData = new FormData();
+
+    Object.entries(vals).forEach(([key, value]) => {
+      if (key === "images") {
+        value.forEach((img, idx) => {
+          if (img.file) {
+            formData.append(`images[${idx}]`, img.file);
+          } else if (img.previewUrl) {
+            formData.append(`existingImages[${idx}]`, img.previewUrl);
+          }
+        });
+      } else {
+        formData.append(key, value ?? "");
+      }
+    });
+
+    await onSave(vals); 
+    onClose(); 
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg">
+      <DialogContent 
+        className="max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader><DialogTitle>{product ? "Edit Product" : "Add Product"}</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit(submit)} className="space-y-4">
           <Input placeholder="Name" {...register("name")} />
@@ -179,7 +87,7 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
             name="category_id"
             control={control}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} value={field.value || ""}>
+              <Select onValueChange={(v) => field.onChange(v || null)} value={field.value || ""}>
                 <SelectTrigger><SelectValue placeholder="Select category" /></SelectTrigger>
                 <SelectContent className="bg-white">
                   {categories.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
@@ -193,9 +101,9 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
             name="region"
             control={control}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} value={field.value}>
+              <Select onValueChange={(v) => field.onChange(v || null)} value={field.value || ""}>
                 <SelectTrigger><SelectValue placeholder="Select region" /></SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   {["dubai","china","uk"].map(r => <SelectItem key={r} value={r}>{r.toUpperCase()}</SelectItem>)}
                 </SelectContent>
               </Select>
@@ -209,7 +117,7 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
             render={({ field }) => (
               <Select onValueChange={(v)=>field.onChange(v || null)} value={field.value || ""}>
                 <SelectTrigger><SelectValue placeholder="Partner (optional)" /></SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   <SelectItem value="all">None</SelectItem>
                   {partners.map(p => <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>)}
                 </SelectContent>
@@ -223,13 +131,76 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
             render={({ field }) => (
               <Select onValueChange={(v)=>field.onChange(v || null)} value={field.value || ""}>
                 <SelectTrigger><SelectValue placeholder="Supplier (optional)" /></SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   <SelectItem value="all">None</SelectItem>
                   {suppliers.map(s => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}
                 </SelectContent>
               </Select>
             )}
           />
+
+<Controller
+  name="images"
+  control={control}
+  render={({ field }) => {
+    const handleFiles = (e) => {
+      const newFiles = Array.from(e.target.files).map(file => ({
+        file,
+        previewUrl: URL.createObjectURL(file)
+      }));
+      const updated = [...(field.value || []), ...newFiles].slice(0, 4);
+      field.onChange(updated);
+
+      // Reset input so selecting the same file again still triggers onChange
+      e.target.value = null;
+    };
+
+    const removeFile = (index) => {
+      const newFiles = field.value.filter((_, i) => i !== index);
+      field.onChange(newFiles);
+    };
+
+    return (
+      <div className="space-y-2">
+        <Input
+          type="file"
+          multiple
+          accept="image/*"
+          onChange={handleFiles}
+        />
+        <p className="text-sm text-gray-500">Upload up to 4 images</p>
+
+        {/* Previews */}
+        {field.value?.length > 0 && (
+          <div className="flex gap-2 flex-wrap">
+            {field.value.map((file, idx) => (
+              <div
+                key={idx}
+                className="relative w-20 h-20 border rounded overflow-hidden group"
+              >
+                <img
+                  src={file.previewUrl || URL.createObjectURL(file)}
+                  alt={`preview-${idx}`}
+                  className="w-full h-full object-cover"
+                />
+                {/* Remove button */}
+                <button
+                  type="button"
+                  onClick={() => removeFile(idx)}
+                  className="absolute top-1 right-1 bg-black/60 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }}
+/>
+
+
 
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>

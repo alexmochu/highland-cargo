@@ -1,90 +1,3 @@
-// import { createClient } from "@/lib/supabase/client";
-// const supabase = createClient();
-
-// // ---------- Categories ----------
-// export const fetchCategories = async () => {
-//   const { data, error } = await supabase.from("product_categories").select("*").order("created_at", { ascending: false });
-//   if (error) throw error;
-//   return data;
-// };
-
-// export const saveCategory = async (category, id) => {
-//   if (id) {
-//     return await supabase.from("product_categories").update(category).eq("id", id);
-//   }
-//   return await supabase.from("product_categories").insert([category]);
-// };
-
-// export const deleteCategory = async (id) => {
-//   return await supabase.from("product_categories").delete().eq("id", id);
-// };
-
-// // ---------- Products ----------
-// export const fetchProducts = async () => {
-//   const { data, error } = await supabase
-//     .from("products")
-//     .select("*, product_categories(name), partners(name), suppliers(name)")
-//     .order("created_at", { ascending: false });
-//   if (error) throw error;
-//   return data;
-// };
-
-// export const saveProduct = async (product, id) => {
-//   if (id) {
-//     return await supabase.from("products").update(product).eq("id", id);
-//   }
-//   return await supabase.from("products").insert([product]);
-// };
-
-// export const deleteProduct = async (id) => {
-//   return await supabase.from("products").delete().eq("id", id);
-// };
-
-// // ---------- Users & Roles ----------
-// export const fetchUsers = async () => {
-//   const { data, error } = await supabase.from("profiles").select("*, partners(name), suppliers(name)");
-//   if (error) throw error;
-//   return data;
-// };
-
-// export const saveUserRole = async (userId, role) => {
-//   return await supabase.from("user_roles").upsert({ user_id: userId, role });
-// };
-
-// export const deleteUser = async (id) => {
-//   return await supabase.from("profiles").delete().eq("id", id);
-// };
-
-// // ---------- Shipments ----------
-// export const fetchShipments = async () => {
-//   const { data, error } = await supabase.from("shipments").select("*, partners(name), suppliers(name), products(name)");
-//   if (error) throw error;
-//   return data;
-// };
-
-// export const saveShipment = async (shipment, id) => {
-//   if (id) {
-//     return await supabase.from("shipments").update(shipment).eq("id", id);
-//   }
-//   return await supabase.from("shipments").insert([shipment]);
-// };
-
-// export const deleteShipment = async (id) => {
-//   return await supabase.from("shipments").delete().eq("id", id);
-// };
-
-// // ---------- Analytics ----------
-// export const fetchAnalytics = async () => {
-//   const [{ count: usersCount }] = await supabase.from("profiles").select("*", { count: "exact", head: true });
-//   const [{ count: shipmentsCount }] = await supabase.from("shipments").select("*", { count: "exact", head: true });
-//   const trending = await supabase.from("trending_products").select("*, products(name)").order("trend_score", { ascending: false }).limit(5);
-//   return {
-//     usersCount,
-//     shipmentsCount,
-//     trending: trending.data
-//   };
-// };
-
 // services/supabaseService.js
 import { createClient } from "@/lib/supabase/client";
 const supabase = createClient();
@@ -184,15 +97,71 @@ export async function fetchProducts({ page = 1, pageSize = 10, category_id } = {
   if (error) throw error;
   return { data: data || [], count: count || 0 };
 }
-export async function saveProduct(product, id) {
-  if (id) {
-    const { error } = await supabase.from("products").update(product).eq("id", id);
-    if (error) throw error;
-    return;
-  }
-  const { error } = await supabase.from("products").insert([product]);
+
+export async function saveProduct(vals, id = null) {
+  // --- 1. Insert/Update product ---
+  const productPayload = {
+    name: vals.name,
+    price: vals.price,
+    description: vals.description,
+    info: vals.info,
+    category_id: vals.category_id,
+    partner_id: vals.partner_id,
+    supplier_id: vals.supplier_id,
+    region: vals.region,
+    added_by_admin: vals.added_by_admin,
+  };
+
+  const { data: product, error } = id
+    ? await supabase.from("products").update(productPayload).eq("id", id).select().single()
+    : await supabase.from("products").insert([productPayload]).select().single();
+
   if (error) throw error;
+
+  // --- 2. Handle images ---
+  const existingUrls = (product.product_images || []).map(img => img.image_url);
+
+  // Separate new uploads from old ones
+  const newFiles = vals.images?.filter(i => i.file) || [];
+  const keptUrls = vals.images?.filter(i => i.image_url)?.map(i => i.image_url) || [];
+
+  // Find deleted ones
+  const deleted = existingUrls.filter(url => !keptUrls.includes(url));
+
+  // --- 2a. Upload new files ---
+  for (const img of newFiles) {
+    const file = img.file;
+    const filePath = `products/${product.id}/${Date.now()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage
+      .from("products")
+      .upload(filePath, file);
+
+    if (uploadError) throw uploadError;
+
+    const { data: { publicUrl } } = supabase
+      .storage.from("products")
+      .getPublicUrl(filePath);
+
+    await supabase.from("product_images").insert({
+      product_id: product.id,
+      image_url: publicUrl,
+    });
+  }
+
+  // --- 2b. Remove deleted ones (DB + storage) ---
+  for (const url of deleted) {
+    await supabase.from("product_images").delete().eq("image_url", url);
+
+    // delete from storage (optional if you want cleanup)
+    const path = url.split("/products/")[1]; // extract path from public URL
+    if (path) {
+      await supabase.storage.from("products").remove([path]);
+    }
+  }
+
+  return product;
 }
+
 export async function deleteProduct(id) {
   const { error } = await supabase.from("products").delete().eq("id", id);
   if (error) throw error;

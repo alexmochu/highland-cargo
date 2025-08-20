@@ -39,11 +39,21 @@ export default function useProducts({ pageSize = 10 } = {}) {
     if (!editing) {
       const temp = { ...vals, id: `temp-${Date.now()}`, created_at: new Date().toISOString() };
       setProducts(prev => [temp, ...prev]);
-      toast.promise(svc.saveProduct(vals), {
-        loading: "Adding product...",
-        success: "Product added",
-        error: "Failed to add product"
-      }).then(() => load(1)).catch(() => load(1));
+  
+      try {
+        await toast.promise(
+          svc.saveProduct(vals),
+          {
+            loading: "Adding product...",
+            success: "Product added",
+            error: "Failed to add product",
+          }
+        );
+        await load(1);
+      } catch (err) {
+        await load(1);
+      }
+  
     } else {
       const backup = products;
       setProducts(prev => prev.map(p => p.id === editing.id ? { ...p, ...vals } : p));
@@ -58,6 +68,8 @@ export default function useProducts({ pageSize = 10 } = {}) {
       }
     }
   };
+  
+  
 
   const remove = async (id) => {
     const backup = products;

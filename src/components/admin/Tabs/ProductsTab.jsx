@@ -46,7 +46,7 @@ export default function ProductsTab() {
               {!loading && products.map(p => (
                 <tr key={p.id} className="border-t">
                   <td className="flex overflow-x-auto snap-x snap-mandatory h-16 w-16">
-                  <Image key={p.id} src={p.product_images[0].image_url} alt={p.description + ' image'} width={300} height={200} className="snap-center object-cover w-full" />
+                  <Image key={p.id} src={p.product_images[0].image_url || null} alt={p.description + ' image'} width={300} height={200} className="snap-center object-cover w-full" />
                   </td>
                   <td>{p.name}</td>
                   <td>{p.product_categories?.name || "-"}</td>
