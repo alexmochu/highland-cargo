@@ -65,5 +65,14 @@ export default function useSuppliers({ pageSize = 10 } = {}) {
     }
   };
 
-  return { suppliers, total, page, setPage, pageSize, loading, editing, setEditing, load, addOrUpdate, remove };
+  async function verifySupplier(id: string, status: "verified" | "rejected") {
+    await fetch(`/api/admin/suppliers/${id}/verify`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    });
+    fetchSuppliers();
+  }
+
+  return { suppliers, total, page, verifySupplier, setPage, pageSize, loading, editing, setEditing, load, addOrUpdate, remove };
 }

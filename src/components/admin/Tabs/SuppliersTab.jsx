@@ -8,7 +8,7 @@ import SupplierModal from "@/components/admin/Modals/SupplierModal";
 import Pagination from "@/components/admin/Pagination";
 
 export default function SuppliersTab() {
-  const { suppliers, total, page, setPage, pageSize, loading, editing, setEditing, addOrUpdate, remove } = useSuppliers({ pageSize: 10 });
+  const { suppliers, total, page, setPage, verifySupplier, pageSize, loading, editing, setEditing, addOrUpdate, remove } = useSuppliers({ pageSize: 10 });
   const [open, setOpen] = useState(false);
 
   return (
@@ -22,9 +22,16 @@ export default function SuppliersTab() {
         <CardContent>
           <table className="min-w-full text-sm">
             <thead><tr className="text-left"><th>Name</th><th>Location</th><th>Contact</th>
-            {/* <th>Actions</th> */}
+            <th>Status</th>
+            <th>Onboarding Step</th>
+            <th>Actions</th>
             </tr></thead>
             <tbody>
+            {loading && (
+              <tr>
+                <td colSpan={5}>Loading…</td>
+              </tr>
+            )}
               {!loading && suppliers.map(s => (
                 <tr key={s.id} className="border-t">
                   <td>{s.name}</td>
@@ -34,6 +41,28 @@ export default function SuppliersTab() {
                     <Button size="sm" variant="outline" onClick={() => { setEditing(s); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
                     <Button size="sm" variant="destructive" onClick={() => remove(s.id)}><Trash2 className="w-4 h-4" /></Button>
                   </td> */}
+                  <td className="capitalize">{s.onboarding_status}</td>
+                  <td>{s.onboarding_step}</td>
+                  <td className="flex gap-2">
+                    {s.onboarding_status === "pending_verification" && (
+                      <>
+                        <Button
+                          size="sm"
+                          className="bg-green-600 text-white"
+                          onClick={() => verifySupplier(s.id, "verified")}
+                        >
+                          Approve
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => verifySupplier(s.id, "rejected")}
+                        >
+                          Reject
+                        </Button>
+                      </>
+                    )}
+                  </td>            
                 </tr>
               ))}
               {loading && <tr><td colSpan={4}>Loading…</td></tr>}
