@@ -27,9 +27,9 @@ import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function ProductsPage() {
-  return(
+  return (
     <Suspense>
-      <Products/>
+      <Products />
     </Suspense>
   )
 }
@@ -109,61 +109,62 @@ function Products() {
 
   return (
     // <Suspense>
-      <div className="min-h-screen py-10 px-4 bg-gradient-to-br from-blue-50 via-white to-orange-50">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
-          
-          {/* Filters */}
-          <aside className="bg-white p-4 rounded-xl shadow h-fit hidden md:block">
-            <h2 className="font-bold text-lg mb-4">Filters</h2>
-            <div>
-              <h3 className="font-semibold">Categories</h3>
-              {categories.map(cat => (
-                <label key={cat.id} className="block">
-                  <input type="checkbox" className="mr-2" /> {cat.name}
-                </label>
-              ))}
-            </div>
-          </aside>
+    <div className="min-h-screen py-10 px-4 bg-gradient-to-br from-blue-50 via-white to-orange-50">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
 
-          {/* Products Grid */}
-          <main className="md:col-span-3 space-y-6">
-            {/* Search + Sort */}
-            <div className="flex flex-wrap gap-4 items-center">
-              <Input placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
-              <select value={region} onChange={(e) => setRegion(e.target.value)} className="border rounded px-3 py-2">
-                <option value="dubai">Dubai</option>
-                <option value="china">China</option>
-                <option value="uk">UK</option>
-              </select>
-              <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="border rounded px-3 py-2">
-                <option value="asc">Price: Low → High</option>
-                <option value="desc">Price: High → Low</option>
-              </select>
-            </div>
+        {/* Filters */}
+        <aside className="bg-white p-4 rounded-xl shadow h-fit hidden md:block">
+          <h2 className="font-bold text-lg mb-4">Filters</h2>
+          <div>
+            <h3 className="font-semibold">Categories</h3>
+            {categories.map(cat => (
+              <label key={cat.id} className="block">
+                <input type="checkbox" className="mr-2" /> {cat.name}
+              </label>
+            ))}
+          </div>
+        </aside>
 
-            {loading ? (
-              <div className="text-center text-gray-500">Loading...</div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {allProducts.map(product => {
-                  const supplierName = product.suppliers?.name || "Highland Cargo";
-                  const initials = supplierName.split(" ").map(w => w[0]).join("");
-                  return (
-                    <motion.div key={product.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-                      <Card className="border-blue-200 shadow hover:shadow-lg transition">
+        {/* Products Grid */}
+        <main className="md:col-span-3 space-y-6">
+          {/* Search + Sort */}
+          <div className="flex flex-wrap gap-4 items-center">
+            <Input placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
+            <select value={region} onChange={(e) => setRegion(e.target.value)} className="border rounded px-3 py-2">
+              <option value="dubai">Dubai</option>
+              <option value="china">China</option>
+              <option value="uk">UK</option>
+            </select>
+            <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="border rounded px-3 py-2">
+              <option value="asc">Price: Low → High</option>
+              <option value="desc">Price: High → Low</option>
+            </select>
+          </div>
+
+          {loading ? (
+            <div className="text-center text-gray-500">Loading...</div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {allProducts.map(product => {
+                const supplierName = product.suppliers?.name || "Highland Cargo";
+                const initials = supplierName.split(" ").map(w => w[0]).join("");
+                return (
+                  <motion.div key={product.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+                    <Link href={`/products/${product.id}`} className="block h-full group">
+                      <Card className="border-blue-200 shadow hover:shadow-xl transition-all duration-300 h-full cursor-pointer group-hover:-translate-y-1">
                         {/* Image carousel */}
                         <div className="relative overflow-hidden">
-                          <div className="flex overflow-x-auto snap-x snap-mandatory h-48">
-                            {product.product_images?.slice(0,4).map((img, i) => (
-                              <Image key={i} src={img.image_url} alt={product.name} width={300} height={200} className="snap-center object-cover w-full" />
+                          <div className="flex overflow-x-auto snap-x snap-mandatory h-48 scrollbar-hide">
+                            {product.product_images?.slice(0, 4).map((img, i) => (
+                              <Image key={i} src={img.image_url} alt={product.name} width={300} height={200} className="snap-center object-cover w-full h-full" />
                             ))}
                           </div>
                         </div>
                         <CardHeader>
-                          <CardTitle>{product.name}</CardTitle>
+                          <CardTitle className="group-hover:text-blue-600 transition-colors">{product.name}</CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-sm text-gray-600">{product.description}</p>
+                          <p className="text-sm text-gray-600 line-clamp-3">{product.description}</p>
                           <p className="text-xs mt-2 text-gray-500">{initials} - {supplierName}</p>
                           <p className="text-xs text-gray-500">Category: {product.product_categories?.name}</p>
                           {product.product_pricing?.length > 0 && (
@@ -171,20 +172,22 @@ function Products() {
                               {product.product_pricing.map(p => `${p.min_quantity}-${p.max_quantity} pcs: $${p.price}`).join(", ")}
                             </p>
                           )}
-                          {/* <div className="mt-4 flex gap-2">
-                            <Button className="bg-blue-600 text-white w-full">Request Quote</Button>
-                            <Button onClick={() => handleChatClick(product.suppliers?.id)} variant="outline">Chat Now</Button>
-                          </div> */}
+                          <div className="mt-4 pt-2 border-t border-gray-100">
+                            <div className="flex items-center justify-center w-full px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg">
+                              View Details
+                            </div>
+                          </div>
                         </CardContent>
                       </Card>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            )}
-          </main>
-        </div>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
+        </main>
       </div>
+    </div>
     // </Suspense>
   );
 }
