@@ -6,33 +6,33 @@ import { Truck, Ship, Plane, MapPin } from "lucide-react";
 export const Hero = () => {
   // const { t } = useTranslation();
   return (
-    <section 
-      className="relative text-white py-28 bg-cover bg-center overflow-hidden flex items-center min-h-[600px]"
+    <section
+      className="relative text-foreground py-28 bg-cover bg-center overflow-hidden flex items-center min-h-[600px]"
       style={{ backgroundImage: "url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=2070&auto=format&fit=crop')" }}
     >
-      <div className="absolute inset-0 bg-gradient-to-tl from-orange-400/40 via-blue-900/80 to-blue-700/90 blur-[1px]"></div>
-      <div className="absolute inset-0 bg-blue-900/10"></div>
+      <div className="absolute inset-0 bg-gradient-to-tl from-orange-100/40 via-blue-900/70 to-blue-800/80 blur-[1px]"></div>
+      <div className="absolute inset-0 bg-blue-900/20"></div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="opacity-99 animate-fade-in-up [animation-fill-mode:forwards]">
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow animate-pulse">
+            <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow-sm animate-pulse text-white">
               {/* <Trans i18nKey="hero_title" components={{
                 1: <span className="text-orange-300 bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent" />,
                 2: <span className="text-orange-400" />
               }} /> */}
               <p className="text-4xl font-bold">
                 {'Move' + ' '}
-                <span className="text-orange-300 bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent">
+                <span className="text-orange-200 bg-gradient-to-r from-orange-300 to-yellow-200 bg-clip-text text-transparent">
                   {'Anything '}
                 </span>{' '}
-                <br/>
-                  {'Anywhere, '}
-                <span className="text-orange-300 bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent">
+                <br />
+                {'Anywhere, '}
+                <span className="text-orange-200 bg-gradient-to-r from-orange-300 to-yellow-200 bg-clip-text text-transparent">
                   {'Fast'}
                 </span>{' '}
               </p>
             </h1>
-            <p className="text-xl mb-9 text-blue-100 font-light animate-fade-in-up [animation-delay:150ms]">
+            <p className="text-xl mb-9 text-blue-50/90 font-light animate-fade-in-up [animation-delay:150ms]">
               {/* {t("hero_desc")} */}
               Trusted by 10,000+ businesses for international air, sea, and local shipping. Experience global connections and personal attention — with Highland Cargo.
             </p>
@@ -72,7 +72,7 @@ export const Hero = () => {
         <div className="w-full flex justify-center mt-10">
           <div className="animate-bounce">
             <svg className="w-9 h-9 text-orange-300 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
             </svg>
           </div>
         </div>

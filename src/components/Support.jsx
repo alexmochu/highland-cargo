@@ -43,27 +43,27 @@ export const Support = () => {
   ];
 
   return (
-    <section id="support" className="py-20 bg-gradient-to-r from-blue-50 via-orange-50 to-white">
+    <section id="support" className="py-20 bg-gradient-to-r from-blue-50/50 via-orange-50/50 to-background/50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in">Need Help?</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in [animation-delay:200ms]">
+          <h2 className="text-4xl font-bold text-foreground mb-4 animate-fade-in">Need Help?</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in [animation-delay:200ms]">
             Find answers to common questions and get the support you need for your shipping requirements.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {supportItems.map((item, index) => (
-            <Card key={index} className="hover:shadow-2xl transition-all duration-400 hover:-translate-y-3 animate-fade-in-up">
+            <Card key={index} className="hover:shadow-2xl transition-all duration-400 hover:-translate-y-3 animate-fade-in-up border-border/50 bg-card/50 backdrop-blur-sm">
               <CardHeader className="text-center">
                 <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${item.color} transition-transform duration-300 hover:scale-110 shadow-xl`}>
                   <item.icon className="w-8 h-8 animate-bounce hover:animate-pulse" />
                 </div>
-                <CardTitle className="text-xl">{item.title}</CardTitle>
-                <CardDescription>{item.description}</CardDescription>
+                <CardTitle className="text-xl text-foreground">{item.title}</CardTitle>
+                <CardDescription className="text-muted-foreground">{item.description}</CardDescription>
               </CardHeader>
               <CardContent className="text-center text-white">
-                <Button className="bg-blue-600 hover:bg-blue-700 animate-fade-in">
+                <Button className="bg-blue-600 hover:bg-blue-700 animate-fade-in shadow-md hover:shadow-lg">
                   Click to Know More
                 </Button>
               </CardContent>
@@ -73,7 +73,7 @@ export const Support = () => {
 
         <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-8 text-white text-center hover:scale-105 transition-transform duration-300 shadow-xl">
           <h3 className="text-2xl font-bold mb-4">VAT & DUTY FEES FAQs</h3>
-          <p className="text-lg mb-6">
+          <p className="text-lg mb-6 text-white/90">
             Understanding import duties, VAT calculations, and customs procedures for your international shipments.
           </p>
           <Button variant="outline" className="border-white text-blue-600 hover:bg-white hover:text-orange-500">

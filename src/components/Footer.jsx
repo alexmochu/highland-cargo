@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-[#1c1c1c] text-zinc-100">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
@@ -18,11 +18,11 @@ export const Footer = () => {
                 <h3 className="text-xl font-bold">
                   {/* {t("brand")} */}
                   Highland Cargo
-                  </h3>
+                </h3>
                 <p className="text-sm text-gray-400">
                   {/* {t("tagline")} */}
                   Global Logistics Solutions
-                  </p>
+                </p>
               </div>
             </div>
             <p className="text-gray-400 mb-4">
@@ -80,7 +80,7 @@ export const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>
-            &copy; 2025 
+            &copy; 2025
             {/* {t("brand")} */}
             Highland Cargo
             . {t("copyright")} | {t("privacy")} | {t("terms")}

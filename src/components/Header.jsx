@@ -45,11 +45,11 @@ export const Header = () => {
       .substring(0, 2)
   }
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
+    <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b border-border/40">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="bg-blue-600 text-white p-2 rounded-lg">
+            <div className="bg-blue-600/90 text-white p-2 rounded-lg">
               <div className="w-8 h-8 flex items-center justify-center font-bold text-lg">
                 HC
               </div>
@@ -58,12 +58,12 @@ export const Header = () => {
               <h1 className="text-2xl font-bold text-blue-600">
                 {/* {t("brand")} */}
                 <span className="text-blue-600">Highland{' '}</span>
-                <span className="text-orange-500">Cargo</span>
-                </h1>
-              <p className="text-sm text-gray-600">
+                <span className="text-orange-500/90">Cargo</span>
+              </h1>
+              <p className="text-sm text-muted-foreground">
                 {/* {t("tagline")} */}
                 Global Logistics Solutions
-                </p>
+              </p>
             </div>
           </Link>
           <nav className="hidden md:flex items-center space-x-8">
@@ -72,73 +72,73 @@ export const Header = () => {
             <Link href="/about" className="text-gray-700 hover:text-blue-600 transition-colors">{"About"}</Link>
             <Link href="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">{"Contact"}</Link>
             {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="flex items-center gap-2 ml-2">
-                  <Avatar className="h-8 w-8 border ">
-                    <AvatarImage
-                      src={profile.profile_image_url || "/placeholder.svg"}
-                      alt={profile.full_name || "User"}
-                    />
-                    <AvatarFallback>{getInitials(profile?.full_name || "") || user.email[0].toUpperCase()}</AvatarFallback>
-                  </Avatar>
-                  {/* <span className="hidden md:inline">{profile?.full_name || user.email}</span> */}
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-gray-800">
-              <DropdownMenuItem asChild>
-                  <Link
-                    href="/admin"
-                    className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-2 ml-2">
+                    <Avatar className="h-8 w-8 border ">
+                      <AvatarImage
+                        src={profile.profile_image_url || "/placeholder.svg"}
+                        alt={profile.full_name || "User"}
+                      />
+                      <AvatarFallback>{getInitials(profile?.full_name || "") || user.email[0].toUpperCase()}</AvatarFallback>
+                    </Avatar>
+                    {/* <span className="hidden md:inline">{profile?.full_name || user.email}</span> */}
+                    <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-gray-800">
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/admin"
+                      className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                    >
+                      <User className="mr-2 h-4 w-4" />
+                      Administrator
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/supplier"
+                      className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                    >
+                      <User className="mr-2 h-4 w-4" />
+                      Supplier
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/dashboard"
+                      className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                    >
+                      <User className="mr-2 h-4 w-4" />
+                      Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/partner"
+                      className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                    >
+                      <User className="mr-2 h-4 w-4" />
+                      Partner
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={handleLogout}
+                    disabled={isPending}
+                    className="text-red-600 dark:text-red-400 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
                   >
-                    <User className="mr-2 h-4 w-4" />
-                    Administrator
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link
-                    href="/supplier"
-                    className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-                  >
-                    <User className="mr-2 h-4 w-4" />
-                    Supplier
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link
-                    href="/dashboard"
-                    className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-                  >
-                    <User className="mr-2 h-4 w-4" />
-                    Dashboard
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link
-                    href="/partner"
-                    className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-                  >
-                    <User className="mr-2 h-4 w-4" />
-                    Partner
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={handleLogout}
-                  disabled={isPending}
-                  className="text-red-600 dark:text-red-400 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-                >
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            ): (
-            <Link href="/auth" className="text-gray-700 hover:text-orange-500 transition-colors">{'Login'}</Link>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/auth" className="text-gray-700 hover:text-orange-500 transition-colors">{'Login'}</Link>
             )}
           </nav>
           {/* <div className="hidden md:flex items-center space-x-4">
@@ -164,19 +164,19 @@ export const Header = () => {
               <Link href="/contact" className="text-gray-700 hover:text-blue-600">{"Contact"}</Link>
               {user ? (
                 <>
-                <Link href="/admin" className="text-gray-700 hover:text-blue-600">{"Administrator"}</Link>
-                <Link href="/dashboard" className="text-gray-700 hover:text-blue-600">{"Dashboard"}</Link>
-                <Link href="/Partner" className="text-gray-700 hover:text-blue-600">{"Partner"}</Link>
-                <span
-                  onClick={handleLogout}
-                  disabled={isPending}
-                  className="text-red-600 flex dark:text-red-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-                >
-                  Logout
-                </span>
+                  <Link href="/admin" className="text-gray-700 hover:text-blue-600">{"Administrator"}</Link>
+                  <Link href="/dashboard" className="text-gray-700 hover:text-blue-600">{"Dashboard"}</Link>
+                  <Link href="/Partner" className="text-gray-700 hover:text-blue-600">{"Partner"}</Link>
+                  <span
+                    onClick={handleLogout}
+                    disabled={isPending}
+                    className="text-red-600 flex dark:text-red-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                  >
+                    Logout
+                  </span>
                 </>
               ) : (
-              <Link href="/auth" className="text-gray-700 hover:text-orange-500">{"Login"}</Link>
+                <Link href="/auth" className="text-gray-700 hover:text-orange-500">{"Login"}</Link>
               )}
               <div className="flex flex-col space-y-2 pt-4">
                 <LanguageToggle />
