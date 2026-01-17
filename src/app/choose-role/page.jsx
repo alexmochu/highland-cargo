@@ -1,11 +1,11 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useSupabase } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 export default function ChooseRolePage() {
-  const supabase = useSupabase();
+  const supabase = createClient();
   const router = useRouter();
 
   async function chooseRole(role) {
