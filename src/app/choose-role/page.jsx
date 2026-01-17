@@ -8,7 +8,7 @@ export default function ChooseRolePage() {
   const supabase = useSupabase();
   const router = useRouter();
 
-  async function chooseRole(role: "supplier" | "partner") {
+  async function chooseRole(role) {
     await supabase.from("profiles").update({ role }).eq("user_id", (await supabase.auth.getUser()).data.user.id);
     if (role === "supplier") router.push("/supplier-onboarding");
     else router.push("/partner-onboarding");

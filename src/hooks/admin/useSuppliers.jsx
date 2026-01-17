@@ -65,7 +65,7 @@ export default function useSuppliers({ pageSize = 10 } = {}) {
     }
   };
 
-  async function verifySupplier(id: string, status: "verified" | "rejected") {
+  async function verifySupplier(id, status) {
     await fetch(`/api/admin/suppliers/${id}/verify`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
