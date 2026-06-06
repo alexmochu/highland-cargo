@@ -1,9 +1,8 @@
 "use client"
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Button } from "@/components/ui/button";
-import { Menu, Search, User, LogOut, Settings, ChevronDown, Building2, Globe, Sparkles } from "lucide-react"
-
-import { useState, useTransition, useEffect } from "react";
+import { Menu, User, LogOut, ChevronDown } from "lucide-react"
+import { useState, useTransition } from "react";
 // import { useTranslation } from 'next-i18next';
 import { useAuth } from "@/components/auth-provider"
 import LanguageToggle from "./LanguageToggle";
@@ -44,55 +43,75 @@ export const Header = () => {
       .toUpperCase()
       .substring(0, 2)
   }
+  
+  const navLinks = [
+    { href: "/services", label: "Services" },
+    { href: "/products", label: "Products" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+  ]
+
   return (
-    <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b border-border/40">
+    <header className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-200">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="bg-blue-600/90 text-white p-2 rounded-lg">
-              <div className="w-8 h-8 flex items-center justify-center font-bold text-lg">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-700 text-white p-2.5 rounded-xl shadow-lg shadow-slate-800/20 group-hover:shadow-slate-800/30 transition-all">
+              <div className="w-8 h-8 flex items-center justify-center font-bold text-lg tracking-tight">
                 HC
               </div>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-blue-600">
-                {/* {t("brand")} */}
-                <span className="text-blue-600">Highland{' '}</span>
-                <span className="text-orange-500/90">Cargo</span>
+              <h1 className="text-2xl font-bold">
+                <span className="text-slate-800">Highland</span>
+                <span className="text-amber-500">Cargo</span>
               </h1>
-              <p className="text-sm text-muted-foreground">
-                {/* {t("tagline")} */}
+              <p className="text-xs text-slate-500 font-medium">
                 Global Logistics Solutions
               </p>
             </div>
           </Link>
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/services" className="text-gray-700 hover:text-blue-600 transition-colors">{"Services"}</Link>
-            <Link href="/products" className="text-gray-700 hover:text-blue-600 transition-colors">{"Products"}</Link>
-            <Link href="/about" className="text-gray-700 hover:text-blue-600 transition-colors">{"About"}</Link>
-            <Link href="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">{"Contact"}</Link>
+          
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {navLinks.map((link) => (
+              <Link 
+                key={link.href} 
+                href={link.href} 
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  pathname === link.href 
+                    ? "text-slate-800 bg-amber-50" 
+                    : "text-slate-600 hover:text-slate-800 hover:bg-slate-100"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-2 ml-2">
-                    <Avatar className="h-8 w-8 border ">
+                  <Button variant="ghost" className="flex items-center gap-2 ml-2 hover:bg-slate-100">
+                    <Avatar className="h-9 w-9 border-2 border-slate-200">
                       <AvatarImage
                         src={profile.profile_image_url || "/placeholder.svg"}
                         alt={profile.full_name || "User"}
                       />
-                      <AvatarFallback>{getInitials(profile?.full_name || "") || user.email[0].toUpperCase()}</AvatarFallback>
+                      <AvatarFallback className="bg-slate-100 text-slate-700 font-medium">
+                        {getInitials(profile?.full_name || "") || user.email[0].toUpperCase()}
+                      </AvatarFallback>
                     </Avatar>
-                    {/* <span className="hidden md:inline">{profile?.full_name || user.email}</span> */}
-                    <ChevronDown className="h-4 w-4" />
+                    <ChevronDown className="h-4 w-4 text-slate-500" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-gray-800">
+                <DropdownMenuContent align="end" className="w-56 bg-white border-slate-200 shadow-xl">
                   <DropdownMenuItem asChild>
                     <Link
                       href="/admin"
-                      className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                      className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
                     >
-                      <User className="mr-2 h-4 w-4" />
+                      <User className="mr-3 h-4 w-4 text-slate-500" />
                       Administrator
                     </Link>
                   </DropdownMenuItem>
@@ -100,9 +119,9 @@ export const Header = () => {
                   <DropdownMenuItem asChild>
                     <Link
                       href="/supplier"
-                      className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                      className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
                     >
-                      <User className="mr-2 h-4 w-4" />
+                      <User className="mr-3 h-4 w-4 text-slate-500" />
                       Supplier
                     </Link>
                   </DropdownMenuItem>
@@ -110,9 +129,9 @@ export const Header = () => {
                   <DropdownMenuItem asChild>
                     <Link
                       href="/dashboard"
-                      className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                      className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
                     >
-                      <User className="mr-2 h-4 w-4" />
+                      <User className="mr-3 h-4 w-4 text-slate-500" />
                       Dashboard
                     </Link>
                   </DropdownMenuItem>
@@ -120,9 +139,9 @@ export const Header = () => {
                   <DropdownMenuItem asChild>
                     <Link
                       href="/partner"
-                      className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                      className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
                     >
-                      <User className="mr-2 h-4 w-4" />
+                      <User className="mr-3 h-4 w-4 text-slate-500" />
                       Partner
                     </Link>
                   </DropdownMenuItem>
@@ -130,57 +149,79 @@ export const Header = () => {
                   <DropdownMenuItem
                     onClick={handleLogout}
                     disabled={isPending}
-                    className="text-red-600 dark:text-red-400 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                    className="text-red-600 p-3 rounded-md hover:bg-red-50 cursor-pointer"
                   >
-                    <LogOut className="mr-2 h-4 w-4" />
+                    <LogOut className="mr-3 h-4 w-4" />
                     Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link href="/auth" className="text-gray-700 hover:text-orange-500 transition-colors">{'Login'}</Link>
+              <Link href="/auth">
+                <Button className="ml-2 bg-slate-800 hover:bg-slate-700 text-white">
+                  Login
+                </Button>
+              </Link>
             )}
           </nav>
-          {/* <div className="hidden md:flex items-center space-x-4">
-            <Button className="bg-orange-500 text-white hover:bg-orange-600">
-              Get Quote
-            </Button>
-          </div> */}
-
+          
+          {/* Mobile menu button */}
           <Button
             variant="outline"
             size="sm"
-            className="md:hidden"
+            className="md:hidden border-slate-300 hover:bg-slate-100"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <Menu className="w-4 h-4" />
+            <Menu className="w-5 h-5 text-slate-600" />
           </Button>
         </div>
+        
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t">
-            <nav className="flex flex-col space-y-4">
-              <Link href="/services" className="text-gray-700 hover:text-blue-600">{"Services"}</Link>
-              <Link href="/about" className="text-gray-700 hover:text-blue-600">{"About"}</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-blue-600">{"Contact"}</Link>
-              {user ? (
-                <>
-                  <Link href="/admin" className="text-gray-700 hover:text-blue-600">{"Administrator"}</Link>
-                  <Link href="/dashboard" className="text-gray-700 hover:text-blue-600">{"Dashboard"}</Link>
-                  <Link href="/Partner" className="text-gray-700 hover:text-blue-600">{"Partner"}</Link>
-                  <span
-                    onClick={handleLogout}
-                    disabled={isPending}
-                    className="text-red-600 flex dark:text-red-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-                  >
-                    Logout
-                  </span>
-                </>
-              ) : (
-                <Link href="/auth" className="text-gray-700 hover:text-orange-500">{"Login"}</Link>
-              )}
-              <div className="flex flex-col space-y-2 pt-4">
-                <LanguageToggle />
-                <Button className="bg-orange-500 hover:bg-orange-600">{"Get Quote"}</Button>
+          <div className="md:hidden mt-6 py-6 border-t border-slate-200">
+            <nav className="flex flex-col space-y-2">
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.href} 
+                  href={link.href}
+                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                    pathname === link.href 
+                      ? "text-slate-800 bg-amber-50" 
+                      : "text-slate-600 hover:text-slate-800 hover:bg-slate-100"
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              
+              <div className="pt-4 space-y-2">
+                {user ? (
+                  <>
+                    <Link href="/admin" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                      Administrator
+                    </Link>
+                    <Link href="/dashboard" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                      Dashboard
+                    </Link>
+                    <Link href="/partner" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                      Partner
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      disabled={isPending}
+                      className="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <Link href="/auth" className="block">
+                    <Button className="w-full bg-slate-800 hover:bg-slate-700 text-white">
+                      Login
+                    </Button>
+                  </Link>
+                )}
               </div>
             </nav>
           </div>
