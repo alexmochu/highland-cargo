@@ -3,6 +3,7 @@ import React from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/components/auth-provider";
+import { motion } from "framer-motion";
 import OverviewTab from "@/components/partner/OverviewTab";
 import ShipmentsTab from "@/components/partner/ShipmentsTab";
 import MessagesTab from "@/components/partner/MessagesTab";
@@ -13,19 +14,26 @@ export default function PartnerDashboardPage() {
   const partnerId = profile?.id || null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-blue-50 via-orange-50 to-blue-100 py-8">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center gap-3 mb-8">
-          <LayoutDashboard className="w-8 h-8 text-blue-500" />
-          <h2 className="text-3xl font-bold text-gray-800">Partner Dashboard</h2>
-        </div>
+    <div className="min-h-screen bg-slate-50 py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex items-center gap-4 mb-8"
+        >
+          <div className="bg-slate-800 p-3 rounded-2xl">
+            <LayoutDashboard className="w-8 h-8 text-amber-500" />
+          </div>
+          <h2 className="text-4xl font-bold text-slate-800">Partner Dashboard</h2>
+        </motion.div>
 
         <Tabs defaultValue="overview">
-          <TabsList className="mb-4 flex flex-wrap gap-2">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="shipments">My Shipments</TabsTrigger>
+          <TabsList className="mb-6 flex flex-wrap gap-3 bg-slate-100 p-2 rounded-xl">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Overview</TabsTrigger>
+            <TabsTrigger value="shipments" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">My Shipments</TabsTrigger>
             {/* <TabsTrigger value="messages">Messages</TabsTrigger> */}
-            <TabsTrigger value="profile">Profile</TabsTrigger>
+            <TabsTrigger value="profile" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Profile</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview"><OverviewTab partnerId={partnerId} /></TabsContent>

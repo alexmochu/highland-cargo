@@ -8,24 +8,32 @@ import PartnersTab from "@/components/admin/Tabs/PartnersTab";
 import ProductsTab from "@/components/admin/Tabs/ProductsTab";
 import SuppliersTab from "@/components/admin/Tabs/SuppliersTab";
 import { Settings } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function AdminDashboard() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-blue-50 to-orange-100 py-8">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center gap-3 mb-8">
-          <Settings className="w-8 h-8 text-orange-500" />
-          <h2 className="text-3xl font-bold text-gray-900">Admin Dashboard</h2>
-        </div>
+    <div className="min-h-screen bg-slate-50 py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex items-center gap-3 mb-8"
+        >
+          <div className="bg-slate-800 p-3 rounded-2xl">
+            <Settings className="w-8 h-8 text-amber-500" />
+          </div>
+          <h2 className="text-4xl font-bold text-slate-800">Admin Dashboard</h2>
+        </motion.div>
         <Tabs defaultValue="analytics">
-          <TabsList className="mb-4 flex flex-wrap gap-2">
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
-            <TabsTrigger value="categories">Categories</TabsTrigger>
-            <TabsTrigger value="products">Products</TabsTrigger>
-            <TabsTrigger value="users">Users</TabsTrigger>
-            <TabsTrigger value="shipments">Shipments</TabsTrigger>
-            <TabsTrigger value="partners">Partners</TabsTrigger>
-            <TabsTrigger value="suppliers">Suppliers</TabsTrigger>
+          <TabsList className="mb-6 flex flex-wrap gap-3 bg-slate-100 p-2 rounded-xl">
+            <TabsTrigger value="analytics" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Analytics</TabsTrigger>
+            <TabsTrigger value="categories" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Categories</TabsTrigger>
+            <TabsTrigger value="products" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Products</TabsTrigger>
+            <TabsTrigger value="users" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Users</TabsTrigger>
+            <TabsTrigger value="shipments" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Shipments</TabsTrigger>
+            <TabsTrigger value="partners" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Partners</TabsTrigger>
+            <TabsTrigger value="suppliers" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Suppliers</TabsTrigger>
             {/* <TabsTrigger value="catalogs">Product Catalogs</TabsTrigger> */}
           </TabsList>
 

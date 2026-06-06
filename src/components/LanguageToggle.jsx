@@ -27,13 +27,14 @@ export default function LanguageToggle() {
   // };
 
   return (
-    <div className="flex gap-1">
-      {LANGS.map(l => (
+    <div className="flex gap-2">
+      {LANGS.map((l, index) => (
         <Button
           key={l.code}
-          variant={l.code ? "default" : "outline"}
+          variant={index === 0 ? "default" : "outline"}
           size="sm"
-          onClick={() => changeLanguage(l.code)}
+          className={index === 0 ? "bg-slate-800 hover:bg-slate-700 text-white" : "border-slate-300 hover:border-slate-400 hover:bg-slate-100"}
+          // onClick={() => changeLanguage(l.code)}
         >
           {l.label}
         </Button>

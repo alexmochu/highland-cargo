@@ -36,7 +36,7 @@ export default function AuthPage() {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
   return (
-    <div className="min-h-screen flex items-center justify-center py-10 bg-gradient-to-tr from-orange-50 via-blue-50 to-orange-100">
+    <div className="min-h-screen flex items-center justify-center py-10 bg-gradient-to-tr from-slate-50 via-amber-50 to-slate-100">
       <AuthForm />
     </div>
   );

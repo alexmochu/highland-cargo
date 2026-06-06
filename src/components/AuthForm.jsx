@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { motion } from "framer-motion";
 
 export function AuthForm({ onAuth }) {
   // State for auth method selection
@@ -149,10 +150,22 @@ export function AuthForm({ onAuth }) {
   }
 
   return (
-    <div className="w-full max-w-sm bg-white shadow-lg rounded-xl p-8 space-y-6 animate-fade-in-up">
-      <div className="flex justify-center font-bold text-2xl gap-2">
-        <span className="text-blue-600">Highland</span>
-        <span className="text-orange-500">Cargo</span>
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-8 md:p-10 space-y-8"
+    >
+      <div className="flex justify-center items-center gap-3">
+        <div className="bg-gradient-to-br from-slate-800 to-slate-700 text-white p-3 rounded-2xl">
+          <div className="w-10 h-10 flex items-center justify-center font-bold text-xl tracking-tight">
+            HC
+          </div>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-2xl font-bold text-slate-800">Highland</span>
+          <span className="text-2xl font-bold text-amber-500">Cargo</span>
+        </div>
       </div>
       {/* Auth Method Tabs */}
       <div className="flex gap-2 justify-center pt-2">
@@ -180,9 +193,9 @@ export function AuthForm({ onAuth }) {
       </div>
       {/* Tab Forms */}
       {tab === "magic_link" && (
-        <form className="space-y-5" onSubmit={handleMagicLink}>
+        <form className="space-y-6" onSubmit={handleMagicLink}>
           <div>
-            <label className="block text-sm mb-1 font-semibold text-gray-700" htmlFor="otp-email">
+            <label className="block text-sm mb-2 font-semibold text-slate-700" htmlFor="otp-email">
               Email address
             </label>
             <Input
@@ -193,10 +206,11 @@ export function AuthForm({ onAuth }) {
               onChange={e => setEmail(e.target.value)}
               placeholder="e.g. you@email.com"
               required
+              className="h-12 border-slate-300 focus:border-amber-500"
             />
           </div>
           {error && <div className="text-red-600 text-sm">{error}</div>}
-          <Button variant={"dark"} className="w-full mt-4" type="submit" disabled={loading}>
+          <Button className="w-full mt-2 bg-slate-800 hover:bg-slate-700 text-white h-12 text-lg" type="submit" disabled={loading}>
             {loading ? "Sending Magic Link…" : "Send Magic Link"}
           </Button>
         </form>
@@ -325,6 +339,6 @@ export function AuthForm({ onAuth }) {
           )}
         </form>
       )} */}
-    </div>
+    </motion.div>
   );
 }
