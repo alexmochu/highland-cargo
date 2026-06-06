@@ -1,3 +1,5 @@
+"use client";
+
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Star, Quote } from "lucide-react";
 import { motion } from "framer-motion";
