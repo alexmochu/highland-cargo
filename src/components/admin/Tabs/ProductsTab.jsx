@@ -40,7 +40,7 @@ export default function ProductsTab() {
               <tr className="text-left">
                 <th>Image</th>
                 <th>Name</th><th>Category</th><th>Region</th><th>Price</th><th>Partner</th><th>Supplier</th>
-            {/* <th>Actions</th> */}
+            <th>Actions</th>
             </tr></thead>
             <tbody>
               {!loading && products.map(p => {
@@ -64,14 +64,14 @@ export default function ProductsTab() {
                     <td>{p.price}</td>
                     <td>{p.partners?.name || "-"}</td>
                     <td>{p.suppliers?.name || "-"}</td>
-                    {/* <td className="flex gap-2">
+                    <td className="flex gap-2">
                       <Button size="sm" variant="outline" onClick={() => { setEditing(p); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
                       <Button size="sm" variant="destructive" onClick={() => remove(p.id)}><Trash2 className="w-4 h-4" /></Button>
-                    </td> */}
+                    </td>
                   </tr>
                 );
               })}
-              {loading && <tr><td colSpan={7}>Loading…</td></tr>}
+              {loading && <tr><td colSpan={8}>Loading…</td></tr>}
             </tbody>
           </table>
 
