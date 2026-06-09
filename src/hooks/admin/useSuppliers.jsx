@@ -66,12 +66,23 @@ export default function useSuppliers({ pageSize = 10 } = {}) {
   };
 
   async function verifySupplier(id, status) {
-    await fetch(`/api/admin/suppliers/${id}/verify`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
-    });
-    fetchSuppliers();
+    try {
+      await toast.promise(
+        fetch(`/api/admin/suppliers/${id}/verify`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status }),
+        }),
+        {
+          loading: "Updating supplier...",
+          success: "Supplier status updated",
+          error: "Failed to update supplier"
+        }
+      );
+      load(page);
+    } catch (e) {
+      console.error("Verify supplier error:", e);
+    }
   }
 
   return { suppliers, total, page, verifySupplier, setPage, pageSize, loading, editing, setEditing, load, addOrUpdate, remove };

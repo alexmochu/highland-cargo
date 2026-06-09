@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Pagination({ page, total, pageSize, onPageChange }) {
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -8,10 +9,10 @@ export default function Pagination({ page, total, pageSize, onPageChange }) {
         Showing page {page} of {totalPages} • {total} items
       </div>
       <div className="flex gap-2">
-        <button className="btn" onClick={() => onPageChange(1)} disabled={page === 1}>First</button>
-        <button className="btn" onClick={() => onPageChange(page - 1)} disabled={page === 1}>Prev</button>
-        <button className="btn" onClick={() => onPageChange(page + 1)} disabled={page === totalPages}>Next</button>
-        <button className="btn" onClick={() => onPageChange(totalPages)} disabled={page === totalPages}>Last</button>
+        <Button variant="outline" size="sm" onClick={() => onPageChange(1)} disabled={page === 1}>First</Button>
+        <Button variant="outline" size="sm" onClick={() => onPageChange(page - 1)} disabled={page === 1}>Prev</Button>
+        <Button variant="outline" size="sm" onClick={() => onPageChange(page + 1)} disabled={page === totalPages}>Next</Button>
+        <Button variant="outline" size="sm" onClick={() => onPageChange(totalPages)} disabled={page === totalPages}>Last</Button>
       </div>
     </div>
   );

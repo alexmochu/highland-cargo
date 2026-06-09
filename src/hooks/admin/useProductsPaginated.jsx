@@ -34,6 +34,7 @@ export default function useProducts({ pageSize = 10 } = {}) {
 
   useEffect(() => { load(); }, []);
   useEffect(() => { load(1); }, [filterCategory]);
+  useEffect(() => { load(page); }, [page]);
 
   const addOrUpdate = async (vals) => {
     if (!editing) {
