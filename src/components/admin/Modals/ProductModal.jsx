@@ -31,41 +31,33 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
   });
 
   useEffect(() => {
-    reset(product ? {
-      name: product.name || "",
-      price: product.price || "",
-      info: product.info || "",
-      description: product.description || "",
-      category_id: product.category_id || "",
-      partner_id: product.partner_id || null,
-      supplier_id: product.supplier_id || null,
-      region: product.region || null,
-      added_by_admin: product.added_by_admin ?? true,
-      images: product.product_images 
-      ? product.product_images.map(img => ({ previewUrl: img.image_url, file: null }))
-      : [],
-    } : undefined);
-  }, [product, reset]);
+    if (isOpen) {
+      reset(product ? {
+        name: product.name || "",
+        price: product.price || "",
+        info: product.info || "",
+        description: product.description || "",
+        category_id: product.category_id || "",
+        partner_id: product.partner_id || null,
+        supplier_id: product.supplier_id || null,
+        region: product.region || null,
+        added_by_admin: product.added_by_admin ?? true,
+        images: product.product_images 
+        ? product.product_images.map(img => ({ previewUrl: img.image_url, file: null }))
+        : [],
+      } : {
+        name: "", price: "", info: "", description: "", category_id: "", partner_id: null, supplier_id: null, region: null, added_by_admin: true, images: [],
+      });
+    }
+  }, [product, reset, isOpen]);
 
   const submit = async (vals) => { 
-    const formData = new FormData();
-
-    Object.entries(vals).forEach(([key, value]) => {
-      if (key === "images") {
-        value.forEach((img, idx) => {
-          if (img.file) {
-            formData.append(`images[${idx}]`, img.file);
-          } else if (img.previewUrl) {
-            formData.append(`existingImages[${idx}]`, img.previewUrl);
-          }
-        });
-      } else {
-        formData.append(key, value ?? "");
-      }
-    });
-
-    await onSave(vals); 
-    onClose(); 
+    try {
+      await onSave(vals); 
+      onClose(); 
+    } catch (e) {
+      // Error handled in useProductsPaginated
+    }
   };
 
   return (
@@ -115,7 +107,7 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
             name="partner_id"
             control={control}
             render={({ field }) => (
-              <Select onValueChange={(v)=>field.onChange(v || null)} value={field.value || ""}>
+              <Select onValueChange={(v) => field.onChange(v === "all" ? null : v)} value={field.value || "all"}>
                 <SelectTrigger><SelectValue placeholder="Partner (optional)" /></SelectTrigger>
                 <SelectContent className="bg-white">
                   <SelectItem value="all">None</SelectItem>
@@ -129,7 +121,7 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
             name="supplier_id"
             control={control}
             render={({ field }) => (
-              <Select onValueChange={(v)=>field.onChange(v || null)} value={field.value || ""}>
+              <Select onValueChange={(v) => field.onChange(v === "all" ? null : v)} value={field.value || "all"}>
                 <SelectTrigger><SelectValue placeholder="Supplier (optional)" /></SelectTrigger>
                 <SelectContent className="bg-white">
                   <SelectItem value="all">None</SelectItem>

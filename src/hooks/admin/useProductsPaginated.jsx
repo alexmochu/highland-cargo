@@ -59,12 +59,17 @@ export default function useProducts({ pageSize = 10 } = {}) {
       const backup = products;
       setProducts(prev => prev.map(p => p.id === editing.id ? { ...p, ...vals } : p));
       try {
-        await svc.saveProduct(vals, editing.id);
-        toast.success("Product updated");
+        await toast.promise(
+          svc.saveProduct(vals, editing.id),
+          {
+            loading: "Updating product...",
+            success: "Product updated",
+            error: "Failed to update product"
+          }
+        );
         setEditing(null);
         load(page);
       } catch (e) {
-        toast.error("Failed to update product");
         setProducts(backup);
       }
     }
