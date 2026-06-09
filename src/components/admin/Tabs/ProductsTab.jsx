@@ -43,23 +43,34 @@ export default function ProductsTab() {
             {/* <th>Actions</th> */}
             </tr></thead>
             <tbody>
-              {!loading && products.map(p => (
-                <tr key={p.id} className="border-t">
-                  <td className="flex overflow-x-auto snap-x snap-mandatory h-16 w-16">
-                  <Image key={p.id} src={p.product_images[0].image_url || null} alt={p.description + ' image'} width={300} height={200} className="snap-center object-cover w-full" />
-                  </td>
-                  <td>{p.name}</td>
-                  <td>{p.product_categories?.name || "-"}</td>
-                  <td className="uppercase">{p.region}</td>
-                  <td>{p.price}</td>
-                  <td>{p.partners?.name || "-"}</td>
-                  <td>{p.suppliers?.name || "-"}</td>
-                  {/* <td className="flex gap-2">
-                    <Button size="sm" variant="outline" onClick={() => { setEditing(p); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
-                    <Button size="sm" variant="destructive" onClick={() => remove(p.id)}><Trash2 className="w-4 h-4" /></Button>
-                  </td> */}
-                </tr>
-              ))}
+              {!loading && products.map(p => {
+                const hasImage = p.product_images && p.product_images.length > 0 && p.product_images[0].image_url;
+                const imageSrc = hasImage ? p.product_images[0].image_url : '/highland-cargo.png';
+                return (
+                  <tr key={p.id} className="border-t">
+                    <td className="flex overflow-x-auto snap-x snap-mandatory h-16 w-16">
+                      <Image 
+                        key={p.id} 
+                        src={imageSrc} 
+                        alt={hasImage ? p.description + ' image' : p.name + ' logo'} 
+                        width={300} 
+                        height={200} 
+                        className="snap-center object-cover w-full" 
+                      />
+                    </td>
+                    <td>{p.name}</td>
+                    <td>{p.product_categories?.name || "-"}</td>
+                    <td className="uppercase">{p.region}</td>
+                    <td>{p.price}</td>
+                    <td>{p.partners?.name || "-"}</td>
+                    <td>{p.suppliers?.name || "-"}</td>
+                    {/* <td className="flex gap-2">
+                      <Button size="sm" variant="outline" onClick={() => { setEditing(p); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
+                      <Button size="sm" variant="destructive" onClick={() => remove(p.id)}><Trash2 className="w-4 h-4" /></Button>
+                    </td> */}
+                  </tr>
+                );
+              })}
               {loading && <tr><td colSpan={7}>Loading…</td></tr>}
             </tbody>
           </table>

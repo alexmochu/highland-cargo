@@ -155,9 +155,13 @@ function Products() {
                         {/* Image carousel */}
                         <div className="relative overflow-hidden">
                           <div className="flex overflow-x-auto snap-x snap-mandatory h-48 scrollbar-hide">
-                            {product.product_images?.slice(0, 4).map((img, i) => (
-                              <Image key={i} src={img.image_url} alt={product.name} width={300} height={200} className="snap-center object-cover w-full h-full" />
-                            ))}
+                            {product.product_images && product.product_images.length > 0 ? (
+                              product.product_images.slice(0, 4).map((img, i) => (
+                                <Image key={i} src={img.image_url} alt={product.name} width={300} height={200} className="snap-center object-cover w-full h-full" />
+                              ))
+                            ) : (
+                              <Image src="/highland-cargo.png" alt={product.name} width={300} height={200} className="snap-center object-cover w-full h-full" />
+                            )}
                           </div>
                         </div>
                         <CardHeader>

@@ -85,7 +85,7 @@ function ProductDetailContent() {
                                     className="object-cover"
                                 />
                             ) : (
-                                <div className="grid place-items-center h-full text-gray-400">No Image Available</div>
+                                <Image src="/highland-cargo.png" alt={product.name} fill className="object-contain p-8" />
                             )}
                         </div>
                         {product.product_images?.length > 1 && (
