@@ -23,7 +23,15 @@ export default function CategoryModal({ isOpen, onClose, onSave, category }) {
     reset(category ? { name: category.name || "", description: category.description || "" } : { name: "", description: "" });
   }, [category, reset]);
 
-  const submit = async (vals) => { await onSave(vals); onClose(); };
+  const submit = async (vals) => { 
+    try {
+      await onSave(vals);
+      reset();
+      onClose();
+    } catch (e) {
+      // Error already shown via toast in hook
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

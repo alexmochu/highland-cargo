@@ -25,17 +25,15 @@ export default function useCategories({ pageSize = 10 } = {}) {
 
   const addOrUpdate = async (vals) => {
     if (!editing) {
-      // optimistic push
-      const temp = { ...vals, id: `temp-${Date.now()}`, created_at: new Date().toISOString() };
-      setCategories(prev => [temp, ...prev]);
-      toast.promise(svc.saveCategory(vals), {
-        loading: "Adding category...",
-        success: "Category added",
-        error: "Failed to add category"
-      }).then(load).catch(load);
+      try {
+        await svc.saveCategory(vals);
+        toast.success("Category added");
+        load();
+      } catch (e) {
+        toast.error("Failed to add category");
+        throw e;
+      }
     } else {
-      const backup = categories;
-      setCategories(prev => prev.map(c => c.id === editing.id ? { ...c, ...vals } : c));
       try {
         await svc.saveCategory(vals, editing.id);
         toast.success("Category updated");
@@ -43,7 +41,7 @@ export default function useCategories({ pageSize = 10 } = {}) {
         load();
       } catch (e) {
         toast.error("Failed to update category");
-        setCategories(backup);
+        throw e;
       }
     }
   };
