@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function KYCUpload({ supplierId, onNext }) {
   const supabase = createClient();
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState(null);
 
   async function handleUpload() {
     if (!file) return;

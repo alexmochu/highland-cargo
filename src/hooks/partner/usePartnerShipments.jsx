@@ -1,5 +1,5 @@
 // hooks/usePartnerShipments.js
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import * as svc from "@/services/partnerService";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
@@ -11,7 +11,7 @@ export default function usePartnerShipments(partnerId, { pageSize = 10 } = {}) {
   const [total, setTotal] = useState(0);
   const channelRef = useRef(null);
 
-  const load = async (p = page) => {
+  const load = useCallback(async (p = page) => {
     if (!partnerId) return;
     setLoading(true);
     try {
@@ -22,9 +22,9 @@ export default function usePartnerShipments(partnerId, { pageSize = 10 } = {}) {
       console.error(e);
       toast.error("Failed to load shipments");
     } finally { setLoading(false); }
-  };
+  }, [partnerId, page, pageSize]);
 
-  useEffect(() => { load(); }, [partnerId, page]);
+  useEffect(() => { load(); }, [load]);
 
   useEffect(() => {
     if (!partnerId) return;
@@ -38,7 +38,7 @@ export default function usePartnerShipments(partnerId, { pageSize = 10 } = {}) {
     return () => {
       try { supabase.removeChannel(channel); } catch (e) { /*ignore*/ }
     };
-  }, [partnerId, page]);
+  }, [partnerId, page, load]);
 
   return { shipments, loading, page, setPage, total, pageSize, reload: () => load(1) };
 }

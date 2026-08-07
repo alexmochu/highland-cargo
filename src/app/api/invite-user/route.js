@@ -1,20 +1,31 @@
 // app/api/admin/invite/route.ts
 import { NextResponse } from "next/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/supabase/adminGuard";
+
+const ALLOWED_ROLES = ["admin", "manager", "accountant", "warehouse_staff", "sales_agent", "cashier", "supplier", "partner"];
 
 export async function POST(req) {
   try {
+    const guard = await requireAdmin();
+    if (!guard.authorized) {
+      return NextResponse.json({ error: guard.message }, { status: guard.status });
+    }
+
     const body = await req.json();
     const { email, full_name, role, partner_id, supplier_id } = body;
 
     if (!email || !role) {
       return NextResponse.json({ error: "Missing email or role" }, { status: 400 });
     }
+    if (!ALLOWED_ROLES.includes(role)) {
+      return NextResponse.json({ error: `role must be one of ${ALLOWED_ROLES.join(", ")}` }, { status: 400 });
+    }
 
     const supabase = createServerSupabaseClient();
 
     const { data: createdUser, error: createErr } = await supabase.auth.admin.inviteUserByEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/auth/callback`
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
     });
 
     if (createErr) {

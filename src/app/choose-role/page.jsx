@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 export default function ChooseRolePage() {
   const supabase = createClient();
   const router = useRouter();
+  const { t } = useTranslation();
 
   async function chooseRole(role) {
     await supabase.from("profiles").update({ role }).eq("user_id", (await supabase.auth.getUser()).data.user.id);
@@ -25,12 +27,12 @@ export default function ChooseRolePage() {
         >
           <Card className="border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300">
             <CardHeader>
-              <CardTitle className="text-2xl text-slate-800">Join as a Supplier</CardTitle>
+              <CardTitle className="text-2xl text-slate-800">{t("chooseRole.supplierTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="mb-6 text-slate-600">Showcase your products and unlock access to partners.</p>
+              <p className="mb-6 text-slate-600">{t("chooseRole.supplierDesc")}</p>
               <Button className="w-full bg-slate-800 hover:bg-slate-700 text-white h-12 text-lg" onClick={() => chooseRole("supplier")}>
-                Start Supplier Onboarding
+                {t("chooseRole.supplierButton")}
               </Button>
             </CardContent>
           </Card>
@@ -43,12 +45,12 @@ export default function ChooseRolePage() {
         >
           <Card className="border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300">
             <CardHeader>
-              <CardTitle className="text-2xl text-slate-800">Join as a Partner</CardTitle>
+              <CardTitle className="text-2xl text-slate-800">{t("chooseRole.partnerTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="mb-6 text-slate-600">Gain access to supplier catalogs and streamline orders.</p>
+              <p className="mb-6 text-slate-600">{t("chooseRole.partnerDesc")}</p>
               <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white h-12 text-lg" onClick={() => chooseRole("partner")}>
-                Start Partner Onboarding
+                {t("chooseRole.partnerButton")}
               </Button>
             </CardContent>
           </Card>

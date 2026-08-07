@@ -13,27 +13,34 @@ export default function ClientDashboard() {
   const { user, profile, loading, logout } = useAuth();
   const router = useRouter();
   const [onboardingIncomplete, setOnboardingIncomplete] = useState(false);
-console.log('role', profile)
+
   useEffect(() => {
-    if (!loading && user && profile) {
-      if (profile.role === "supplier" && profile.supplier_id) {
-        // If supplier, check onboarding
-        fetch(`/api/supplier/${profile.supplier_id}/progress`)
-          .then(res => res.json())
-          .then(data => {
-            if (data.status !== "verified") {
-              setOnboardingIncomplete(true);
-              // Redirect supplier straight into onboarding flow
-              router.push("/supplier-onboarding");
-            }
-          });
-      } else if (!profile.role) {
-        // No role yet → prompt choice
-        router.push("/choose-role");
-      } else {
+    if (loading || !user || !profile) return;
+
+    // Admins don't have a supplier/partner role and don't need onboarding.
+    if (profile.is_admin) return;
+
+    if (profile.role === "supplier") {
+      if (!profile.supplier_id) {
         setOnboardingIncomplete(true);
+        return;
       }
+      fetch(`/api/supplier/${profile.supplier_id}/progress`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.status !== "verified") {
+            setOnboardingIncomplete(true);
+            router.push("/supplier-onboarding");
+          }
+        });
+      return;
     }
+
+    if (!profile.role) {
+      // No role yet → prompt choice
+      router.push("/choose-role");
+    }
+    // profile.role === "partner": nothing further to prompt here.
   }, [loading, user, profile, router]);
 
   if (loading) return <div className="min-h-screen flex items-center justify-center text-slate-600">Loading...</div>;

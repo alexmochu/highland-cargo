@@ -4,43 +4,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Plane, Ship, Warehouse, Truck } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 export const Services = () => {
-  const services = [
-    {
-      icon: Plane,
-      title: "International Air Freight",
-      description: "Fast and reliable air cargo services worldwide. Express delivery for time-sensitive shipments.",
-      features: ["Express delivery", "Real-time tracking", "Global coverage", "Customs clearance"],
-      color: { bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-100" }
-    },
-    {
-      icon: Ship,
-      title: "International Sea Freight",
-      description: "Cost-effective ocean freight solutions for large shipments. Full container and LCL options.",
-      features: ["FCL & LCL options", "Port-to-port service", "Competitive rates", "Documentation support"],
-      color: { bg: "bg-teal-50", text: "text-teal-600", border: "border-teal-100" }
-    },
-    {
-      icon: Warehouse,
-      title: "Overseas Warehouses",
-      description: "Strategic warehousing locations in China, Dubai, and UK for efficient distribution.",
-      features: ["China warehouse", "Dubai warehouse", "UK warehouse", "Inventory management"],
-      color: { bg: "bg-amber-50", text: "text-amber-600", border: "border-amber-100" }
-    },
-    {
-      icon: Truck,
-      title: "Local Delivery",
-      description: "Comprehensive delivery network across Kenya, Uganda, Tanzania, and East Africa.",
-      features: ["Kenya coverage", "Uganda delivery", "Tanzania service", "East Africa network"],
-      color: { bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-100" }
-    }
+  const { t } = useTranslation();
+  const icons = [Plane, Ship, Warehouse, Truck];
+  const colors = [
+    { bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-100" },
+    { bg: "bg-teal-50", text: "text-teal-600", border: "border-teal-100" },
+    { bg: "bg-amber-50", text: "text-amber-600", border: "border-amber-100" },
+    { bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-100" },
   ];
+  const services = t("services.items").map((item, i) => ({
+    ...item,
+    icon: icons[i],
+    color: colors[i],
+  }));
 
   return (
     <section id="services" className="py-24 bg-slate-50">
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -49,11 +33,11 @@ export const Services = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 rounded-full mb-6">
             <div className="w-2 h-2 bg-slate-600 rounded-full" />
-            <span className="text-sm font-semibold text-slate-700">Our Services</span>
+            <span className="text-sm font-semibold text-slate-700">{t("services.badge")}</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Comprehensive Logistics Solutions</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">{t("services.title")}</h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            From air freight to local delivery, we've got you covered with tailored solutions for your business needs.
+            {t("services.subtitle")}
           </p>
         </motion.div>
 
@@ -85,7 +69,7 @@ export const Services = () => {
                     ))}
                   </ul>
                   <Button variant="outline" className="w-full border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700">
-                    Learn More
+                    {t("services.learnMore")}
                   </Button>
                 </CardContent>
               </Card>

@@ -35,7 +35,7 @@ export default function SupplierDashboard() {
             <TabsTrigger value="shipments" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Shipments</TabsTrigger>
             <TabsTrigger value="products" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Products</TabsTrigger>
             <TabsTrigger value="team" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Team</TabsTrigger>
-            {/* <TabsTrigger value="messages">Messages</TabsTrigger> */}
+            <TabsTrigger value="messages" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Messages</TabsTrigger>
             <TabsTrigger value="profile" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Profile</TabsTrigger>
           </TabsList>
 

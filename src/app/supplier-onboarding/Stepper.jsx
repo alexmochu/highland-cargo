@@ -49,7 +49,7 @@ export default function Stepper({ userId, supplierId }) {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center">
       <div className="text-center p-10 bg-white rounded-3xl shadow-xl">
         <h1 className="text-4xl font-bold text-slate-800 mb-4">All steps completed 🎉</h1>
-        <p className="text-lg text-slate-600">You're all set up! Check your dashboard for more details.</p>
+        <p className="text-lg text-slate-600">You&apos;re all set up! Check your dashboard for more details.</p>
       </div>
     </div>
   );

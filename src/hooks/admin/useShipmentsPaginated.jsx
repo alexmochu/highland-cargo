@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as svc from "@/services/adminService";
 import { toast } from "sonner";
 
@@ -12,7 +12,7 @@ export default function useShipments({ pageSize = 10 } = {}) {
   const [editing, setEditing] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const load = async (p = page) => {
+  const load = useCallback(async (p = page) => {
     setLoading(true);
     try {
       const [sRes, pList, sList, prList] = await Promise.all([
@@ -29,9 +29,9 @@ export default function useShipments({ pageSize = 10 } = {}) {
     } catch (e) {
       toast.error("Failed to load shipments");
     } finally { setLoading(false); }
-  };
+  }, [page, pageSize]);
 
-  useEffect(() => { load(); }, [page]);
+  useEffect(() => { load(); }, [load]);
 
   const addOrUpdate = async (vals) => {
     if (!editing) {

@@ -1,147 +1,35 @@
 "use client"
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
-import { useAuthStore } from "@/store/auth-store"
+import { Suspense } from "react"
+import { useSearchParams } from "next/navigation"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { AlertTriangle } from "lucide-react"
 
-export default function AuthCallbackPage() {
-  const router = useRouter()
-  const supabase = createClient()
-  const { setUser, setProfile } = useAuthStore()
-
-  useEffect(() => {
-    // const createUserProfile = async (user, role) => {
-    //   try {
-    //     const fullName = user.user_metadata.full_name || ""
-    //     const firstName = user.user_metadata.first_name || (fullName ? fullName.split(" ")[0] : "")
-    //     const lastName = user.user_metadata.last_name || (fullName ? fullName.split(" ").slice(1).join(" ") : "")
-    //     const avatarUrl = user.user_metadata.avatar_url || ""
-    //     const email = user.user_metadata.email || ""
-
-    //     const { data: existingProfile, error: selectError } = await supabase
-    //       .from("users")
-    //       .select("*")
-    //       .eq("user_id", user.id)
-    //       .maybeSingle()
-
-    //     if (selectError) {
-    //       console.error("Error checking for existing profile:", selectError.message)
-    //       return
-    //     }
-
-    //     if (existingProfile) {
-    //       console.log("Profile already exists. Skipping creation.")
-    //       setProfile(existingProfile)
-    //       return
-    //     }
-
-    //     const { data: insertedUser, error: insertUserError } = await supabase
-    //       .from("users")
-    //       .insert({
-    //         user_id: user.id,
-    //         email: email,
-    //         profile_image_url: avatarUrl,
-    //         full_name: fullName,
-    //         user_type: role,
-    //         password: "",
-    //       })
-    //       .select()
-
-    //     if (insertUserError) {
-    //       console.error("Error creating profile:", insertUserError.message)
-    //     } else {
-    //       console.log("Profile created successfully.")
-    //       if (insertedUser && insertedUser.length > 0) {
-    //         setProfile(insertedUser[0])
-    //       }
-    //     }
-
-    //     // Verify the inserted user exists before inserting the role.
-    //     if (!insertedUser || insertedUser.length === 0) {
-    //       console.error("User insertion did not return a valid user row.")
-    //       return
-    //     }
-
-    //     // Insert corresponding user role into the "user_roles" table.
-    //     const { error: insertRoleError } = await supabase.from("user_roles").insert({
-    //       role: role,
-    //     })
-
-    //     if (insertRoleError) {
-    //       console.error("Error inserting user role:", insertRoleError.message)
-    //     } else {
-    //       console.log("User role inserted successfully in the user_roles table.")
-    //     }
-    //   } catch (error) {
-    //     console.error("Error in createUserProfile:", error)
-    //   }
-    // }
-
-    const handleAuthCallback = async () => {
-      try {
-        const { hash, searchParams } = new URL(window.location.href)
-        const next = searchParams.get("next") || "/dashboard"
-        const role = searchParams.get("role")
-
-        // Handle email confirmation with hash parameters
-        if (hash) {
-          const params = new URLSearchParams(hash.replace("#", "?"))
-          const access_token = params.get("access_token")
-          const refresh_token = params.get("refresh_token")
-
-          if (access_token && refresh_token) {
-            await supabase.auth.setSession({
-              access_token,
-              refresh_token,
-            })
-
-            const {
-              data: { session },
-            } = await supabase.auth.getSession()
-            if (session?.user) {
-              setUser(session.user)
-              // await createUserProfile(session.user, role)
-            }
-
-            router.refresh()
-            return router.push(next)
-          }
-        }
-
-        // Handle OAuth flow with code parameter
-        const code = searchParams.get("code")
-        if (code) {
-          await supabase.auth.exchangeCodeForSession(code)
-
-          const {
-            data: { session },
-          } = await supabase.auth.getSession()
-          if (session?.user) {
-            setUser(session.user)
-            // await createUserProfile(session.user, role)
-          }
-
-          router.refresh()
-          return router.push(next)
-        }
-
-        throw new Error("No authentication tokens found in URL")
-      } catch (error) {
-        console.error("Authentication error:", error)
-        router.push(`/auth/error?message=${encodeURIComponent((error).message)}`)
-      }
-    }
-
-    handleAuthCallback()
-  }, [router, supabase, setUser, setProfile])
+function AuthErrorContent() {
+  const searchParams = useSearchParams()
+  const message = searchParams.get("message") || "Something went wrong while signing you in."
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <h2 className="text-2xl font-semibold mb-4">Completing sign in...</h2>
-        <p className="text-muted-foreground">You will be redirected automatically.</p>
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 p-8">
+      <div className="text-center max-w-md bg-white p-10 rounded-3xl shadow-xl">
+        <div className="mx-auto mb-6 w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center">
+          <AlertTriangle className="w-7 h-7 text-red-600" />
+        </div>
+        <h2 className="text-2xl font-semibold mb-2 text-slate-800">Sign-in failed</h2>
+        <p className="text-slate-600 mb-8">{message}</p>
+        <Button asChild className="bg-slate-800 hover:bg-slate-700 text-white">
+          <Link href="/auth">Try Again</Link>
+        </Button>
       </div>
     </div>
+  )
+}
+
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen" />}>
+      <AuthErrorContent />
+    </Suspense>
   )
 }

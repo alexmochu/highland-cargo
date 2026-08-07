@@ -1,9 +1,17 @@
+// Safely embed a user-supplied value inside a PostgREST or()/and() filter
+// string. Values passed to .or() are parsed as filter syntax, so raw
+// interpolation lets `,` `(` `)` etc. in user input rewrite the query.
+// Wrapping in double quotes (and escaping \ and ") neutralizes that per
+// PostgREST's filter grammar: https://postgrest.org/en/stable/references/api/tables_views.html
+export const escapeForOrFilter = (value) =>
+  `"${String(value).replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
+
 export const getURL = (path = '') => {
-    // Check if NEXT_PUBLIC_NEXTAUTH_URL is set and non-empty. Set this to your site URL in production env.
+    // Check if NEXT_PUBLIC_SITE_URL is set and non-empty. Set this to your site URL in production env.
     let url =
-      process?.env?.NEXTAUTH_URL &&
-      process.env.NEXTAUTH_URL.trim() !== ''
-        ? process.env.NEXTAUTH_URL
+      process?.env?.NEXT_PUBLIC_SITE_URL &&
+      process.env.NEXT_PUBLIC_SITE_URL.trim() !== ''
+        ? process.env.NEXT_PUBLIC_SITE_URL
         : // If not set, check for NEXT_PUBLIC_VERCEL_URL, which is automatically set by Vercel.
           process?.env?.NEXT_PUBLIC_VERCEL_URL &&
             process.env.NEXT_PUBLIC_VERCEL_URL.trim() !== ''

@@ -32,7 +32,7 @@ export default function PartnerDashboardPage() {
           <TabsList className="mb-6 flex flex-wrap gap-3 bg-slate-100 p-2 rounded-xl">
             <TabsTrigger value="overview" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Overview</TabsTrigger>
             <TabsTrigger value="shipments" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">My Shipments</TabsTrigger>
-            {/* <TabsTrigger value="messages">Messages</TabsTrigger> */}
+            <TabsTrigger value="messages" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Messages</TabsTrigger>
             <TabsTrigger value="profile" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Profile</TabsTrigger>
           </TabsList>
 

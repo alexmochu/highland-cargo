@@ -2,10 +2,10 @@
 import { Button } from "@/components/ui/button";
 import { Truck, Ship, Plane, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-// import { useTranslation } from 'next-i18next';
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 export const Hero = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   return (
     <section className="relative text-foreground py-32 overflow-hidden flex items-center min-h-[700px]">
       {/* Background */}
@@ -25,26 +25,25 @@ export const Hero = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 rounded-full mb-6">
               <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
-              <span className="text-sm font-semibold text-amber-700">Global Logistics Excellence</span>
+              <span className="text-sm font-semibold text-amber-700">{t("hero.badge")}</span>
             </div>
-            
+
             <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
-              Move <span className="bg-gradient-to-r from-slate-800 to-amber-500 bg-clip-text text-transparent">Anything</span>, 
+              {t("hero.titleMove")} <span className="bg-gradient-to-r from-slate-800 to-amber-500 bg-clip-text text-transparent">{t("hero.titleAnything")}</span>,
               <br />
-              Anywhere with <span className="text-slate-800">Precision</span>
+              {t("hero.titleAnywhereWith")} <span className="text-slate-800">{t("hero.titlePrecision")}</span>
             </h1>
-            
+
             <p className="text-xl text-slate-600 mb-10 leading-relaxed">
-              Trusted by 10,000+ businesses for international air, sea, and local shipping. 
-              Experience global connections and personal attention — with Highland Cargo.
+              {t("hero.subtitle")}
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="bg-slate-800 hover:bg-slate-700 text-white text-lg px-8 py-6 shadow-xl shadow-slate-800/20 transition-all hover:shadow-slate-800/30 hover:-translate-y-1">
-                Request Quote
+                {t("hero.requestQuote")}
               </Button>
               <Button size="lg" variant="outline" className="border-slate-300 hover:border-slate-400 hover:bg-slate-50 text-slate-700 text-lg px-8 py-6">
-                Track Package
+                {t("hero.trackPackage")}
               </Button>
             </div>
           </motion.div>
@@ -58,10 +57,10 @@ export const Hero = () => {
             <div className="bg-white rounded-3xl p-8 shadow-2xl shadow-slate-200 border border-slate-100">
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { icon: Plane, label: "Air Freight", color: "text-blue-600", bg: "bg-blue-50" },
-                  { icon: Ship, label: "Sea Freight", color: "text-teal-600", bg: "bg-teal-50" },
-                  { icon: MapPin, label: "Warehouses", color: "text-amber-600", bg: "bg-amber-50" },
-                  { icon: Truck, label: "Local Delivery", color: "text-emerald-600", bg: "bg-emerald-50" }
+                  { icon: Plane, label: t("hero.airFreight"), color: "text-blue-600", bg: "bg-blue-50" },
+                  { icon: Ship, label: t("hero.seaFreight"), color: "text-teal-600", bg: "bg-teal-50" },
+                  { icon: MapPin, label: t("hero.warehouses"), color: "text-amber-600", bg: "bg-amber-50" },
+                  { icon: Truck, label: t("hero.localDelivery"), color: "text-emerald-600", bg: "bg-emerald-50" }
                 ].map((item, index) => (
                   <motion.div
                     key={index}

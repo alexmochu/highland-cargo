@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as svc from "@/services/adminService";
 import { toast } from "sonner";
 
@@ -9,7 +9,7 @@ export default function useCategories({ pageSize = 10 } = {}) {
   const [editing, setEditing] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const load = async (p = page) => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       // categories endpoint earlier wasn't paginated; use fetchCategories for full list
@@ -19,9 +19,9 @@ export default function useCategories({ pageSize = 10 } = {}) {
     } catch (e) {
       toast.error("Failed to load categories");
     } finally { setLoading(false); }
-  };
+  }, []);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); }, [load]);
 
   const addOrUpdate = async (vals) => {
     if (!editing) {

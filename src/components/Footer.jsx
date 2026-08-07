@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -19,12 +19,12 @@ export const Footer = () => {
                   Highland Cargo
                 </h3>
                 <p className="text-sm text-slate-400">
-                  Global Logistics Solutions
+                  {t("header.tagline")}
                 </p>
               </div>
             </div>
             <p className="text-slate-400 mb-6 leading-relaxed">
-              Your trusted partner for international shipping and logistics solutions across the globe.
+              {t("footer.description")}
             </p>
             <div className="flex space-x-4">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
@@ -36,15 +36,9 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-white">Services</h4>
+            <h4 className="text-lg font-semibold mb-6 text-white">{t("footer.servicesTitle")}</h4>
             <ul className="space-y-3">
-              {[
-                "International Air Freight",
-                "International Sea Freight", 
-                "Overseas Warehouses",
-                "Local Delivery",
-                "Customs Clearance"
-              ].map((item, idx) => (
+              {t("footer.services").map((item, idx) => (
                 <li key={idx}>
                   <a href="#" className="text-slate-400 hover:text-amber-400 transition-colors">
                     {item}
@@ -55,15 +49,9 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-white">Support</h4>
+            <h4 className="text-lg font-semibold mb-6 text-white">{t("footer.supportTitle")}</h4>
             <ul className="space-y-3">
-              {[
-                "Track Package",
-                "File a Claim",
-                "Shipping Calculator", 
-                "Documentation",
-                "FAQ"
-              ].map((item, idx) => (
+              {t("footer.support").map((item, idx) => (
                 <li key={idx}>
                   <a href="#" className="text-slate-400 hover:text-amber-400 transition-colors">
                     {item}
@@ -74,7 +62,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-white">Contact Info</h4>
+            <h4 className="text-lg font-semibold mb-6 text-white">{t("footer.contactTitle")}</h4>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
@@ -94,7 +82,7 @@ export const Footer = () => {
 
         <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-500">
           <p>
-            &copy; 2025 Highland Cargo. {t("copyright")} | {t("privacy")} | {t("terms")}
+            &copy; 2025 Highland Cargo. {t("footer.copyright")} | {t("footer.privacy")} | {t("footer.terms")}
           </p>
         </div>
       </div>

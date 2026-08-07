@@ -1,12 +1,12 @@
 // hooks/useSupplierData.js
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as svc from "@/services/supplierService";
 import { toast } from "sonner";
 
 export function useShipments(supplierId) {
   const [shipments, setShipments] = useState([]);
   const [loading, setLoading] = useState(false);
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const data = await svc.fetchShipmentsForSupplier(supplierId);
@@ -16,15 +16,15 @@ export function useShipments(supplierId) {
     } finally {
       setLoading(false);
     }
-  };
-  useEffect(() => { if (supplierId) load(); }, [supplierId]);
+  }, [supplierId]);
+  useEffect(() => { if (supplierId) load(); }, [supplierId, load]);
   return { shipments, loading, reload: load };
 }
 
 export function useProducts(supplierId) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const data = await svc.fetchProductsForSupplier(supplierId);
@@ -34,15 +34,15 @@ export function useProducts(supplierId) {
     } finally {
       setLoading(false);
     }
-  };
-  useEffect(() => { if (supplierId) load(); }, [supplierId]);
+  }, [supplierId]);
+  useEffect(() => { if (supplierId) load(); }, [supplierId, load]);
   return { products, loading, reload: load };
 }
 
 export function useTeam(supplierId) {
   const [team, setTeam] = useState([]);
   const [loading, setLoading] = useState(false);
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const data = await svc.fetchSupplierTeam(supplierId);
@@ -52,15 +52,15 @@ export function useTeam(supplierId) {
     } finally {
       setLoading(false);
     }
-  };
-  useEffect(() => { if (supplierId) load(); }, [supplierId]);
+  }, [supplierId]);
+  useEffect(() => { if (supplierId) load(); }, [supplierId, load]);
   return { team, loading, reload: load };
 }
 
 export function useMessages(supplierId) {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const data = await svc.fetchMessagesForSupplier(supplierId);
@@ -70,7 +70,7 @@ export function useMessages(supplierId) {
     } finally {
       setLoading(false);
     }
-  };
-  useEffect(() => { if (supplierId) load(); }, [supplierId]);
+  }, [supplierId]);
+  useEffect(() => { if (supplierId) load(); }, [supplierId, load]);
   return { messages, loading, reload: load };
 }

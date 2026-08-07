@@ -4,51 +4,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Search, Truck, Package, FileText, Phone, CreditCard } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 export const Support = () => {
-  const supportItems = [
-    {
-      icon: Search,
-      title: "Tracking Support",
-      description: "How to track your package?",
-      color: { bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-100" }
-    },
-    {
-      icon: Truck,
-      title: "Shipping Support",
-      description: "Which transportation modes are supported?",
-      color: { bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-100" }
-    },
-    {
-      icon: Package,
-      title: "Packing and Suppliers Support",
-      description: "Packing and Suppliers Support",
-      color: { bg: "bg-purple-50", text: "text-purple-600", border: "border-purple-100" }
-    },
-    {
-      icon: FileText,
-      title: "File a Claim",
-      description: "How to claim for loss or damage?",
-      color: { bg: "bg-red-50", text: "text-red-600", border: "border-red-100" }
-    },
-    {
-      icon: Phone,
-      title: "Contact Us",
-      description: "How to contact us?",
-      color: { bg: "bg-amber-50", text: "text-amber-600", border: "border-amber-100" }
-    },
-    {
-      icon: CreditCard,
-      title: "Importer Code",
-      description: "How to apply for an import code?",
-      color: { bg: "bg-indigo-50", text: "text-indigo-600", border: "border-indigo-100" }
-    }
+  const { t } = useTranslation();
+  const icons = [Search, Truck, Package, FileText, Phone, CreditCard];
+  const colors = [
+    { bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-100" },
+    { bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-100" },
+    { bg: "bg-purple-50", text: "text-purple-600", border: "border-purple-100" },
+    { bg: "bg-red-50", text: "text-red-600", border: "border-red-100" },
+    { bg: "bg-amber-50", text: "text-amber-600", border: "border-amber-100" },
+    { bg: "bg-indigo-50", text: "text-indigo-600", border: "border-indigo-100" },
   ];
+  const supportItems = t("support.items").map((item, i) => ({
+    ...item,
+    icon: icons[i],
+    color: colors[i],
+  }));
 
   return (
     <section id="support" className="py-24 bg-white">
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -57,11 +35,11 @@ export const Support = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 rounded-full mb-6">
             <div className="w-2 h-2 bg-slate-600 rounded-full" />
-            <span className="text-sm font-semibold text-slate-700">Support Center</span>
+            <span className="text-sm font-semibold text-slate-700">{t("support.badge")}</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Need Help?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">{t("support.title")}</h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Find answers to common questions and get the support you need for your shipping requirements.
+            {t("support.subtitle")}
           </p>
         </motion.div>
 
@@ -85,7 +63,7 @@ export const Support = () => {
                 </CardHeader>
                 <CardContent className="text-center">
                   <Button className="bg-slate-800 hover:bg-slate-700 text-white">
-                    Click to Know More
+                    {t("support.clickToKnowMore")}
                   </Button>
                 </CardContent>
               </Card>
@@ -101,12 +79,12 @@ export const Support = () => {
           whileHover={{ scale: 1.02 }}
           className="bg-gradient-to-r from-slate-800 to-slate-700 rounded-3xl p-8 md:p-12 text-white text-center shadow-xl"
         >
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">VAT & DUTY FEES FAQs</h3>
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">{t("support.vatTitle")}</h3>
           <p className="text-lg mb-8 text-slate-200 max-w-2xl mx-auto">
-            Understanding import duties, VAT calculations, and customs procedures for your international shipments.
+            {t("support.vatText")}
           </p>
           <Button variant="outline" className="border-white text-white hover:bg-white hover:text-slate-800">
-            View FAQs
+            {t("support.viewFaqs")}
           </Button>
         </motion.div>
       </div>

@@ -1,62 +1,43 @@
-// import { NextResponse } from 'next/server';
-// import { createClient } from '@/lib/supabase/middleware';
-
-// const protectedRoutes = ['/dashboard', '/messages', '/profile']
-
-// export async function middleware(request) {
-//   const { supabase, response } = createClient(request);
-//   const {
-//     data: { user },
-//   } = await supabase.auth.getUser();
-//   if (!user) {
-//     if(protectedRoutes.some(route => request.nextUrl.pathname.startsWith(route))){
-//         const redirectUrl = new URL('/auth', request.url)
-//         return NextResponse.redirect(redirectUrl)
-//     }
-//   }
-//   return response;
-// }
-
-// export const config = {
-//   matcher: [
-//     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-//     '/dashboard/:path*',
-//   ],
-// };
-
 import { updateSession } from '@/lib/supabase/middleware'
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase'
 
-const protectedRoutes = ['/coming-soon', '/dashboard', '/messages', '/profile']
-// const publicRoutes = ['/auth', '/services']
+// Routes that require a signed-in user.
+const protectedRoutes = ['/coming-soon', '/dashboard', '/messages', '/profile', '/admin', '/supplier', '/partner', '/choose-role', '/pos']
+// Routes that additionally require profiles.is_admin === true, or one of the operational roles below.
+const adminRoutes = ['/admin', '/pos']
+const ADMIN_AREA_ROLES = ['admin', 'manager', 'accountant', 'warehouse_staff', 'sales_agent', 'cashier']
 
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
 
-  // ✅ Skip middleware completely for public routes
-//   if (publicRoutes.some((route) => pathname.startsWith(route))) {
-//     return NextResponse.next();
-//   }
-
-//   // update user's auth session
   if (protectedRoutes.some((route) => pathname.startsWith(route))) {
     const supabase = await createClient()
 
-    // Retrieve the user using Supabase's auth helper.
     const {
       data: { user },
     } = await supabase.auth.getUser();
 
-    // If no user is found, redirect to sign-in.
     if (!user) {
       const signInUrl = request.nextUrl.clone();
       signInUrl.pathname = '/auth';
       signInUrl.searchParams.set('redirect', pathname);
       return NextResponse.redirect(signInUrl);
     }
+
+    if (adminRoutes.some((route) => pathname.startsWith(route))) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('is_admin, role')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (!profile?.is_admin && !ADMIN_AREA_ROLES.includes(profile?.role)) {
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+      }
+    }
   }
-  
+
   return await updateSession(request)
 }
 
@@ -72,42 +53,3 @@ export const config = {
     '/((?!_next/static|_next/image|favicon.png|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }
-
-
-// Translation
-
-// middleware.js
-// import { NextResponse } from 'next/server';
-// import acceptLanguage from 'accept-language';
-
-// const PUBLIC_FILE = /\.(.*)$/;
-
-// const locales = ['en', 'zh', 'ar'];
-// const defaultLocale = 'en';
-
-// acceptLanguage.languages(locales);
-
-// export function middleware(req) {
-//   const { pathname } = req.nextUrl;
-
-//   if (
-//     PUBLIC_FILE.test(pathname) || // Skip static files
-//     pathname.startsWith('/api')   // Skip API routes
-//   ) {
-//     return;
-//   }
-
-//   const pathnameIsMissingLocale = locales.every(
-//     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-//   );
-
-//   if (pathnameIsMissingLocale) {
-//     const locale = acceptLanguage.get(req.headers.get('Accept-Language')) || defaultLocale;
-
-//     return NextResponse.redirect(new URL(`/${locale}${pathname}`, req.url));
-//   }
-// }
-
-// export const config = {
-//   matcher: ['/((?!_next|favicon.ico).*)'], // Run middleware on all routes except Next.js internals
-// };

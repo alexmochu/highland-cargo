@@ -1,43 +1,38 @@
 "use client"
 
-import { useEffect, useState } from "react";
-// import { supabase } from "@/integrations/supabase/client";
-// import { useNavigate } from "react-router-dom";
-import { AuthForm } from "@/components/AuthForm";
+import { Suspense, useEffect } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useAuth } from "@/components/auth-provider"
+import { AuthForm } from "@/components/AuthForm"
+import { useTranslation } from "@/i18n/LocaleProvider"
 
-export default function AuthPage() {
-  const [loading, setLoading] = useState(false);
-//   const navigate = useNavigate();
+function AuthPageContent() {
+  const { user, loading } = useAuth()
+  const { t } = useTranslation()
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
-//   useEffect(() => {
-//     let unsub;
-//     async function checkSession() {
-//       const { data: { session } } = await supabase.auth.getSession();
-//       if (session) {
-//         navigate("/", { replace: true });
-//       } else {
-//         setLoading(false);
-//       }
-//     }
-//     checkSession();
-//     unsub = supabase.auth.onAuthStateChange((_evt, session) => {
-//       if (session) {
-//         navigate("/", { replace: true });
-//       }
-//     });
-//     return () => {
-//       if (unsub && typeof unsub.subscription?.unsubscribe === "function") {
-//         unsub.subscription.unsubscribe();
-//       }
-//     };
-//   }, [navigate]);
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace(searchParams.get("redirect") || "/dashboard")
+    }
+  }, [loading, user, router, searchParams])
 
-  if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  if (loading || user) {
+    return <div className="min-h-screen flex items-center justify-center">{t("auth.loading")}</div>;
   }
+
   return (
     <div className="min-h-screen flex items-center justify-center py-10 bg-gradient-to-tr from-slate-50 via-amber-50 to-slate-100">
       <AuthForm />
     </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen" />}>
+      <AuthPageContent />
+    </Suspense>
   );
 }

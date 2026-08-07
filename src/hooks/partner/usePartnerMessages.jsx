@@ -1,5 +1,5 @@
 // hooks/usePartnerMessages.js
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import * as svc from "@/services/partnerService";
 import { toast } from "sonner";
@@ -9,7 +9,7 @@ export default function usePartnerMessages(partnerId) {
   const [loading, setLoading] = useState(false);
   const channelRef = useRef(null);
 
-  const load = async () => {
+  const load = useCallback(async () => {
     if (!partnerId) return;
     setLoading(true);
     try {
@@ -27,9 +27,9 @@ export default function usePartnerMessages(partnerId) {
       console.error(e);
       toast.error("Failed to load messages");
     } finally { setLoading(false); }
-  };
+  }, [partnerId]);
 
-  useEffect(() => { load(); }, [partnerId]);
+  useEffect(() => { load(); }, [load]);
 
   useEffect(() => {
     if (!partnerId) return;
@@ -45,7 +45,7 @@ export default function usePartnerMessages(partnerId) {
     return () => {
       try { supabase.removeChannel(channel); } catch (e) {}
     };
-  }, [partnerId]);
+  }, [partnerId, load]);
 
   return { messages, loading, reload: load };
 }

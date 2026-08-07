@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as svc from "@/services/adminService";
 import { toast } from "sonner";
 
@@ -10,10 +10,10 @@ export default function useProducts({ pageSize = 10 } = {}) {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [editing, setEditing] = useState(null);
-  const [filterCategory, setFilterCategory] = useState("");
+  const [filterCategory, setFilterCategoryState] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const load = async (p = page, cat = filterCategory) => {
+  const load = useCallback(async (p = page, cat = filterCategory) => {
     setLoading(true);
     try {
       const [cats, partnersList, suppliersList] = await Promise.all([
@@ -30,17 +30,22 @@ export default function useProducts({ pageSize = 10 } = {}) {
     } catch (e) {
       toast.error("Failed to load products");
     } finally { setLoading(false); }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageSize]);
 
-  useEffect(() => { load(); }, []);
-  useEffect(() => { load(1); }, [filterCategory]);
-  useEffect(() => { load(page); }, [page]);
+  // Single source of truth for refetching: page or category filter changing.
+  useEffect(() => { load(page, filterCategory); }, [page, filterCategory, load]);
+
+  const setFilterCategory = useCallback((cat) => {
+    setFilterCategoryState(cat);
+    setPage(1);
+  }, []);
 
   const addOrUpdate = async (vals) => {
     if (!editing) {
       const temp = { ...vals, id: `temp-${Date.now()}`, created_at: new Date().toISOString() };
       setProducts(prev => [temp, ...prev]);
-  
+
       try {
         await toast.promise(
           svc.saveProduct(vals),
@@ -54,7 +59,7 @@ export default function useProducts({ pageSize = 10 } = {}) {
       } catch (err) {
         await load(1);
       }
-  
+
     } else {
       const backup = products;
       setProducts(prev => prev.map(p => p.id === editing.id ? { ...p, ...vals } : p));
@@ -74,8 +79,6 @@ export default function useProducts({ pageSize = 10 } = {}) {
       }
     }
   };
-  
-  
 
   const remove = async (id) => {
     const backup = products;

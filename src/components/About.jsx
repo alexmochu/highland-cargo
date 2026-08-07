@@ -3,19 +3,22 @@
 import { Button } from "@/components/ui/button";
 import { Globe, Users, Award } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 export const About = () => {
+  const { t } = useTranslation();
   const stats = [
-    { icon: Globe, value: "5+", label: "Countries Served", color: { bg: "bg-blue-50", text: "text-blue-600" } },
-    { icon: Users, value: "1K+", label: "Happy Clients", color: { bg: "bg-emerald-50", text: "text-emerald-600" } },
-    { icon: Award, value: "15+", label: "Years Experience", color: { bg: "bg-amber-50", text: "text-amber-600" } },
+    { icon: Globe, value: "5+", label: t("about.statsCountries"), color: { bg: "bg-blue-50", text: "text-blue-600" } },
+    { icon: Users, value: "1K+", label: t("about.statsClients"), color: { bg: "bg-emerald-50", text: "text-emerald-600" } },
+    { icon: Award, value: "15+", label: t("about.statsExperience"), color: { bg: "bg-amber-50", text: "text-amber-600" } },
   ];
 
   return (
     <section id="about" className="py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-16 items-center mb-20">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -24,25 +27,25 @@ export const About = () => {
           >
             <div className="flex items-center gap-3">
               <div className="bg-slate-200 w-4 h-4 rounded-full" />
-              <span className="uppercase text-sm font-semibold tracking-wider text-slate-600">About Us</span>
+              <span className="uppercase text-sm font-semibold tracking-wider text-slate-600">{t("about.badge")}</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4 leading-tight">
-              Connecting Africa to the World
+              {t("about.title")}
             </h2>
             <p className="text-lg text-slate-700 leading-relaxed">
-              Highland Cargo is a leading logistics and freight forwarding company with over <span className="font-bold text-amber-500">15 years</span> (since 2009) of experience in international trade.
+              {t("about.p1Prefix")}<span className="font-bold text-amber-500">{t("about.p1Highlight")}</span>{t("about.p1Suffix")}
             </p>
             <p className="text-lg text-slate-600 leading-relaxed">
-              We connect Africa’s businesses to the world with smart solutions for air and sea freight, warehousing, and delivery. Join <span className="font-bold text-slate-800">1000+ clients</span> who trust us with their cargo journeys!
+              {t("about.p2Prefix")}<span className="font-bold text-slate-800">{t("about.p2Highlight")}</span>{t("about.p2Suffix")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button className="bg-slate-800 hover:bg-slate-700 text-white shadow-lg">
-                Learn More About Us
+                {t("about.learnMoreButton")}
               </Button>
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -50,19 +53,21 @@ export const About = () => {
             className="relative w-full group"
           >
             <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1974&auto=format&fit=crop" 
-                alt="Our Team discussing logistics" 
-                className="rounded-3xl shadow-2xl w-full h-[500px] object-cover" 
+              <Image
+                src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1974&auto=format&fit=crop"
+                alt="Our Team discussing logistics"
+                width={800}
+                height={500}
+                className="rounded-3xl shadow-2xl w-full h-[500px] object-cover"
               />
               <div className="absolute -bottom-8 -left-8 bg-slate-800 text-white p-8 rounded-3xl shadow-xl max-w-xs group-hover:scale-105 transition-transform duration-300">
-                <p className="font-bold text-2xl mb-2">Over 15 Years</p>
-                <p className="text-slate-300">Delivering excellence in logistics, globally.</p>
+                <p className="font-bold text-2xl mb-2">{t("about.imageCaptionTitle")}</p>
+                <p className="text-slate-300">{t("about.imageCaptionText")}</p>
               </div>
             </div>
           </motion.div>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {stats.map((stat, index) => (
             <motion.div

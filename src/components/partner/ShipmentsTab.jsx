@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import usePartnerShipments from "@/hooks/partner/usePartnerShipments";
-import Pagination from "@/components/partner/Pagination";
+import Pagination from "@/components/ui/pagination";
 import ShipmentDetailModal from "@/components/partner/ShipmentDetailModal";
 import { Button } from "@/components/ui/button";
 

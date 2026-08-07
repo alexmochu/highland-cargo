@@ -43,7 +43,6 @@ export function AuthProvider({ children }) {
           else if (profileData) {
             setProfile(profileData)
           }
-          // setProfile(userData.user)
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred during authentication")
@@ -59,18 +58,17 @@ export function AuthProvider({ children }) {
       setUser(session?.user ?? null)
 
       if (session?.user) {
-        // const { data: profileData, error: profileError } = await supabase
-        //   .from("users")
-        //   .select("*")
-        //   .eq("user_id", session.user.id)
-        //   .maybeSingle()
+        const { data: profileData, error: profileError } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("user_id", session.user.id)
+          .maybeSingle()
 
-        // if (profileError) {
-        //   console.error("Error fetching profile:", profileError.message)
-        // } else if (profileData) {
-        //   setProfile(profileData)
-        // }
-        setProfile(session?.user)
+        if (profileError) {
+          console.error("Error fetching profile:", profileError.message)
+        } else if (profileData) {
+          setProfile(profileData)
+        }
       } else {
         setProfile({
           full_name: "",

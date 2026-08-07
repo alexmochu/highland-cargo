@@ -1,12 +1,22 @@
 import { NextResponse } from "next/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/supabase/adminGuard";
 
 export async function PATCH(
   req,
   { params }
 ) {
   try {
+    const guard = await requireAdmin();
+    if (!guard.authorized) {
+      return NextResponse.json({ error: guard.message }, { status: guard.status });
+    }
+
     const { status } = await req.json(); // "verified" or "rejected"
+    if (!["verified", "rejected"].includes(status)) {
+      return NextResponse.json({ error: "status must be 'verified' or 'rejected'" }, { status: 400 });
+    }
+
     const supabase = createServerSupabaseClient();
 
     const { error } = await supabase

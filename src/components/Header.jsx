@@ -1,10 +1,9 @@
 "use client"
-// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Button } from "@/components/ui/button";
 import { Menu, User, LogOut, ChevronDown } from "lucide-react"
 import { useState, useTransition } from "react";
-// import { useTranslation } from 'next-i18next';
 import { useAuth } from "@/components/auth-provider"
+import { useTranslation } from "@/i18n/LocaleProvider";
 import LanguageToggle from "./LanguageToggle";
 import Link from 'next/link'
 import {
@@ -19,12 +18,12 @@ import { usePathname, useRouter } from "next/navigation"
 
 export const Header = () => {
   const { user, profile, loading, logout } = useAuth()
+  const { t } = useTranslation()
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const pathname = usePathname()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const { t } = useTranslation();
 
   const handleLogout = async () => {
     startTransition(async () => {
@@ -43,12 +42,12 @@ export const Header = () => {
       .toUpperCase()
       .substring(0, 2)
   }
-  
+
   const navLinks = [
-    { href: "/services", label: "Services" },
-    { href: "/products", label: "Products" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/services", label: t("nav.services") },
+    { href: "/products", label: t("nav.products") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/contact", label: t("nav.contact") },
   ]
 
   return (
@@ -68,27 +67,29 @@ export const Header = () => {
                 <span className="text-amber-500">Cargo</span>
               </h1>
               <p className="text-xs text-slate-500 font-medium">
-                Global Logistics Solutions
+                {t("header.tagline")}
               </p>
             </div>
           </Link>
-          
+
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <Link 
-                key={link.href} 
-                href={link.href} 
+              <Link
+                key={link.href}
+                href={link.href}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  pathname === link.href 
-                    ? "text-slate-800 bg-amber-50" 
+                  pathname === link.href
+                    ? "text-slate-800 bg-amber-50"
                     : "text-slate-600 hover:text-slate-800 hover:bg-slate-100"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-            
+
+            <LanguageToggle />
+
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -106,45 +107,57 @@ export const Header = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56 bg-white border-slate-200 shadow-xl">
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/admin"
-                      className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
-                    >
-                      <User className="mr-3 h-4 w-4 text-slate-500" />
-                      Administrator
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/supplier"
-                      className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
-                    >
-                      <User className="mr-3 h-4 w-4 text-slate-500" />
-                      Supplier
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
+                  {profile?.is_admin && (
+                    <>
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/admin"
+                          className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
+                        >
+                          <User className="mr-3 h-4 w-4 text-slate-500" />
+                          {t("header.administrator")}
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                    </>
+                  )}
+                  {profile?.role === "supplier" && (
+                    <>
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/supplier"
+                          className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
+                        >
+                          <User className="mr-3 h-4 w-4 text-slate-500" />
+                          {t("header.supplier")}
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                    </>
+                  )}
                   <DropdownMenuItem asChild>
                     <Link
                       href="/dashboard"
                       className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
                     >
                       <User className="mr-3 h-4 w-4 text-slate-500" />
-                      Dashboard
+                      {t("header.dashboard")}
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/partner"
-                      className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
-                    >
-                      <User className="mr-3 h-4 w-4 text-slate-500" />
-                      Partner
-                    </Link>
-                  </DropdownMenuItem>
+                  {profile?.role === "partner" && (
+                    <>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/partner"
+                          className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
+                        >
+                          <User className="mr-3 h-4 w-4 text-slate-500" />
+                          {t("header.partner")}
+                        </Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleLogout}
@@ -152,41 +165,44 @@ export const Header = () => {
                     className="text-red-600 p-3 rounded-md hover:bg-red-50 cursor-pointer"
                   >
                     <LogOut className="mr-3 h-4 w-4" />
-                    Logout
+                    {t("header.logout")}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <Link href="/auth">
                 <Button className="ml-2 bg-slate-800 hover:bg-slate-700 text-white">
-                  Login
+                  {t("header.login")}
                 </Button>
               </Link>
             )}
           </nav>
-          
+
           {/* Mobile menu button */}
           <Button
             variant="outline"
             size="sm"
             className="md:hidden border-slate-300 hover:bg-slate-100"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav"
           >
             <Menu className="w-5 h-5 text-slate-600" />
           </Button>
         </div>
-        
+
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-6 py-6 border-t border-slate-200">
+          <div id="mobile-nav" className="md:hidden mt-6 py-6 border-t border-slate-200">
             <nav className="flex flex-col space-y-2">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.href} 
+                <Link
+                  key={link.href}
                   href={link.href}
                   className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                    pathname === link.href 
-                      ? "text-slate-800 bg-amber-50" 
+                    pathname === link.href
+                      ? "text-slate-800 bg-amber-50"
                       : "text-slate-600 hover:text-slate-800 hover:bg-slate-100"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
@@ -194,31 +210,44 @@ export const Header = () => {
                   {link.label}
                 </Link>
               ))}
-              
+
+              <div className="pt-4">
+                <LanguageToggle />
+              </div>
+
               <div className="pt-4 space-y-2">
                 {user ? (
                   <>
-                    <Link href="/admin" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
-                      Administrator
-                    </Link>
+                    {profile?.is_admin && (
+                      <Link href="/admin" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                        {t("header.administrator")}
+                      </Link>
+                    )}
+                    {profile?.role === "supplier" && (
+                      <Link href="/supplier" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                        {t("header.supplier")}
+                      </Link>
+                    )}
                     <Link href="/dashboard" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
-                      Dashboard
+                      {t("header.dashboard")}
                     </Link>
-                    <Link href="/partner" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
-                      Partner
-                    </Link>
+                    {profile?.role === "partner" && (
+                      <Link href="/partner" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                        {t("header.partner")}
+                      </Link>
+                    )}
                     <button
                       onClick={handleLogout}
                       disabled={isPending}
                       className="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50"
                     >
-                      Logout
+                      {t("header.logout")}
                     </button>
                   </>
                 ) : (
                   <Link href="/auth" className="block">
                     <Button className="w-full bg-slate-800 hover:bg-slate-700 text-white">
-                      Login
+                      {t("header.login")}
                     </Button>
                   </Link>
                 )}
@@ -230,11 +259,3 @@ export const Header = () => {
     </header>
   );
 };
-
-// export async function getStaticProps({ locale }) {
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale, ['common'])),
-//     },
-//   };
-// }

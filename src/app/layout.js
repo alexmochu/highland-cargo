@@ -1,40 +1,38 @@
-import localFont from "next/font/local";
 import "./globals.css";
+import Script from "next/script";
 import { CSPostHogProvider } from './provider'
-
-import Head from 'next/head';
-// import { ThemeProvider } from '@/components/theme-provider'
-// import { QueryProvider } from '@/components/query-provider'
-// import { AuthProvider } from '@/lib/hooks/useAuth'
 import { AuthProvider } from "@/components/auth-provider";
+import { LocaleProvider } from "@/i18n/LocaleProvider";
 import { Header } from "@/components/Header";
 import { Toaster } from '@/components/ui/toaster'
 import { getURL } from '@/utils/helpers';
 
-// const geistSans = localFont({
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+const title = 'Highland Cargo Africa: Global Logistic Solutions';
+const description = 'Moving Anything Anywhere, Fast';
+const ogImageUrl = getURL('/highland-cargo.png');
 
 export const metadata = {
   metadataBase: new URL(getURL()),
-  title: 'Highland Cargo Africa: Global Logistic Solutions',
-  description: 'Moving Anything Anywhere, Fast',
+  title,
+  description,
   openGraph: {
-    title: 'Highland Cargo Africa: Global Logistic Solutions',
-    description: 'Moving Anything Anywhere, Fast',
+    title,
+    description,
+    url: getURL(),
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/highland-cargo.png`,
-        width: 1200, // Update dimensions as appropriate
+        url: ogImageUrl,
+        width: 1200,
         height: 630,
         alt: 'Highland Cargo Africa: Moving Anything Anywhere, Fast',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: [ogImageUrl],
   },
   icons: {
     icon: "/favicon.png",
@@ -44,35 +42,24 @@ export const metadata = {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Highland Cargo Africa: Global Logistic Solutions",
-  "description": "Moving Anything Anywhere, Fast",
+  "name": title,
+  "description": description,
   "url": "https://www.highlandcargoafrica.com",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta property="og:description" content={metadata.openGraph.description} />
-        <meta property="og:image" content={metadata.openGraph.images[0].url} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metadata.openGraph.title} />
-        <meta name="twitter:description" content={metadata.openGraph.description} />
-        <meta name="twitter:image" content={metadata.openGraph.images[0].url} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-      </Head>
       <CSPostHogProvider>
-      <body
-        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
-          {/* <QueryProvider> */}
+        <body>
+          <Script src="https://js.paystack.co/v2/inline.js" strategy="afterInteractive" />
+          {/* JSON-LD doesn't need to live in <head> — Next.js renders script
+              tags like this wherever they appear in the tree. */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          />
+          <LocaleProvider>
             <AuthProvider>
               <Header/>
               <div className="flex min-h-screen flex-col">
@@ -80,9 +67,8 @@ export default function RootLayout({ children }) {
               </div>
               <Toaster />
             </AuthProvider>
-          {/* </QueryProvider> */}
-        {/* </ThemeProvider> */}
-      </body>
+          </LocaleProvider>
+        </body>
       </CSPostHogProvider>
     </html>
   );

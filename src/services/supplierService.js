@@ -1,5 +1,6 @@
 // services/supplierService.js
 import { createClient } from "@/lib/supabase/client";
+import { toast } from "sonner";
 const supabase = createClient();
 
 // Shipments for a supplier
@@ -55,7 +56,7 @@ export async function deleteProductById(id) {
 export async function fetchSupplierTeam(supplierId) {
   const { data, error } = await supabase
     .from("supplier_team_members")
-    .select(`*, profiles(full_name, email, id as profile_id)`)
+    .select(`*, profiles(full_name, email, profile_id:id)`)
     .eq("supplier_id", supplierId)
     .order("created_at", { ascending: false });
   if (error) throw error;
@@ -85,13 +86,29 @@ export async function updateTeamMemberPermissions(id, updates) {
 
 // Messages
 export async function fetchMessagesForSupplier(supplierId) {
-  const { data, error } = await supabase
+  const { data: messages, error } = await supabase
     .from("messages")
-    .select(`*, products(name), shipments(tracking_number, id), profiles:auth_users!left(id, email)`) // not a real join — keep minimal
+    .select(`*, products(name), shipments(tracking_number, id)`)
     .eq("supplier_id", supplierId)
     .order("created_at", { ascending: false });
   if (error) throw error;
-  return data || [];
+  if (!messages || messages.length === 0) return [];
+
+  // messages.sender_id references auth.users, not profiles directly, so
+  // there's no FK PostgREST can embed on — fetch sender profiles separately
+  // and merge them in.
+  const senderIds = [...new Set(messages.map(m => m.sender_id).filter(Boolean))];
+  let profilesById = {};
+  if (senderIds.length > 0) {
+    const { data: senderProfiles, error: profilesError } = await supabase
+      .from("profiles")
+      .select("user_id, full_name, email")
+      .in("user_id", senderIds);
+    if (profilesError) throw profilesError;
+    profilesById = Object.fromEntries((senderProfiles || []).map(p => [p.user_id, p]));
+  }
+
+  return messages.map(m => ({ ...m, sender: profilesById[m.sender_id] || null }));
 }
 
 export async function postMessageForSupplier(payload) {

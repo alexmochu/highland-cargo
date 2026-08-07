@@ -1,5 +1,5 @@
 // hooks/usePartners.js
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import * as svc from "@/services/adminService";
 import { toast } from "sonner";
 
@@ -10,7 +10,7 @@ export default function usePartners({ pageSize = 10 } = {}) {
   const [loading, setLoading] = useState(false);
   const [editing, setEditing] = useState(null);
 
-  const load = async (p = page) => {
+  const load = useCallback(async (p = page) => {
     setLoading(true);
     try {
       const { data, count } = await svc.fetchPartners({ page: p, pageSize });
@@ -21,9 +21,9 @@ export default function usePartners({ pageSize = 10 } = {}) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, pageSize]);
 
-  useEffect(() => { load(); }, [page]);
+  useEffect(() => { load(); }, [load]);
 
   const addOrUpdate = async (vals) => {
     // optimistic UI: if adding, push to top with temporary id

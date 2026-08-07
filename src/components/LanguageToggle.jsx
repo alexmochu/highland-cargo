@@ -1,53 +1,41 @@
-"use client"
-// import { useRouter } from 'next/navigation';
-import { Button } from "@/components/ui/button";
-// import { usePathname } from 'next/navigation';
-// import { useParams } from 'next/navigation';
-// import { useTranslation } from 'next-i18next';
+"use client";
 
-const LANGS = [
-  { code: "en", label: "EN" },
-  { code: "zh", label: "中文" },
-  { code: "ar", label: "العربية" }
-];
+import { Button } from "@/components/ui/button";
+import { Languages } from "lucide-react";
+import { useTranslation } from "@/i18n/LocaleProvider";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function LanguageToggle() {
-  // const router = useRouter();
-  // const pathname = usePathname();
-  // const { locale } = useParams();
-  // const { t } = useTranslation()
-
-  // const changeLanguage = (lng) => {
-  //   if (pathname.startsWith(`/${locale}`)) {
-  //     const newPath = pathname.replace(`/${locale}`, `/${lng}`);
-  //     router.push(newPath);
-  //   } else {
-  //     router.push(`/${lng}${pathname}`);
-  //   }
-  // };
+  const { locale, setLocale, t, locales } = useTranslation();
 
   return (
-    <div className="flex gap-2">
-      {LANGS.map((l, index) => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
         <Button
-          key={l.code}
-          variant={index === 0 ? "default" : "outline"}
+          variant="outline"
           size="sm"
-          className={index === 0 ? "bg-slate-800 hover:bg-slate-700 text-white" : "border-slate-300 hover:border-slate-400 hover:bg-slate-100"}
-          // onClick={() => changeLanguage(l.code)}
+          className="border-slate-300 hover:border-slate-400 hover:bg-slate-100 gap-2"
         >
-          {l.label}
+          <Languages className="h-4 w-4" />
+          {t(`languages.${locale}`)}
         </Button>
-      ))}
-      {/* <select
-        className="p-2 border rounded"
-        value={locale}
-        onChange={(e) => changeLanguage(e.target.value)}
-      >
-        <option value="en">{t('english')}</option>
-        <option value="zh">{t('chinese')}</option>
-        <option value="ar">{t('arabic')}</option>
-      </select> */}
-    </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="bg-white border-slate-200 shadow-xl">
+        {locales.map((code) => (
+          <DropdownMenuItem
+            key={code}
+            onClick={() => setLocale(code)}
+            className={`cursor-pointer ${code === locale ? "font-semibold text-slate-900" : ""}`}
+          >
+            {t(`languages.${code}`)}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

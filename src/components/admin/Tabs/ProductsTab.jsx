@@ -6,7 +6,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import useProducts from "@/hooks/admin/useProductsPaginated";
 import ProductModal from "@/components/admin/Modals/ProductModal";
-import Pagination from "@/components/admin/Pagination";
+import Pagination from "@/components/ui/pagination";
 import Image from 'next/image';
 
 export default function ProductsTab() {

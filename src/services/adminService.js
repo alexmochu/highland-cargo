@@ -209,6 +209,46 @@ export async function deleteShipment(id) {
   if (error) throw error;
 }
 
+/* -------------------- Warehouses -------------------- */
+export async function fetchWarehouses({ page = 1, pageSize = 10 } = {}) {
+  const { data, error, count } = await paginatedSelect({ table: "warehouses", page, pageSize, select: "*", orderBy: "name", ascending: true });
+  if (error) throw error;
+  return { data: data || [], count: count || 0 };
+}
+export async function saveWarehouse(warehouse, id) {
+  if (id) {
+    const { error } = await supabase.from("warehouses").update(warehouse).eq("id", id);
+    if (error) throw error;
+    return;
+  }
+  const { error } = await supabase.from("warehouses").insert([warehouse]);
+  if (error) throw error;
+}
+export async function deleteWarehouse(id) {
+  const { error } = await supabase.from("warehouses").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/* -------------------- Roles -------------------- */
+export async function fetchRoles() {
+  const { data, error } = await supabase.from("roles").select("*").order("created_at", { ascending: true });
+  if (error) throw error;
+  return data || [];
+}
+export async function saveRole(role, id) {
+  if (id) {
+    const { error } = await supabase.from("roles").update(role).eq("id", id);
+    if (error) throw error;
+    return;
+  }
+  const { error } = await supabase.from("roles").insert([role]);
+  if (error) throw error;
+}
+export async function deleteRole(id) {
+  const { error } = await supabase.from("roles").delete().eq("id", id);
+  if (error) throw error;
+}
+
 /* -------------------- Analytics -------------------- */
 export async function fetchAnalytics() {
   const profilesCountPromise = supabase.from("profiles").select("*", { count: "exact", head: true });

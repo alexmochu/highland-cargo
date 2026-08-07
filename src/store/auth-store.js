@@ -2,30 +2,6 @@ import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import { createClient } from "@/lib/supabase/client"
 
-// const UserProfile = {
-//   id: string,
-//   user_id: string,
-//   full_name: string,
-//   email: string,
-//   profile_image_url: string,
-//   user_type: string,
-// }
-
-// const AuthState = {
-//   user: any | null,
-//   profile: UserProfile,
-//   loading: boolean,
-//   error: string | null,
-//   initialized: boolean,
-//   setUser: (user),
-//   setProfile: (profile),
-//   setLoading: (loading),
-//   setError: (error),
-//   setInitialized: (initialized),
-//   logout: (null),
-//   clearStore: (null),
-// }
-
 export const useAuthStore = create()(
   persist(
     (set, get) => ({

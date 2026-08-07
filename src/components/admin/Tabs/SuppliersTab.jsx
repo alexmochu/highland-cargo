@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import useSuppliers from "@/hooks/admin/useSuppliers";
 import SupplierModal from "@/components/admin/Modals/SupplierModal";
-import Pagination from "@/components/admin/Pagination";
+import Pagination from "@/components/ui/pagination";
 
 export default function SuppliersTab() {
   const { suppliers, total, page, setPage, verifySupplier, pageSize, loading, editing, setEditing, addOrUpdate, remove } = useSuppliers({ pageSize: 10 });
@@ -16,7 +16,7 @@ export default function SuppliersTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Suppliers</CardTitle>
-          {/* <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Supplier</Button> */}
+          <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Supplier</Button>
         </CardHeader>
 
         <CardContent>
@@ -27,23 +27,17 @@ export default function SuppliersTab() {
             <th>Actions</th>
             </tr></thead>
             <tbody>
-            {loading && (
-              <tr>
-                <td colSpan={5}>Loading…</td>
-              </tr>
-            )}
+              {loading && <tr><td colSpan={6}>Loading…</td></tr>}
               {!loading && suppliers.map(s => (
                 <tr key={s.id} className="border-t">
                   <td>{s.name}</td>
                   <td>{s.location || "-"}</td>
                   <td>{s.contact_email || "-"}</td>
-                  {/* <td className="flex gap-2">
-                    <Button size="sm" variant="outline" onClick={() => { setEditing(s); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
-                    <Button size="sm" variant="destructive" onClick={() => remove(s.id)}><Trash2 className="w-4 h-4" /></Button>
-                  </td> */}
                   <td className="capitalize">{s.onboarding_status}</td>
                   <td>{s.onboarding_step}</td>
                   <td className="flex gap-2">
+                    <Button size="sm" variant="outline" onClick={() => { setEditing(s); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
+                    <Button size="sm" variant="destructive" onClick={() => remove(s.id)}><Trash2 className="w-4 h-4" /></Button>
                     {s.onboarding_status === "pending_verification" && (
                       <>
                         <Button
@@ -62,10 +56,9 @@ export default function SuppliersTab() {
                         </Button>
                       </>
                     )}
-                  </td>            
+                  </td>
                 </tr>
               ))}
-              {loading && <tr><td colSpan={4}>Loading…</td></tr>}
             </tbody>
           </table>
 

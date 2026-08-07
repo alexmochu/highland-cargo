@@ -1,11 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2, Eye, ChevronLeft } from "lucide-react";
 import useCategories from "@/hooks/admin/useCategoriesPaginated";
 import CategoryModal from "@/components/admin/Modals/CategoryModal";
-import Pagination from "@/components/admin/Pagination";
+import Pagination from "@/components/ui/pagination";
 import { fetchProducts } from "@/services/adminService";
 import { createClient } from "@/lib/supabase/client";
 
@@ -16,7 +16,7 @@ export default function CategoriesTab() {
   const [categoryProducts, setCategoryProducts] = useState([]);
   const [productsLoading, setProductsLoading] = useState(false);
   const [categoryProductCounts, setCategoryProductCounts] = useState({});
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
   useEffect(() => {
     const fetchProductCounts = async () => {
@@ -32,7 +32,7 @@ export default function CategoriesTab() {
       }
     };
     fetchProductCounts();
-  }, [categories]);
+  }, [categories, supabase]);
 
   const viewProducts = async (category) => {
     setViewingCategory(category);
@@ -56,7 +56,7 @@ export default function CategoriesTab() {
               <Button variant="outline" onClick={() => setViewingCategory(null)}>
                 <ChevronLeft className="w-4 h-4 mr-2" /> Back
               </Button>
-              <CardTitle>Products in "{viewingCategory.name}"</CardTitle>
+              <CardTitle>Products in &quot;{viewingCategory.name}&quot;</CardTitle>
             </div>
           </CardHeader>
           <CardContent>

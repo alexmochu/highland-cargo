@@ -29,7 +29,7 @@ export default function SupplierOnboardingPage() {
       if (profileData?.supplier_id) {
         const { data: supplierData } = await supabase
           .from("suppliers")
-          .select("id, onboarding_step, supplier_status")
+          .select("id, onboarding_step, onboarding_status")
           .eq("id", profileData.supplier_id)
           .single();
         setSupplier(supplierData);
@@ -52,7 +52,7 @@ export default function SupplierOnboardingPage() {
     </div>
   );
 
-  if (supplier?.supplier_status === "verified") {
+  if (supplier?.onboarding_status === "verified") {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center p-10 bg-white rounded-3xl shadow-xl">
