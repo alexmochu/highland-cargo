@@ -11,15 +11,16 @@ function AuthErrorContent() {
   const message = searchParams.get("message") || "Something went wrong while signing you in."
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 p-8">
-      <div className="text-center max-w-md bg-white p-10 rounded-3xl shadow-xl">
-        <div className="mx-auto mb-6 w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center">
+    <div className="flex min-h-screen items-center justify-center bg-paper-dim p-8">
+      <div className="text-center max-w-md bg-surface border border-line p-10 relative overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-[3px] bg-red-500" />
+        <div className="mx-auto mb-6 w-14 h-14 flex items-center justify-center border border-red-200 bg-red-50">
           <AlertTriangle className="w-7 h-7 text-red-600" />
         </div>
-        <h2 className="text-2xl font-semibold mb-2 text-slate-800">Sign-in failed</h2>
-        <p className="text-slate-600 mb-8">{message}</p>
-        <Button asChild className="bg-slate-800 hover:bg-slate-700 text-white">
-          <Link href="/auth">Try Again</Link>
+        <h2 className="font-display font-extrabold text-2xl mb-2">Sign-in failed</h2>
+        <p className="text-text-2 mb-8">{message}</p>
+        <Button asChild className="bg-ink hover:bg-ink/90 text-paper rounded-none">
+          <Link href="/auth">Try again</Link>
         </Button>
       </div>
     </div>

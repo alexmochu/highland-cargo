@@ -19,18 +19,18 @@ export default function LanguageToggle() {
         <Button
           variant="outline"
           size="sm"
-          className="border-slate-300 hover:border-slate-400 hover:bg-slate-100 gap-2"
+          className="border-line-strong hover:border-line-strong hover:bg-paper-dim gap-2"
         >
           <Languages className="h-4 w-4" />
           {t(`languages.${locale}`)}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-white border-slate-200 shadow-xl">
+      <DropdownMenuContent align="end" className="bg-white border-line shadow-xl">
         {locales.map((code) => (
           <DropdownMenuItem
             key={code}
             onClick={() => setLocale(code)}
-            className={`cursor-pointer ${code === locale ? "font-semibold text-slate-900" : ""}`}
+            className={`cursor-pointer ${code === locale ? "font-semibold text-ink" : ""}`}
           >
             {t(`languages.${code}`)}
           </DropdownMenuItem>

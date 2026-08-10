@@ -10,39 +10,35 @@ const testimonials = [
     title: "Procurement Specialist, Nairobi",
     review: "Highland Cargo made international shipping smooth and fast. The team is responsive and trustworthy!",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/women/65.jpg",
   },
   {
     name: "David Musoke",
     title: "Retail Business Owner, Kampala",
     review: "Superb local delivery and tracking. I always get my goods on time.",
     rating: 4,
-    image: "https://randomuser.me/api/portraits/men/43.jpg",
   },
   {
     name: "Elizabeth Chen",
     title: "Ecommerce Operations, Shanghai",
     review: "Professional, efficient, and reliable in warehousing and customs help.",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
   }
 ];
 
 export const TestimonialCarousel = () => (
-  <section className="py-24 bg-slate-50">
+  <section className="py-24 lg:py-32 bg-surface border-t border-line">
     <div className="container mx-auto px-4">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-12"
+        className="text-center mb-14"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 rounded-full mb-6">
-          <div className="w-2 h-2 bg-slate-600 rounded-full" />
-          <span className="text-sm font-semibold text-slate-700">Testimonials</span>
+        <div className="font-manifest text-[12px] text-freight-soft tracking-wide mb-4">
+          TESTIMONIALS
         </div>
-        <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">What Our Clients Say</h2>
+        <h2 className="font-display font-extrabold text-4xl md:text-5xl text-balance">What our clients say</h2>
       </motion.div>
       <Carousel opts={{ loop: true, align: "center" }} className="max-w-3xl mx-auto">
         <CarouselContent>
@@ -52,32 +48,30 @@ export const TestimonialCarousel = () => (
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mx-auto w-full max-w-2xl space-y-6 border border-slate-200"
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="bg-paper-dim p-8 md:p-12 mx-auto w-full max-w-2xl space-y-6 border border-line"
               >
-                <div className="bg-amber-100 w-12 h-12 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
-                  <Quote className="w-6 h-6 text-amber-600" />
+                <Quote className="w-8 h-8 text-beacon" strokeWidth={1.5} />
+                <p className="italic text-lg text-ink leading-relaxed">&quot;{t.review}&quot;</p>
+                <div className="flex gap-1">
+                  {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-4 h-4 text-freight fill-freight" />)}
+                  {[...Array(5 - t.rating)].map((_, i) => <Star key={i} className="w-4 h-4 text-line-strong" />)}
                 </div>
-                <p className="italic text-lg text-slate-700 leading-relaxed">&quot;{t.review}&quot;</p>
-                <div className="flex gap-1 mb-2">
-                  {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-5 h-5 text-amber-500 fill-amber-500" />)}
-                  {[...Array(5 - t.rating)].map((_, i) => <Star key={i} className="w-5 h-5 text-slate-300" />)}
-                </div>
-                <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
-                  <div className="w-14 h-14 bg-slate-100 rounded-full flex items-center justify-center font-bold text-lg text-slate-800">
+                <div className="flex items-center gap-4 pt-5 border-t border-line">
+                  <div className="w-12 h-12 bg-ink text-paper flex items-center justify-center font-display font-bold text-sm flex-none">
                     {t.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
-                    <div className="font-semibold text-slate-800 text-lg">{t.name}</div>
-                    <div className="text-sm text-slate-500">{t.title}</div>
+                    <div className="font-semibold text-ink">{t.name}</div>
+                    <div className="text-sm text-text-3">{t.title}</div>
                   </div>
                 </div>
               </motion.div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="bg-white border-slate-300 hover:bg-slate-100" />
-        <CarouselNext className="bg-white border-slate-300 hover:bg-slate-100" />
+        <CarouselPrevious className="bg-surface border-line-strong hover:bg-paper-dim rounded-none" />
+        <CarouselNext className="bg-surface border-line-strong hover:bg-paper-dim rounded-none" />
       </Carousel>
     </div>
   </section>

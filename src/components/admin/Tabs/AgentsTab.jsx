@@ -16,7 +16,7 @@ export default function AgentsTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Agents</CardTitle>
-          <Button className="bg-slate-800 text-white" onClick={() => { setEditing(null); setOpen(true); }}>
+          <Button className="bg-ink text-white" onClick={() => { setEditing(null); setOpen(true); }}>
             <Plus className="w-4 h-4 mr-2" />Add Agent
           </Button>
         </CardHeader>

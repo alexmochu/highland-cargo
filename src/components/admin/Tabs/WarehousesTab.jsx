@@ -16,7 +16,7 @@ export default function WarehousesTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Warehouses</CardTitle>
-          <Button className="bg-slate-800 text-white" onClick={() => { setEditing(null); setOpen(true); }}>
+          <Button className="bg-ink text-white" onClick={() => { setEditing(null); setOpen(true); }}>
             <Plus className="w-4 h-4 mr-2" />Add Warehouse
           </Button>
         </CardHeader>
@@ -31,7 +31,7 @@ export default function WarehousesTab() {
                   <td className="py-2">{w.name}</td>
                   <td>{[w.city, w.country].filter(Boolean).join(", ")}</td>
                   <td className="capitalize">{w.type}</td>
-                  <td>{w.is_active ? <span className="text-emerald-600">Active</span> : <span className="text-slate-400">Inactive</span>}</td>
+                  <td>{w.is_active ? <span className="text-emerald-600">Active</span> : <span className="text-text-3">Inactive</span>}</td>
                   <td className="flex gap-2 py-2">
                     <Button size="sm" variant="outline" onClick={() => { setEditing(w); setOpen(true); }}><Pencil className="w-4 h-4" /></Button>
                     <Button size="sm" variant="destructive" onClick={() => remove(w.id)}><Trash2 className="w-4 h-4" /></Button>

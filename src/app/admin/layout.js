@@ -118,34 +118,37 @@ export default function AdminLayout({ children }) {
 
   if (authLoading || rolesLoading || !profile) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50">
-        <Loader2 className="w-10 h-10 text-slate-800 animate-spin mb-3" />
-        <p className="text-slate-500 font-medium">Loading admin console...</p>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-paper-dim">
+        <Loader2 className="w-10 h-10 text-ink animate-spin mb-3" />
+        <p className="text-text-3 font-medium">Loading admin console...</p>
       </div>
     );
   }
 
   if (!profile.is_admin && !ADMIN_AREA_ROLES.includes(profile.role)) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 p-4">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-paper-dim p-4">
         <ShieldAlert className="w-14 h-14 text-red-500 mb-4" />
-        <h1 className="text-2xl font-bold text-slate-800 mb-2">Access Denied</h1>
-        <p className="text-slate-500 text-center max-w-md">You don&apos;t have permission to access the admin console.</p>
+        <h1 className="text-2xl font-bold text-ink mb-2">Access Denied</h1>
+        <p className="text-text-3 text-center max-w-md">You don&apos;t have permission to access the admin console.</p>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
-      <aside className={`bg-white border-r border-slate-200 flex flex-col shrink-0 transition-all ${collapsed ? "w-20" : "w-64"}`}>
-        <div className={`h-16 flex items-center border-b border-slate-200 px-4 ${collapsed ? "justify-center" : "justify-between"}`}>
+    <div className="flex min-h-screen bg-paper-dim">
+      <aside className={`bg-surface border-r border-line flex flex-col shrink-0 transition-all ${collapsed ? "w-20" : "w-64"}`}>
+        <div className={`h-16 flex items-center border-b border-line px-4 gap-2.5 ${collapsed ? "justify-center" : "justify-between"}`}>
           {!collapsed && (
-            <div>
-              <p className="font-black text-slate-800 leading-none">Highland<span className="text-amber-500">Cargo</span></p>
-              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Admin</p>
+            <div className="flex items-center gap-2.5">
+              <div className="bg-ink text-paper w-8 h-8 flex items-center justify-center font-display font-extrabold text-sm shrink-0">HC</div>
+              <div>
+                <p className="font-display font-extrabold text-sm leading-none">HIGHLAND <span className="text-freight">CARGO</span></p>
+                <p className="text-[10px] text-text-3 font-manifest uppercase tracking-widest mt-1">Admin console</p>
+              </div>
             </div>
           )}
-          <button onClick={() => setCollapsed(c => !c)} className="text-slate-400 hover:text-slate-700">
+          <button onClick={() => setCollapsed(c => !c)} className="text-text-3 hover:text-text-2">
             {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
           </button>
         </div>
@@ -163,8 +166,8 @@ export default function AdminLayout({ children }) {
                 <div key={item.name}>
                   <button
                     onClick={() => setOpenGroups(prev => ({ ...prev, [item.name]: !isOpen }))}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
-                      isGroupActive ? "bg-amber-50 text-slate-800" : "text-slate-500 hover:bg-slate-100"
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-semibold transition-colors border-l-2 ${
+                      isGroupActive ? "bg-beacon/10 text-ink border-beacon" : "text-text-3 hover:bg-paper-dim border-transparent"
                     }`}
                   >
                     <Icon className="w-5 h-5 shrink-0" />
@@ -178,7 +181,7 @@ export default function AdminLayout({ children }) {
                           key={sub.href}
                           href={sub.href}
                           className={`block px-3 py-2 rounded-lg text-sm font-medium ${
-                            pathname.startsWith(sub.href) ? "text-amber-600" : "text-slate-500 hover:text-slate-800"
+                            pathname.startsWith(sub.href) ? "text-freight" : "text-text-3 hover:text-ink"
                           }`}
                         >
                           {sub.name}
@@ -194,8 +197,8 @@ export default function AdminLayout({ children }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
-                  isActive ? "bg-amber-50 text-slate-800" : "text-slate-500 hover:bg-slate-100"
+                className={`flex items-center gap-3 px-3 py-2.5 text-sm font-semibold transition-colors border-l-2 ${
+                  isActive ? "bg-beacon/10 text-ink border-beacon" : "text-text-3 hover:bg-paper-dim border-transparent"
                 }`}
                 title={collapsed ? item.name : undefined}
               >
@@ -206,7 +209,7 @@ export default function AdminLayout({ children }) {
           })}
         </nav>
 
-        <div className="p-3 border-t border-slate-200">
+        <div className="p-3 border-t border-line">
           <button
             onClick={() => { logout(); router.push("/"); }}
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50"
@@ -218,13 +221,13 @@ export default function AdminLayout({ children }) {
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 shrink-0">
-          <div className="text-sm font-semibold text-slate-400 capitalize">
-            {pathname.split("/").filter(Boolean).join(" / ")}
+        <header className="h-16 bg-surface border-b border-line flex items-center justify-between px-6 shrink-0">
+          <div className="font-manifest text-[12px] text-text-3 tracking-wide">
+            {pathname.split("/").filter(Boolean).join(" / ").toUpperCase()}
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold text-slate-600">{profile.full_name || profile.email}</span>
-            <span className="text-xs font-bold uppercase tracking-wide bg-slate-800 text-white px-2.5 py-1 rounded-full">
+            <span className="text-sm font-semibold text-text-2">{profile.full_name || profile.email}</span>
+            <span className="text-[11px] font-semibold uppercase tracking-wide bg-ink text-paper px-2.5 py-1">
               {profile.role || (profile.is_admin ? "admin" : "")}
             </span>
           </div>

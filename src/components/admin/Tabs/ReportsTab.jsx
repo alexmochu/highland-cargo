@@ -13,34 +13,34 @@ function money(amount, currency = "KES") {
 export default function ReportsTab() {
   const { sales, purchases, expenses, profitLoss, loading } = useReports();
 
-  if (loading) return <div className="text-center py-12 text-slate-400">Loading reports…</div>;
+  if (loading) return <div className="text-center py-12 text-text-3">Loading reports…</div>;
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>
-          <CardHeader><CardTitle className="text-sm text-slate-500">Revenue Collected</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-sm text-text-3">Revenue Collected</CardTitle></CardHeader>
           <CardContent className="flex items-center gap-3">
             <TrendingUp className="w-6 h-6 text-emerald-600" />
             <span className="text-2xl font-bold">{money(sales?.revenue, sales?.currency)}</span>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader><CardTitle className="text-sm text-slate-500">Purchase Spend</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-sm text-text-3">Purchase Spend</CardTitle></CardHeader>
           <CardContent className="flex items-center gap-3">
             <ShoppingBag className="w-6 h-6 text-blue-600" />
             <span className="text-2xl font-bold">{money(purchases?.totalSpend, purchases?.currency)}</span>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader><CardTitle className="text-sm text-slate-500">Expenses</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-sm text-text-3">Expenses</CardTitle></CardHeader>
           <CardContent className="flex items-center gap-3">
-            <Wallet className="w-6 h-6 text-amber-600" />
+            <Wallet className="w-6 h-6 text-freight" />
             <span className="text-2xl font-bold">{money(expenses?.total, expenses?.currency)}</span>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader><CardTitle className="text-sm text-slate-500">Net Profit</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-sm text-text-3">Net Profit</CardTitle></CardHeader>
           <CardContent className="flex items-center gap-3">
             <DollarSign className={`w-6 h-6 ${profitLoss?.netProfit >= 0 ? "text-emerald-600" : "text-red-600"}`} />
             <span className={`text-2xl font-bold ${profitLoss?.netProfit >= 0 ? "" : "text-red-600"}`}>{money(profitLoss?.netProfit, profitLoss?.currency)}</span>
@@ -91,7 +91,7 @@ export default function ReportsTab() {
                   </tr>
                 ))}
                 {(!expenses?.byCategory || expenses.byCategory.length === 0) && (
-                  <tr><td colSpan={2} className="text-slate-400 py-4">No expenses recorded yet.</td></tr>
+                  <tr><td colSpan={2} className="text-text-3 py-4">No expenses recorded yet.</td></tr>
                 )}
               </tbody>
             </table>

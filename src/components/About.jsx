@@ -9,81 +9,76 @@ import { useTranslation } from "@/i18n/LocaleProvider";
 export const About = () => {
   const { t } = useTranslation();
   const stats = [
-    { icon: Globe, value: "5+", label: t("about.statsCountries"), color: { bg: "bg-blue-50", text: "text-blue-600" } },
-    { icon: Users, value: "1K+", label: t("about.statsClients"), color: { bg: "bg-emerald-50", text: "text-emerald-600" } },
-    { icon: Award, value: "15+", label: t("about.statsExperience"), color: { bg: "bg-amber-50", text: "text-amber-600" } },
+    { icon: Globe, value: "05", label: t("about.statsCountries") },
+    { icon: Users, value: "1K+", label: t("about.statsClients") },
+    { icon: Award, value: "15+", label: t("about.statsExperience") },
   ];
 
   return (
-    <section id="about" className="py-24 bg-white overflow-hidden">
+    <section id="about" className="py-24 lg:py-32 bg-surface overflow-hidden border-t border-line">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-16 items-center mb-20">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-7 mt-10 lg:mt-0"
+            transition={{ duration: 0.7 }}
+            className="space-y-6 mt-10 lg:mt-0"
           >
-            <div className="flex items-center gap-3">
-              <div className="bg-slate-200 w-4 h-4 rounded-full" />
-              <span className="uppercase text-sm font-semibold tracking-wider text-slate-600">{t("about.badge")}</span>
+            <div className="font-manifest text-[12px] text-freight-soft tracking-wide">
+              {t("about.badge").toUpperCase()}
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4 leading-tight">
+            <h2 className="font-display font-extrabold text-4xl md:text-5xl leading-[0.98] text-balance max-w-lg">
               {t("about.title")}
             </h2>
-            <p className="text-lg text-slate-700 leading-relaxed">
-              {t("about.p1Prefix")}<span className="font-bold text-amber-500">{t("about.p1Highlight")}</span>{t("about.p1Suffix")}
+            <p className="text-lg text-text-2 leading-relaxed">
+              {t("about.p1Prefix")}<span className="font-semibold text-freight">{t("about.p1Highlight")}</span>{t("about.p1Suffix")}
             </p>
-            <p className="text-lg text-slate-600 leading-relaxed">
-              {t("about.p2Prefix")}<span className="font-bold text-slate-800">{t("about.p2Highlight")}</span>{t("about.p2Suffix")}
+            <p className="text-lg text-text-2 leading-relaxed">
+              {t("about.p2Prefix")}<span className="font-semibold text-ink">{t("about.p2Highlight")}</span>{t("about.p2Suffix")}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button className="bg-slate-800 hover:bg-slate-700 text-white shadow-lg">
+            <div className="pt-2">
+              <Button className="bg-ink hover:bg-ink/90 text-paper rounded-none px-7 py-6">
                 {t("about.learnMoreButton")}
               </Button>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-full group"
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="relative w-full"
           >
-            <div className="relative">
-              <Image
-                src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1974&auto=format&fit=crop"
-                alt="Our Team discussing logistics"
-                width={800}
-                height={500}
-                className="rounded-3xl shadow-2xl w-full h-[500px] object-cover"
-              />
-              <div className="absolute -bottom-8 -left-8 bg-slate-800 text-white p-8 rounded-3xl shadow-xl max-w-xs group-hover:scale-105 transition-transform duration-300">
-                <p className="font-bold text-2xl mb-2">{t("about.imageCaptionTitle")}</p>
-                <p className="text-slate-300">{t("about.imageCaptionText")}</p>
-              </div>
+            <Image
+              src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1974&auto=format&fit=crop"
+              alt="Our team coordinating a shipment"
+              width={800}
+              height={500}
+              className="w-full h-[460px] object-cover grayscale-[15%]"
+            />
+            <div className="absolute -bottom-6 -left-6 bg-ink text-paper p-6 max-w-[240px] border border-ink">
+              <p className="font-display font-extrabold text-2xl mb-1">{t("about.imageCaptionTitle")}</p>
+              <p className="text-paper/70 text-sm leading-relaxed">{t("about.imageCaptionText")}</p>
             </div>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 border border-line divide-y md:divide-y-0 md:divide-x divide-line">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -4 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="p-10 flex items-center gap-6"
             >
-              <div className="bg-slate-50 rounded-3xl p-10 text-center shadow-sm border border-slate-100 hover:shadow-md transition-all">
-                <div className={`${stat.color.bg} w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner`}>
-                  <stat.icon className={`w-10 h-10 ${stat.color.text}`} />
-                </div>
-                <div className="text-5xl font-bold text-slate-800 mb-2">{stat.value}</div>
-                <div className="text-lg text-slate-600 font-medium">{stat.label}</div>
+              <stat.icon className="w-8 h-8 text-freight flex-none" strokeWidth={1.5} />
+              <div>
+                <div className="font-display font-extrabold text-4xl leading-none text-ink">{stat.value}</div>
+                <div className="text-sm text-text-2 mt-1.5">{stat.label}</div>
               </div>
             </motion.div>
           ))}

@@ -65,11 +65,11 @@ export default function CategoriesTab() {
             ) : categoryProducts.length > 0 ? (
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {categoryProducts.map(product => (
-                  <Card key={product.id} className="border-slate-200">
+                  <Card key={product.id} className="border-line">
                     <CardHeader>
                       <CardTitle className="text-lg">{product.name}</CardTitle>
                     </CardHeader>
-                    <CardContent className="text-sm text-slate-600">
+                    <CardContent className="text-sm text-text-2">
                       <p>Price: ${product.price}</p>
                       <p>Region: {product.region}</p>
                     </CardContent>
@@ -85,7 +85,7 @@ export default function CategoriesTab() {
         <Card>
           <CardHeader className="flex items-center justify-between">
             <CardTitle>Product Categories</CardTitle>
-            <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Category</Button>
+            <Button className="bg-ink text-paper" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Category</Button>
           </CardHeader>
 
           <CardContent>

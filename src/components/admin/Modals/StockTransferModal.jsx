@@ -72,11 +72,11 @@ export default function StockTransferModal({ isOpen, onClose, onSave, transfer, 
             )} />
           </div>
           {errors.to_warehouse_id && <p className="text-red-500 text-sm">{errors.to_warehouse_id.message}</p>}
-          <p className="text-xs text-slate-400">Setting status to "completed" posts stock-out at source and stock-in at destination.</p>
+          <p className="text-xs text-text-3">Setting status to "completed" posts stock-out at source and stock-in at destination.</p>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-slate-600">Items</p>
+              <p className="text-sm font-semibold text-text-2">Items</p>
               <Button type="button" size="sm" variant="outline" onClick={() => append({ product_id: "", quantity: "1" })}>
                 <Plus className="w-4 h-4 mr-1" />Add Item
               </Button>

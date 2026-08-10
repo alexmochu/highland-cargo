@@ -14,7 +14,7 @@ export default function PartnerDashboardPage() {
   const partnerId = profile?.id || null;
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8">
+    <div className="min-h-screen bg-paper-dim py-8">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -22,18 +22,18 @@ export default function PartnerDashboardPage() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-4 mb-8"
         >
-          <div className="bg-slate-800 p-3 rounded-2xl">
-            <LayoutDashboard className="w-8 h-8 text-amber-500" />
+          <div className="bg-ink p-3 rounded-2xl">
+            <LayoutDashboard className="w-8 h-8 text-beacon" />
           </div>
-          <h2 className="text-4xl font-bold text-slate-800">Partner Dashboard</h2>
+          <h2 className="text-4xl font-bold text-ink">Partner Dashboard</h2>
         </motion.div>
 
         <Tabs defaultValue="overview">
-          <TabsList className="mb-6 flex flex-wrap gap-3 bg-slate-100 p-2 rounded-xl">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Overview</TabsTrigger>
-            <TabsTrigger value="shipments" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">My Shipments</TabsTrigger>
-            <TabsTrigger value="messages" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Messages</TabsTrigger>
-            <TabsTrigger value="profile" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Profile</TabsTrigger>
+          <TabsList className="mb-6 flex flex-wrap gap-3 bg-surface-raised border border-line p-2 rounded-xl">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-ink data-[state=active]:text-paper rounded-lg">Overview</TabsTrigger>
+            <TabsTrigger value="shipments" className="data-[state=active]:bg-ink data-[state=active]:text-paper rounded-lg">My Shipments</TabsTrigger>
+            <TabsTrigger value="messages" className="data-[state=active]:bg-ink data-[state=active]:text-paper rounded-lg">Messages</TabsTrigger>
+            <TabsTrigger value="profile" className="data-[state=active]:bg-ink data-[state=active]:text-paper rounded-lg">Profile</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview"><OverviewTab partnerId={partnerId} /></TabsContent>

@@ -8,7 +8,7 @@ import PaymentModal from "@/components/admin/Modals/PaymentModal";
 import Pagination from "@/components/ui/pagination";
 
 const STATUS_COLORS = {
-  pending: "bg-slate-100 text-slate-600",
+  pending: "bg-paper-dim text-text-2",
   success: "bg-emerald-100 text-emerald-700",
   failed: "bg-red-100 text-red-700",
 };
@@ -22,7 +22,7 @@ export default function PaymentsTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Payments</CardTitle>
-          <Button className="bg-slate-800 text-white" onClick={() => setOpen(true)}>
+          <Button className="bg-ink text-white" onClick={() => setOpen(true)}>
             <Plus className="w-4 h-4 mr-2" />Record Payment
           </Button>
         </CardHeader>

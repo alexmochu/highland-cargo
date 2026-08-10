@@ -18,20 +18,20 @@ export default function ChooseRolePage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-8">
+    <div className="min-h-screen flex items-center justify-center bg-paper-dim p-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Card className="border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="border-line shadow-lg hover:shadow-xl transition-all duration-300">
             <CardHeader>
-              <CardTitle className="text-2xl text-slate-800">{t("chooseRole.supplierTitle")}</CardTitle>
+              <CardTitle className="text-2xl text-ink">{t("chooseRole.supplierTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="mb-6 text-slate-600">{t("chooseRole.supplierDesc")}</p>
-              <Button className="w-full bg-slate-800 hover:bg-slate-700 text-white h-12 text-lg" onClick={() => chooseRole("supplier")}>
+              <p className="mb-6 text-text-2">{t("chooseRole.supplierDesc")}</p>
+              <Button className="w-full bg-ink hover:bg-ink/90 text-paper h-12 text-lg" onClick={() => chooseRole("supplier")}>
                 {t("chooseRole.supplierButton")}
               </Button>
             </CardContent>
@@ -43,13 +43,13 @@ export default function ChooseRolePage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Card className="border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="border-line shadow-lg hover:shadow-xl transition-all duration-300">
             <CardHeader>
-              <CardTitle className="text-2xl text-slate-800">{t("chooseRole.partnerTitle")}</CardTitle>
+              <CardTitle className="text-2xl text-ink">{t("chooseRole.partnerTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="mb-6 text-slate-600">{t("chooseRole.partnerDesc")}</p>
-              <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white h-12 text-lg" onClick={() => chooseRole("partner")}>
+              <p className="mb-6 text-text-2">{t("chooseRole.partnerDesc")}</p>
+              <Button className="w-full bg-beacon hover:bg-beacon/90 text-ink font-semibold h-12 text-lg" onClick={() => chooseRole("partner")}>
                 {t("chooseRole.partnerButton")}
               </Button>
             </CardContent>

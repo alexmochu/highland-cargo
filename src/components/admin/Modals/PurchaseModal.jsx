@@ -76,11 +76,11 @@ export default function PurchaseModal({ isOpen, onClose, onSave, purchase, suppl
             )} />
           </div>
           {(errors.supplier_id || errors.warehouse_id) && <p className="text-red-500 text-sm">Supplier and warehouse are required.</p>}
-          <p className="text-xs text-slate-400">Setting status to "received" posts stock-in movements for the warehouse above.</p>
+          <p className="text-xs text-text-3">Setting status to "received" posts stock-in movements for the warehouse above.</p>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-slate-600">Line Items</p>
+              <p className="text-sm font-semibold text-text-2">Line Items</p>
               <Button type="button" size="sm" variant="outline" onClick={() => append({ product_id: null, description: "", quantity: "1", unit_cost: "" })}>
                 <Plus className="w-4 h-4 mr-1" />Add Item
               </Button>

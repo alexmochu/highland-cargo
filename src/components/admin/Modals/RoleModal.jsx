@@ -51,10 +51,10 @@ export default function RoleModal({ isOpen, onClose, onSave, role }) {
           <Input placeholder="Description" {...register("description")} />
 
           <div className="space-y-3">
-            <p className="text-sm font-semibold text-slate-600">Permissions</p>
+            <p className="text-sm font-semibold text-text-2">Permissions</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {PERMISSION_MODULES.map(mod => (
-                <div key={mod.id} className="border border-slate-200 rounded-lg p-3 space-y-2">
+                <div key={mod.id} className="border border-line rounded-lg p-3 space-y-2">
                   <p className="text-sm font-medium">{mod.label}</p>
                   <div className="flex flex-wrap gap-2">
                     {mod.actions.map(action => {
@@ -65,7 +65,7 @@ export default function RoleModal({ isOpen, onClose, onSave, role }) {
                           key={action}
                           onClick={() => toggle(mod.id, action)}
                           className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition-colors ${
-                            active ? "bg-slate-800 text-white border-slate-800" : "bg-white text-slate-500 border-slate-200 hover:border-slate-400"
+                            active ? "bg-ink text-paper border-ink" : "bg-white text-text-3 border-line hover:border-line-strong"
                           }`}
                         >
                           {action}

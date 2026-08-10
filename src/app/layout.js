@@ -1,11 +1,30 @@
 import "./globals.css";
 import Script from "next/script";
+import localFont from "next/font/local";
 import { CSPostHogProvider } from './provider'
 import { AuthProvider } from "@/components/auth-provider";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
 import { Header } from "@/components/Header";
+import RevealObserver from "@/components/RevealObserver";
 import { Toaster } from '@/components/ui/toaster'
 import { getURL } from '@/utils/helpers';
+
+// Self-hosted (next/font/local) rather than next/font/google -- fetching
+// from Google Fonts at build time is a network dependency that breaks the
+// build in sandboxed/restricted environments; local files have none. Both
+// are variable fonts, so a single file covers the whole weight range.
+const bigShoulders = localFont({
+  src: "./fonts/big-shoulders-display.woff2",
+  weight: "600 800",
+  variable: "--font-display",
+  display: "swap",
+});
+const plexSans = localFont({
+  src: "./fonts/ibm-plex-sans.woff2",
+  weight: "400 700",
+  variable: "--font-body",
+  display: "swap",
+});
 
 const title = 'Highland Cargo Africa: Global Logistic Solutions';
 const description = 'Moving Anything Anywhere, Fast';
@@ -49,7 +68,7 @@ const structuredData = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${bigShoulders.variable} ${plexSans.variable}`}>
       <CSPostHogProvider>
         <body>
           <Script src="https://js.paystack.co/v2/inline.js" strategy="afterInteractive" />
@@ -59,6 +78,7 @@ export default function RootLayout({ children }) {
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
           />
+          <RevealObserver />
           <LocaleProvider>
             <AuthProvider>
               <Header/>

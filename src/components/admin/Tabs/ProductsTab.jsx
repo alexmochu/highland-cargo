@@ -30,7 +30,7 @@ export default function ProductsTab() {
               </SelectContent>
             </Select>
 
-            <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2"/>Add Product</Button>
+            <Button className="bg-ink text-paper" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2"/>Add Product</Button>
           </div>
         </CardHeader>
 

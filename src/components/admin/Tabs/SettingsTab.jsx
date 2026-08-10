@@ -15,7 +15,7 @@ export default function SettingsTab() {
   useEffect(() => { if (business) setBusinessForm(business); }, [business]);
   useEffect(() => { if (invoice) setInvoiceForm(invoice); }, [invoice]);
 
-  if (loading || !businessForm || !invoiceForm) return <div className="text-center py-12 text-slate-400">Loading settings…</div>;
+  if (loading || !businessForm || !invoiceForm) return <div className="text-center py-12 text-text-3">Loading settings…</div>;
 
   return (
     <div className="space-y-6">
@@ -29,7 +29,7 @@ export default function SettingsTab() {
             <Input placeholder="Email" value={businessForm.email || ""} onChange={e => setBusinessForm({ ...businessForm, email: e.target.value })} />
           </div>
           <Input placeholder="Currency (e.g. KES)" value={businessForm.currency || ""} onChange={e => setBusinessForm({ ...businessForm, currency: e.target.value })} />
-          <Button className="bg-slate-800 text-white" onClick={() => saveBusiness(businessForm)}>Save Business Settings</Button>
+          <Button className="bg-ink text-white" onClick={() => saveBusiness(businessForm)}>Save Business Settings</Button>
         </CardContent>
       </Card>
 
@@ -41,7 +41,7 @@ export default function SettingsTab() {
             <Input placeholder="Default due days" value={invoiceForm.due_days_default ?? ""} onChange={e => setInvoiceForm({ ...invoiceForm, due_days_default: Number(e.target.value) || 0 })} />
           </div>
           <Input placeholder="Footer note (printed on invoices/receipts)" value={invoiceForm.footer_note || ""} onChange={e => setInvoiceForm({ ...invoiceForm, footer_note: e.target.value })} />
-          <Button className="bg-slate-800 text-white" onClick={() => saveInvoice(invoiceForm)}>Save Invoice Settings</Button>
+          <Button className="bg-ink text-white" onClick={() => saveInvoice(invoiceForm)}>Save Invoice Settings</Button>
         </CardContent>
       </Card>
 
@@ -58,7 +58,7 @@ export default function SettingsTab() {
                   <td><Button size="sm" variant="destructive" onClick={() => removeTaxRate(t.id)}><Trash2 className="w-4 h-4" /></Button></td>
                 </tr>
               ))}
-              {taxRates.length === 0 && <tr><td colSpan={3} className="text-slate-400 py-4">No tax rates configured.</td></tr>}
+              {taxRates.length === 0 && <tr><td colSpan={3} className="text-text-3 py-4">No tax rates configured.</td></tr>}
             </tbody>
           </table>
           <div className="flex gap-2">

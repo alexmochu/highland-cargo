@@ -36,10 +36,10 @@ export default function ContactDetails({ supplierId, onNext }) {
     <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 space-y-4">
       {error && <p className="text-red-500 text-sm">{error}</p>}
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Contact Email</label>
+        <label className="block text-sm font-medium text-text-2 mb-1">Contact Email</label>
         <input
           type="email"
-          className="border border-slate-300 rounded-lg p-2 w-full"
+          className="border border-line-strong rounded-lg p-2 w-full"
           placeholder="you@company.com"
           value={form.contact_email}
           onChange={e => setForm({ ...form, contact_email: e.target.value })}
@@ -47,10 +47,10 @@ export default function ContactDetails({ supplierId, onNext }) {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+        <label className="block text-sm font-medium text-text-2 mb-1">Phone Number</label>
         <input
           type="tel"
-          className="border border-slate-300 rounded-lg p-2 w-full"
+          className="border border-line-strong rounded-lg p-2 w-full"
           placeholder="+254 7XX XXX XXX"
           value={form.phone}
           onChange={e => setForm({ ...form, phone: e.target.value })}
@@ -60,7 +60,7 @@ export default function ContactDetails({ supplierId, onNext }) {
       <button
         type="submit"
         disabled={saving}
-        className="bg-blue-600 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+        className="bg-ink text-paper px-4 py-2 rounded-lg disabled:opacity-50"
       >
         {saving ? "Saving..." : "Save & Continue →"}
       </button>

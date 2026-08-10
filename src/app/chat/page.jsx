@@ -21,7 +21,7 @@ function ChatComingSoon() {
     >
       <a
         href="tel:+254707126666"
-        className="text-slate-700 font-semibold underline underline-offset-4 hover:text-amber-600"
+        className="text-text-2 font-semibold underline underline-offset-4 hover:text-freight"
       >
         {t("comingSoon.chatCallCta")}
       </a>

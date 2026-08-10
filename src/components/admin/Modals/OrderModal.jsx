@@ -77,7 +77,7 @@ export default function OrderModal({ isOpen, onClose, onSave, order, customers }
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-slate-600">Line Items</p>
+              <p className="text-sm font-semibold text-text-2">Line Items</p>
               <Button type="button" size="sm" variant="outline" onClick={() => append({ description: "", quantity: "1", unit_price: "" })}>
                 <Plus className="w-4 h-4 mr-1" />Add Item
               </Button>

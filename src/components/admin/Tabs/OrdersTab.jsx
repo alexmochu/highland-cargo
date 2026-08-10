@@ -8,7 +8,7 @@ import OrderModal from "@/components/admin/Modals/OrderModal";
 import Pagination from "@/components/ui/pagination";
 
 const STATUS_COLORS = {
-  pending: "bg-slate-100 text-slate-600",
+  pending: "bg-paper-dim text-text-2",
   confirmed: "bg-blue-100 text-blue-700",
   processing: "bg-amber-100 text-amber-700",
   completed: "bg-emerald-100 text-emerald-700",
@@ -24,7 +24,7 @@ export default function OrdersTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Orders</CardTitle>
-          <Button className="bg-slate-800 text-white" onClick={() => { setEditing(null); setOpen(true); }}>
+          <Button className="bg-ink text-white" onClick={() => { setEditing(null); setOpen(true); }}>
             <Plus className="w-4 h-4 mr-2" />New Order
           </Button>
         </CardHeader>

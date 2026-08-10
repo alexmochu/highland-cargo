@@ -22,7 +22,7 @@ export default function POSPage() {
   const [closingAmount, setClosingAmount] = useState("");
 
   if (loading) {
-    return <div className="p-8 text-center text-slate-500">Loading register...</div>;
+    return <div className="p-8 text-center text-text-3">Loading register...</div>;
   }
 
   if (!register) {
@@ -41,10 +41,10 @@ export default function POSPage() {
             </Select>
             <Input placeholder="Register name" value={registerName} onChange={e => setRegisterName(e.target.value)} />
             <Input placeholder="Opening float (cash in drawer)" value={openingFloat} onChange={e => setOpeningFloat(e.target.value)} />
-            <Button className="w-full bg-slate-800 text-white" onClick={() => openRegister(registerName, openingFloat)} disabled={!warehouseId}>
+            <Button className="w-full bg-ink text-white" onClick={() => openRegister(registerName, openingFloat)} disabled={!warehouseId}>
               Open Register
             </Button>
-            <Link href="/admin" className="flex items-center justify-center gap-1 text-sm text-slate-400 hover:text-slate-600">
+            <Link href="/admin" className="flex items-center justify-center gap-1 text-sm text-text-3 hover:text-text-2">
               <ArrowLeft className="w-3 h-3" />Back to Admin
             </Link>
           </CardContent>
@@ -55,13 +55,13 @@ export default function POSPage() {
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="h-14 bg-slate-800 text-white flex items-center justify-between px-6 shrink-0">
+      <header className="h-14 bg-ink text-white flex items-center justify-between px-6 shrink-0">
         <div className="flex items-center gap-2 font-bold"><Terminal className="w-5 h-5" />POS -- {register.name}</div>
         <div className="flex items-center gap-4 text-sm">
           <span>{profile?.full_name || profile?.email}</span>
           <div className="flex items-center gap-2">
             <Input
-              className="h-8 w-28 text-slate-800"
+              className="h-8 w-28 text-ink"
               placeholder="Closing amt"
               value={closingAmount}
               onChange={e => setClosingAmount(e.target.value)}
@@ -79,24 +79,24 @@ export default function POSPage() {
               <button
                 key={p.id}
                 onClick={() => addToCart(p)}
-                className="bg-white border border-slate-200 rounded-xl p-4 text-left hover:border-slate-400 hover:shadow-sm transition-all"
+                className="bg-white border border-line rounded-xl p-4 text-left hover:border-line-strong hover:shadow-sm transition-all"
               >
-                <p className="font-semibold text-slate-800 text-sm line-clamp-2">{p.name}</p>
-                <p className="text-slate-500 text-sm mt-1">{Number(p.numeric_price ?? p.price ?? 0).toLocaleString()}</p>
+                <p className="font-semibold text-ink text-sm line-clamp-2">{p.name}</p>
+                <p className="text-text-3 text-sm mt-1">{Number(p.numeric_price ?? p.price ?? 0).toLocaleString()}</p>
               </button>
             ))}
-            {products.length === 0 && <p className="text-slate-400 col-span-full text-center py-8">No products found.</p>}
+            {products.length === 0 && <p className="text-text-3 col-span-full text-center py-8">No products found.</p>}
           </div>
         </div>
 
-        <div className="w-96 bg-white border-l border-slate-200 flex flex-col shrink-0">
-          <div className="p-4 border-b border-slate-200 font-bold text-slate-800">Cart</div>
+        <div className="w-96 bg-white border-l border-line flex flex-col shrink-0">
+          <div className="p-4 border-b border-line font-bold text-ink">Cart</div>
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             {cart.map(item => (
               <div key={item.id} className="flex items-center justify-between gap-2">
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-slate-800 truncate">{item.name}</p>
-                  <p className="text-xs text-slate-400">{item.unit_price.toLocaleString()} each</p>
+                  <p className="text-sm font-medium text-ink truncate">{item.name}</p>
+                  <p className="text-xs text-text-3">{item.unit_price.toLocaleString()} each</p>
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
                   <Button size="sm" variant="outline" className="h-7 w-7 p-0" onClick={() => updateQuantity(item.id, item.quantity - 1)}><Minus className="w-3 h-3" /></Button>
@@ -106,10 +106,10 @@ export default function POSPage() {
                 </div>
               </div>
             ))}
-            {cart.length === 0 && <p className="text-slate-400 text-sm text-center py-8">Cart is empty</p>}
+            {cart.length === 0 && <p className="text-text-3 text-sm text-center py-8">Cart is empty</p>}
           </div>
-          <div className="p-4 border-t border-slate-200 space-y-3">
-            <div className="flex justify-between font-bold text-lg text-slate-800">
+          <div className="p-4 border-t border-line space-y-3">
+            <div className="flex justify-between font-bold text-lg text-ink">
               <span>Total</span>
               <span>{total.toLocaleString()}</span>
             </div>

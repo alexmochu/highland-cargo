@@ -16,7 +16,7 @@ export default function ShipmentsTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Shipments</CardTitle>
-          <Button className="bg-blue-600 text-white" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Shipment</Button>
+          <Button className="bg-ink text-paper" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="w-4 h-4 mr-2" />Add Shipment</Button>
         </CardHeader>
 
         <CardContent>

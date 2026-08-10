@@ -23,7 +23,7 @@ function AuthPageContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-10 bg-gradient-to-tr from-slate-50 via-amber-50 to-slate-100">
+    <div className="min-h-screen flex items-center justify-center py-10 bg-paper-dim">
       <AuthForm />
     </div>
   );

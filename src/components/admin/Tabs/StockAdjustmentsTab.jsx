@@ -8,7 +8,7 @@ import StockAdjustmentModal from "@/components/admin/Modals/StockAdjustmentModal
 import Pagination from "@/components/ui/pagination";
 
 const STATUS_COLORS = {
-  pending: "bg-slate-100 text-slate-600",
+  pending: "bg-paper-dim text-text-2",
   approved: "bg-emerald-100 text-emerald-700",
 };
 
@@ -21,7 +21,7 @@ export default function StockAdjustmentsTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Stock Adjustments</CardTitle>
-          <Button className="bg-slate-800 text-white" onClick={() => { setEditing(null); setOpen(true); }}>
+          <Button className="bg-ink text-white" onClick={() => { setEditing(null); setOpen(true); }}>
             <Plus className="w-4 h-4 mr-2" />New Adjustment
           </Button>
         </CardHeader>

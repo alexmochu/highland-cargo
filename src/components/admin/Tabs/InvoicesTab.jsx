@@ -9,11 +9,11 @@ import InvoiceModal from "@/components/admin/Modals/InvoiceModal";
 import Pagination from "@/components/ui/pagination";
 
 const STATUS_COLORS = {
-  draft: "bg-slate-100 text-slate-600",
+  draft: "bg-paper-dim text-text-2",
   sent: "bg-blue-100 text-blue-700",
   paid: "bg-emerald-100 text-emerald-700",
   overdue: "bg-red-100 text-red-700",
-  cancelled: "bg-slate-200 text-slate-500",
+  cancelled: "bg-paper-dim text-text-3",
 };
 
 export default function InvoicesTab() {
@@ -43,7 +43,7 @@ export default function InvoicesTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Invoices</CardTitle>
-          <Button className="bg-slate-800 text-white" onClick={() => { setEditing(null); setOpen(true); }}>
+          <Button className="bg-ink text-white" onClick={() => { setEditing(null); setOpen(true); }}>
             <Plus className="w-4 h-4 mr-2" />New Invoice
           </Button>
         </CardHeader>

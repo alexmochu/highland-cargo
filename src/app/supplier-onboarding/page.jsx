@@ -41,23 +41,23 @@ export default function SupplierOnboardingPage() {
   }, [supabase, user]);
 
   if (loading) return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-      <p className="text-lg text-slate-600">Loading...</p>
+    <div className="min-h-screen bg-paper-dim flex items-center justify-center">
+      <p className="text-lg text-text-2">Loading...</p>
     </div>
   );
   
   if (!user) return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-      <p className="text-lg text-slate-600">Please login</p>
+    <div className="min-h-screen bg-paper-dim flex items-center justify-center">
+      <p className="text-lg text-text-2">Please login</p>
     </div>
   );
 
   if (supplier?.onboarding_status === "verified") {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-paper-dim flex items-center justify-center">
         <div className="text-center p-10 bg-white rounded-3xl shadow-xl">
-          <h1 className="text-4xl font-bold text-slate-800 mb-4">You’re already verified ✅</h1>
-          <p className="text-lg text-slate-600">Redirecting to dashboard...</p>
+          <h1 className="text-4xl font-bold text-ink mb-4">You’re already verified ✅</h1>
+          <p className="text-lg text-text-2">Redirecting to dashboard...</p>
         </div>
       </div>
     );

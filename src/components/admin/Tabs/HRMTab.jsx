@@ -23,7 +23,7 @@ function SimpleList({ title, items, fields, onAdd, onRemove, renderRow }) {
                 <td className="text-right"><Button size="sm" variant="destructive" onClick={() => onRemove(item.id)}><Trash2 className="w-3.5 h-3.5" /></Button></td>
               </tr>
             ))}
-            {items.length === 0 && <tr><td className="text-slate-400 py-3">None yet.</td></tr>}
+            {items.length === 0 && <tr><td className="text-text-3 py-3">None yet.</td></tr>}
           </tbody>
         </table>
         <div className="flex gap-2">
@@ -44,26 +44,26 @@ export default function HRMTab() {
   const [leaveForm, setLeaveForm] = useState({ employee_id: "", leave_type_id: "", start_date: "", end_date: "", reason: "" });
   const [payrollForm, setPayrollForm] = useState({ employee_id: "", period_month: "", basic_salary: "", deductions: "0" });
 
-  if (hrm.loading) return <div className="text-center py-12 text-slate-400">Loading HRM…</div>;
+  if (hrm.loading) return <div className="text-center py-12 text-text-3">Loading HRM…</div>;
 
   const todayStr = new Date().toISOString().slice(0, 10);
   const attendanceToday = (employeeId) => hrm.attendance.find(a => a.employee_id === employeeId && a.attendance_date === todayStr);
 
   return (
     <Tabs defaultValue="employees">
-      <TabsList className="mb-6 flex flex-wrap gap-3 bg-slate-100 p-2 rounded-xl">
-        <TabsTrigger value="employees" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Employees</TabsTrigger>
-        <TabsTrigger value="attendance" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Attendance</TabsTrigger>
-        <TabsTrigger value="leave" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Leave</TabsTrigger>
-        <TabsTrigger value="payroll" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Payroll</TabsTrigger>
-        <TabsTrigger value="setup" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg">Setup</TabsTrigger>
+      <TabsList className="mb-6 flex flex-wrap gap-3 bg-paper-dim p-2 rounded-xl">
+        <TabsTrigger value="employees" className="data-[state=active]:bg-ink data-[state=active]:text-paper rounded-lg">Employees</TabsTrigger>
+        <TabsTrigger value="attendance" className="data-[state=active]:bg-ink data-[state=active]:text-paper rounded-lg">Attendance</TabsTrigger>
+        <TabsTrigger value="leave" className="data-[state=active]:bg-ink data-[state=active]:text-paper rounded-lg">Leave</TabsTrigger>
+        <TabsTrigger value="payroll" className="data-[state=active]:bg-ink data-[state=active]:text-paper rounded-lg">Payroll</TabsTrigger>
+        <TabsTrigger value="setup" className="data-[state=active]:bg-ink data-[state=active]:text-paper rounded-lg">Setup</TabsTrigger>
       </TabsList>
 
       <TabsContent value="employees">
         <Card>
           <CardHeader className="flex items-center justify-between">
             <CardTitle>Employees</CardTitle>
-            <Button className="bg-slate-800 text-white" onClick={() => { setEditingEmployee(null); setEmployeeModalOpen(true); }}>
+            <Button className="bg-ink text-white" onClick={() => { setEditingEmployee(null); setEmployeeModalOpen(true); }}>
               <Plus className="w-4 h-4 mr-2" />Add Employee
             </Button>
           </CardHeader>
@@ -77,14 +77,14 @@ export default function HRMTab() {
                     <td>{e.hrm_departments?.name || "-"}</td>
                     <td>{e.hrm_designations?.name || "-"}</td>
                     <td className="capitalize">{e.employment_type.replace("_", " ")}</td>
-                    <td>{e.status === "active" ? <span className="text-emerald-600">Active</span> : <span className="text-slate-400">Inactive</span>}</td>
+                    <td>{e.status === "active" ? <span className="text-emerald-600">Active</span> : <span className="text-text-3">Inactive</span>}</td>
                     <td className="flex gap-2 py-2">
                       <Button size="sm" variant="outline" onClick={() => { setEditingEmployee(e); setEmployeeModalOpen(true); }}><Pencil className="w-4 h-4" /></Button>
                       <Button size="sm" variant="destructive" onClick={() => hrm.removeEmployee(e.id)}><Trash2 className="w-4 h-4" /></Button>
                     </td>
                   </tr>
                 ))}
-                {hrm.employeeList.length === 0 && <tr><td colSpan={6} className="text-slate-400 py-4">No employees yet.</td></tr>}
+                {hrm.employeeList.length === 0 && <tr><td colSpan={6} className="text-text-3 py-4">No employees yet.</td></tr>}
               </tbody>
             </table>
           </CardContent>
@@ -111,7 +111,7 @@ export default function HRMTab() {
                         ) : !rec.check_out ? (
                           <Button size="sm" variant="outline" onClick={() => hrm.doCheckOut(rec.id)}><LogOut className="w-3.5 h-3.5 mr-1" />Check Out</Button>
                         ) : (
-                          <span className="text-slate-400 text-xs">Complete</span>
+                          <span className="text-text-3 text-xs">Complete</span>
                         )}
                       </td>
                     </tr>
@@ -164,7 +164,7 @@ export default function HRMTab() {
                     </td>
                   </tr>
                 ))}
-                {hrm.leaveRequests.length === 0 && <tr><td colSpan={5} className="text-slate-400 py-4">No leave requests.</td></tr>}
+                {hrm.leaveRequests.length === 0 && <tr><td colSpan={5} className="text-text-3 py-4">No leave requests.</td></tr>}
               </tbody>
             </table>
           </CardContent>
@@ -214,7 +214,7 @@ export default function HRMTab() {
                     <td>{p.status === "pending" && <Button size="sm" className="bg-emerald-600 text-white" onClick={() => hrm.payPayroll(p.id)}>Mark Paid</Button>}</td>
                   </tr>
                 ))}
-                {hrm.payrollRows.length === 0 && <tr><td colSpan={5} className="text-slate-400 py-4">No payroll entries.</td></tr>}
+                {hrm.payrollRows.length === 0 && <tr><td colSpan={5} className="text-text-3 py-4">No payroll entries.</td></tr>}
               </tbody>
             </table>
           </CardContent>

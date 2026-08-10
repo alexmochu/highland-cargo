@@ -45,26 +45,25 @@ export function AuthForm() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-8 md:p-10 space-y-8"
+      className="w-full max-w-md bg-surface border border-line p-8 md:p-10 space-y-8 relative overflow-hidden"
     >
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-beacon" />
       <div className="flex justify-center items-center gap-3">
-        <div className="bg-gradient-to-br from-slate-800 to-slate-700 text-white p-3 rounded-2xl">
-          <div className="w-10 h-10 flex items-center justify-center font-bold text-xl tracking-tight">
-            HC
-          </div>
+        <div className="bg-ink text-paper w-11 h-11 flex items-center justify-center font-display font-extrabold text-lg">
+          HC
         </div>
-        <div className="flex flex-col">
-          <span className="text-2xl font-bold text-slate-800">Highland</span>
-          <span className="text-2xl font-bold text-amber-500">Cargo</span>
+        <div className="flex flex-col leading-none">
+          <span className="font-display font-extrabold text-xl">HIGHLAND</span>
+          <span className="font-display font-extrabold text-xl text-freight">CARGO</span>
         </div>
       </div>
 
       <form className="space-y-6" onSubmit={handleMagicLink}>
         <div>
-          <label className="block text-sm mb-2 font-semibold text-slate-700" htmlFor="otp-email">
+          <label className="block text-sm mb-2 font-semibold text-text-2" htmlFor="otp-email">
             {t("auth.emailLabel")}
           </label>
           <Input
@@ -75,11 +74,11 @@ export function AuthForm() {
             onChange={e => setEmail(e.target.value)}
             placeholder={t("auth.emailPlaceholder")}
             required
-            className="h-12 border-slate-300 focus:border-amber-500"
+            className="h-12 rounded-none border-line-strong focus-visible:border-freight focus-visible:ring-freight/20"
           />
         </div>
         {error && <div className="text-red-600 text-sm">{error}</div>}
-        <Button className="w-full mt-2 bg-slate-800 hover:bg-slate-700 text-white h-12 text-lg" type="submit" disabled={loading}>
+        <Button className="w-full mt-2 bg-ink hover:bg-ink/90 text-paper rounded-none h-12 text-base" type="submit" disabled={loading}>
           {loading ? t("auth.sending") : t("auth.sendMagicLink")}
         </Button>
       </form>

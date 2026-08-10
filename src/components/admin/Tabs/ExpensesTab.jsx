@@ -16,7 +16,7 @@ export default function ExpensesTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Expenses</CardTitle>
-          <Button className="bg-slate-800 text-white" onClick={() => { setEditing(null); setOpen(true); }}>
+          <Button className="bg-ink text-white" onClick={() => { setEditing(null); setOpen(true); }}>
             <Plus className="w-4 h-4 mr-2" />Record Expense
           </Button>
         </CardHeader>

@@ -20,7 +20,7 @@ export default function InventoryTab() {
               </tr>
             ))}
             {loading && <tr><td colSpan={3}>Loading…</td></tr>}
-            {!loading && levels.length === 0 && <tr><td colSpan={3} className="text-slate-400 py-4">No stock movements recorded yet.</td></tr>}
+            {!loading && levels.length === 0 && <tr><td colSpan={3} className="text-text-3 py-4">No stock movements recorded yet.</td></tr>}
           </tbody>
         </table>
       </CardContent>

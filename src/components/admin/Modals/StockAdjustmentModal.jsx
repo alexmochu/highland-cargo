@@ -66,11 +66,11 @@ export default function StockAdjustmentModal({ isOpen, onClose, onSave, adjustme
           </div>
           {errors.warehouse_id && <p className="text-red-500 text-sm">{errors.warehouse_id.message}</p>}
           <Input placeholder="Reason (e.g. damaged goods, stock count correction)" {...register("reason")} />
-          <p className="text-xs text-slate-400">Setting status to "approved" posts the quantity change to stock. Use negative numbers for losses.</p>
+          <p className="text-xs text-text-3">Setting status to "approved" posts the quantity change to stock. Use negative numbers for losses.</p>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-slate-600">Items</p>
+              <p className="text-sm font-semibold text-text-2">Items</p>
               <Button type="button" size="sm" variant="outline" onClick={() => append({ product_id: "", quantity_change: "" })}>
                 <Plus className="w-4 h-4 mr-1" />Add Item
               </Button>

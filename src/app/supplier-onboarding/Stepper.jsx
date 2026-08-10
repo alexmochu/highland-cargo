@@ -46,16 +46,16 @@ export default function Stepper({ userId, supplierId }) {
   const CurrentStep = steps[step]?.component;
 
   if (!CurrentStep) return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+    <div className="min-h-screen bg-paper-dim flex items-center justify-center">
       <div className="text-center p-10 bg-white rounded-3xl shadow-xl">
-        <h1 className="text-4xl font-bold text-slate-800 mb-4">All steps completed 🎉</h1>
-        <p className="text-lg text-slate-600">You&apos;re all set up! Check your dashboard for more details.</p>
+        <h1 className="text-4xl font-bold text-ink mb-4">All steps completed 🎉</h1>
+        <p className="text-lg text-text-2">You&apos;re all set up! Check your dashboard for more details.</p>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4">
+    <div className="min-h-screen bg-paper-dim py-12 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -63,11 +63,11 @@ export default function Stepper({ userId, supplierId }) {
           transition={{ duration: 0.6 }}
           className="mb-8 text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full mb-4">
-            <span className="text-sm font-semibold text-slate-700">Step {step + 1} of {steps.length}</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-paper-dim rounded-full mb-4">
+            <span className="text-sm font-semibold text-text-2">Step {step + 1} of {steps.length}</span>
           </div>
-          <h2 className="text-4xl font-bold text-slate-800 mb-2">{steps[step].title}</h2>
-          <p className="text-lg text-slate-600">Complete this step to continue your onboarding process.</p>
+          <h2 className="text-4xl font-bold text-ink mb-2">{steps[step].title}</h2>
+          <p className="text-lg text-text-2">Complete this step to continue your onboarding process.</p>
         </motion.div>
         
         <motion.div

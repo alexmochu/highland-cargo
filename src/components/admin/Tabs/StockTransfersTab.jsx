@@ -8,7 +8,7 @@ import StockTransferModal from "@/components/admin/Modals/StockTransferModal";
 import Pagination from "@/components/ui/pagination";
 
 const STATUS_COLORS = {
-  pending: "bg-slate-100 text-slate-600",
+  pending: "bg-paper-dim text-text-2",
   in_transit: "bg-amber-100 text-amber-700",
   completed: "bg-emerald-100 text-emerald-700",
   cancelled: "bg-red-100 text-red-700",
@@ -23,7 +23,7 @@ export default function StockTransfersTab() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Stock Transfers</CardTitle>
-          <Button className="bg-slate-800 text-white" onClick={() => { setEditing(null); setOpen(true); }}>
+          <Button className="bg-ink text-white" onClick={() => { setEditing(null); setOpen(true); }}>
             <Plus className="w-4 h-4 mr-2" />New Transfer
           </Button>
         </CardHeader>

@@ -51,22 +51,20 @@ export const Header = () => {
   ]
 
   return (
-    <header className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-200">
+    <header className="bg-paper/90 backdrop-blur-xl sticky top-0 z-50 border-b border-line">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="bg-gradient-to-br from-slate-800 to-slate-700 text-white p-2.5 rounded-xl shadow-lg shadow-slate-800/20 group-hover:shadow-slate-800/30 transition-all">
-              <div className="w-8 h-8 flex items-center justify-center font-bold text-lg tracking-tight">
-                HC
-              </div>
+            <div className="bg-ink text-paper w-11 h-11 flex items-center justify-center font-display font-extrabold text-lg tracking-tight">
+              HC
             </div>
             <div>
-              <h1 className="text-2xl font-bold">
-                <span className="text-slate-800">Highland</span>
-                <span className="text-amber-500">Cargo</span>
+              <h1 className="font-display font-extrabold text-xl leading-none tracking-tight">
+                <span className="text-ink">HIGHLAND </span>
+                <span className="text-freight">CARGO</span>
               </h1>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-[11px] text-text-3 font-manifest mt-1 tracking-wide">
                 {t("header.tagline")}
               </p>
             </div>
@@ -78,10 +76,10 @@ export const Header = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`px-4 py-2 text-sm font-medium transition-all ${
                   pathname === link.href
-                    ? "text-slate-800 bg-amber-50"
-                    : "text-slate-600 hover:text-slate-800 hover:bg-slate-100"
+                    ? "text-ink border-b border-freight"
+                    : "text-text-2 hover:text-ink"
                 }`}
               >
                 {link.label}
@@ -93,28 +91,28 @@ export const Header = () => {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-2 ml-2 hover:bg-slate-100">
-                    <Avatar className="h-9 w-9 border-2 border-slate-200">
+                  <Button variant="ghost" className="flex items-center gap-2 ml-2 hover:bg-paper-dim">
+                    <Avatar className="h-9 w-9 border-2 border-line">
                       <AvatarImage
                         src={profile.profile_image_url || "/placeholder.svg"}
                         alt={profile.full_name || "User"}
                       />
-                      <AvatarFallback className="bg-slate-100 text-slate-700 font-medium">
+                      <AvatarFallback className="bg-paper-dim text-text-2 font-medium">
                         {getInitials(profile?.full_name || "") || user.email[0].toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
-                    <ChevronDown className="h-4 w-4 text-slate-500" />
+                    <ChevronDown className="h-4 w-4 text-text-3" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-white border-slate-200 shadow-xl">
+                <DropdownMenuContent align="end" className="w-56 bg-surface border-line shadow-xl">
                   {profile?.is_admin && (
                     <>
                       <DropdownMenuItem asChild>
                         <Link
                           href="/admin"
-                          className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
+                          className="flex items-center p-3 rounded-md hover:bg-paper-dim cursor-pointer"
                         >
-                          <User className="mr-3 h-4 w-4 text-slate-500" />
+                          <User className="mr-3 h-4 w-4 text-text-3" />
                           {t("header.administrator")}
                         </Link>
                       </DropdownMenuItem>
@@ -126,9 +124,9 @@ export const Header = () => {
                       <DropdownMenuItem asChild>
                         <Link
                           href="/supplier"
-                          className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
+                          className="flex items-center p-3 rounded-md hover:bg-paper-dim cursor-pointer"
                         >
-                          <User className="mr-3 h-4 w-4 text-slate-500" />
+                          <User className="mr-3 h-4 w-4 text-text-3" />
                           {t("header.supplier")}
                         </Link>
                       </DropdownMenuItem>
@@ -138,9 +136,9 @@ export const Header = () => {
                   <DropdownMenuItem asChild>
                     <Link
                       href="/dashboard"
-                      className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
+                      className="flex items-center p-3 rounded-md hover:bg-paper-dim cursor-pointer"
                     >
-                      <User className="mr-3 h-4 w-4 text-slate-500" />
+                      <User className="mr-3 h-4 w-4 text-text-3" />
                       {t("header.dashboard")}
                     </Link>
                   </DropdownMenuItem>
@@ -150,9 +148,9 @@ export const Header = () => {
                       <DropdownMenuItem asChild>
                         <Link
                           href="/partner"
-                          className="flex items-center p-3 rounded-md hover:bg-slate-100 cursor-pointer"
+                          className="flex items-center p-3 rounded-md hover:bg-paper-dim cursor-pointer"
                         >
-                          <User className="mr-3 h-4 w-4 text-slate-500" />
+                          <User className="mr-3 h-4 w-4 text-text-3" />
                           {t("header.partner")}
                         </Link>
                       </DropdownMenuItem>
@@ -171,7 +169,7 @@ export const Header = () => {
               </DropdownMenu>
             ) : (
               <Link href="/auth">
-                <Button className="ml-2 bg-slate-800 hover:bg-slate-700 text-white">
+                <Button className="ml-2 bg-ink hover:bg-ink/90 text-paper rounded-none">
                   {t("header.login")}
                 </Button>
               </Link>
@@ -182,19 +180,19 @@ export const Header = () => {
           <Button
             variant="outline"
             size="sm"
-            className="md:hidden border-slate-300 hover:bg-slate-100"
+            className="md:hidden border-line-strong hover:bg-paper-dim"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav"
           >
-            <Menu className="w-5 h-5 text-slate-600" />
+            <Menu className="w-5 h-5 text-text-2" />
           </Button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div id="mobile-nav" className="md:hidden mt-6 py-6 border-t border-slate-200">
+          <div id="mobile-nav" className="md:hidden mt-6 py-6 border-t border-line">
             <nav className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <Link
@@ -202,8 +200,8 @@ export const Header = () => {
                   href={link.href}
                   className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                     pathname === link.href
-                      ? "text-slate-800 bg-amber-50"
-                      : "text-slate-600 hover:text-slate-800 hover:bg-slate-100"
+                      ? "text-ink bg-paper-dim"
+                      : "text-text-2 hover:text-ink hover:bg-paper-dim"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -219,20 +217,20 @@ export const Header = () => {
                 {user ? (
                   <>
                     {profile?.is_admin && (
-                      <Link href="/admin" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                      <Link href="/admin" className="block px-4 py-3 rounded-xl text-sm font-medium text-text-2 hover:text-ink hover:bg-paper-dim">
                         {t("header.administrator")}
                       </Link>
                     )}
                     {profile?.role === "supplier" && (
-                      <Link href="/supplier" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                      <Link href="/supplier" className="block px-4 py-3 rounded-xl text-sm font-medium text-text-2 hover:text-ink hover:bg-paper-dim">
                         {t("header.supplier")}
                       </Link>
                     )}
-                    <Link href="/dashboard" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                    <Link href="/dashboard" className="block px-4 py-3 rounded-xl text-sm font-medium text-text-2 hover:text-ink hover:bg-paper-dim">
                       {t("header.dashboard")}
                     </Link>
                     {profile?.role === "partner" && (
-                      <Link href="/partner" className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                      <Link href="/partner" className="block px-4 py-3 rounded-xl text-sm font-medium text-text-2 hover:text-ink hover:bg-paper-dim">
                         {t("header.partner")}
                       </Link>
                     )}
@@ -246,7 +244,7 @@ export const Header = () => {
                   </>
                 ) : (
                   <Link href="/auth" className="block">
-                    <Button className="w-full bg-slate-800 hover:bg-slate-700 text-white">
+                    <Button className="w-full bg-ink hover:bg-ink/90 text-paper rounded-none">
                       {t("header.login")}
                     </Button>
                   </Link>
