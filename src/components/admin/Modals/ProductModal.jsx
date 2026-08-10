@@ -160,7 +160,7 @@ export default function ProductModal({ isOpen, onClose, onSave, product, categor
           accept="image/*"
           onChange={handleFiles}
         />
-        <p className="text-sm text-gray-500">Upload up to 4 images</p>
+        <p className="text-sm text-text-3">Upload up to 4 images</p>
 
         {/* Previews */}
         {field.value?.length > 0 && (

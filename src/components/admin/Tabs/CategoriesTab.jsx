@@ -89,11 +89,11 @@ export default function CategoriesTab() {
           </CardHeader>
 
           <CardContent>
-            <table className="min-w-full text-sm">
-              <thead><tr className="text-left"><th>Name</th><th>Description</th><th>Products</th><th>Created</th><th>Actions</th></tr></thead>
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+              <thead><tr><th>Name</th><th>Description</th><th>Products</th><th>Created</th><th>Actions</th></tr></thead>
               <tbody>
                 {!loading && categories.map(c => (
-                  <tr key={c.id} className="border-t">
+                  <tr key={c.id}>
                     <td>{c.name}</td>
                     <td>{c.description || "-"}</td>
                     <td className="font-medium">{categoryProductCounts[c.id] || 0}</td>
@@ -107,7 +107,7 @@ export default function CategoriesTab() {
                 ))}
                 {loading && <tr><td colSpan={5}>Loading…</td></tr>}
               </tbody>
-            </table>
+            </table></div>
 
             <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
           </CardContent>

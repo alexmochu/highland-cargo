@@ -21,11 +21,11 @@ export default function ExpensesTab() {
           </Button>
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Date</th><th>Description</th><th>Category</th><th>Warehouse</th><th>Amount</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Warehouse</th><th>Amount</th><th>Actions</th></tr></thead>
             <tbody>
               {!loading && expenses.map(e => (
-                <tr key={e.id} className="border-t">
+                <tr key={e.id}>
                   <td className="py-2">{e.expense_date}</td>
                   <td>{e.description}</td>
                   <td>{e.expense_categories?.name || "Uncategorized"}</td>
@@ -39,7 +39,7 @@ export default function ExpensesTab() {
               ))}
               {loading && <tr><td colSpan={6}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>
       </Card>

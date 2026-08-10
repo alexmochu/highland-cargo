@@ -81,9 +81,9 @@ export default function ProductsTab({ supplierId }) {
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
               <thead>
-                <tr className="text-left">
+                <tr>
                   <th>Name</th>
                   <th>Category</th>
                   <th>Region</th>
@@ -93,7 +93,7 @@ export default function ProductsTab({ supplierId }) {
               </thead>
               <tbody>
                 {!loading && products.map(p => (
-                  <tr key={p.id} className="border-t">
+                  <tr key={p.id}>
                     <td>{p.name}</td>
                     <td>{p.product_categories?.name}</td>
                     <td className="uppercase">{p.region}</td>
@@ -110,7 +110,7 @@ export default function ProductsTab({ supplierId }) {
                 ))}
                 {loading && <tr><td colSpan={5}>Loading…</td></tr>}
               </tbody>
-            </table>
+            </table></div>
           </div>
         </CardContent>
       </Card>

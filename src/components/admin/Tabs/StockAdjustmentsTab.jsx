@@ -26,11 +26,11 @@ export default function StockAdjustmentsTab() {
           </Button>
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Adjustment #</th><th>Warehouse</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Adjustment #</th><th>Warehouse</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
               {!loading && adjustments.map(a => (
-                <tr key={a.id} className="border-t">
+                <tr key={a.id}>
                   <td className="py-2">{a.adjustment_number}</td>
                   <td>{a.warehouses?.name || "-"}</td>
                   <td>{a.reason || "-"}</td>
@@ -43,7 +43,7 @@ export default function StockAdjustmentsTab() {
               ))}
               {loading && <tr><td colSpan={5}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>
       </Card>

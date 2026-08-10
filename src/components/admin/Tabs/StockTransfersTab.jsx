@@ -28,11 +28,11 @@ export default function StockTransfersTab() {
           </Button>
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Transfer #</th><th>From</th><th>To</th><th>Status</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Transfer #</th><th>From</th><th>To</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
               {!loading && transfers.map(t => (
-                <tr key={t.id} className="border-t">
+                <tr key={t.id}>
                   <td className="py-2">{t.transfer_number}</td>
                   <td>{t.from?.name || "-"}</td>
                   <td>{t.to?.name || "-"}</td>
@@ -45,7 +45,7 @@ export default function StockTransfersTab() {
               ))}
               {loading && <tr><td colSpan={5}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>
       </Card>

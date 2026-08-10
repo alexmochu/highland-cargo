@@ -30,13 +30,13 @@ export default function QuotationsTab() {
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
               <thead>
-                <tr className="text-left"><th>Number</th><th>Customer</th><th>Route</th><th>Mode</th><th>Amount</th><th>Status</th><th>Actions</th></tr>
+                <tr><th>Number</th><th>Customer</th><th>Route</th><th>Mode</th><th>Amount</th><th>Status</th><th>Actions</th></tr>
               </thead>
               <tbody>
                 {!loading && quotations.map(q => (
-                  <tr key={q.id} className="border-t">
+                  <tr key={q.id}>
                     <td className="py-2">{q.quotation_number}</td>
                     <td>{q.customers?.name || "-"}</td>
                     <td>{[q.warehouses?.name, q.destination].filter(Boolean).join(" → ") || "-"}</td>
@@ -56,7 +56,7 @@ export default function QuotationsTab() {
                 ))}
                 {loading && <tr><td colSpan={7}>Loading…</td></tr>}
               </tbody>
-            </table>
+            </table></div>
           </div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>

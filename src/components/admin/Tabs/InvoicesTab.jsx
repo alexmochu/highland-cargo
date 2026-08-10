@@ -49,11 +49,11 @@ export default function InvoicesTab() {
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <thead><tr className="text-left"><th>Invoice #</th><th>Customer</th><th>Order</th><th>Amount</th><th>Paid</th><th>Status</th><th>Actions</th></tr></thead>
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+              <thead><tr><th>Invoice #</th><th>Customer</th><th>Order</th><th>Amount</th><th>Paid</th><th>Status</th><th>Actions</th></tr></thead>
               <tbody>
                 {!loading && invoices.map(inv => (
-                  <tr key={inv.id} className="border-t">
+                  <tr key={inv.id}>
                     <td className="py-2">{inv.invoice_number}</td>
                     <td>{inv.customers?.name || "-"}</td>
                     <td>{inv.orders?.order_number || "-"}</td>
@@ -73,7 +73,7 @@ export default function InvoicesTab() {
                 ))}
                 {loading && <tr><td colSpan={7}>Loading…</td></tr>}
               </tbody>
-            </table>
+            </table></div>
           </div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>

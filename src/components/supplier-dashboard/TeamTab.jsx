@@ -56,13 +56,13 @@ export default function TeamTab({ supplierId }) {
           {/* <Button onClick={() => setAdding(true)}><Plus className="w-4 h-4 mr-2"/>Add Member</Button> */}
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Email</th><th>Can manage products</th><th>Can manage team</th>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Email</th><th>Can manage products</th><th>Can manage team</th>
             {/* <th>Actions</th> */}
             </tr></thead>
             <tbody>
               {!loading && team.map(m => (
-                <tr key={m.id} className="border-t">
+                <tr key={m.id}>
                   <td>{m.profiles?.email || "-"}</td>
                   <td>{m.can_manage_products ? "Yes" : "No"}</td>
                   <td>{m.can_manage_team ? "Yes" : "No"}</td>
@@ -73,7 +73,7 @@ export default function TeamTab({ supplierId }) {
               ))}
               {loading && <tr><td colSpan={4}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
         </CardContent>
       </Card>
 

@@ -20,11 +20,11 @@ export default function DiscountsTab() {
           </Button>
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Code</th><th>Type</th><th>Value</th><th>Status</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Code</th><th>Type</th><th>Value</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
               {!loading && discounts.map(d => (
-                <tr key={d.id} className="border-t">
+                <tr key={d.id}>
                   <td className="py-2 font-mono">{d.code}</td>
                   <td className="capitalize">{d.type}</td>
                   <td>{d.type === "percentage" ? `${d.value}%` : d.value}</td>
@@ -37,7 +37,7 @@ export default function DiscountsTab() {
               ))}
               {loading && <tr><td colSpan={5}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
         </CardContent>
       </Card>
 

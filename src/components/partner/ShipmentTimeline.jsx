@@ -38,19 +38,23 @@ export default function ShipmentTimeline({ shipmentId }) {
   }, [shipmentId, supabase]);
 
   return (
-    <div className="border-l-2 border-gray-300 pl-4 space-y-4">
-      {events.map((event, idx) => (
-        <div key={idx} className="relative">
-          <div className="absolute -left-3 top-1 w-5 h-5 rounded-full bg-blue-500 border border-white"></div>
-          <div>
-            <p className="font-semibold">{event.status}</p>
-            {event.note && <p className="text-sm text-gray-600">{event.note}</p>}
-            <p className="text-xs text-gray-400">
-              {event.profiles?.full_name || "System"} • {timeAgo(new Date(event.created_at))} ago
-            </p>
+    <div className="border-l-2 border-line-strong pl-5 space-y-5">
+      {events.map((event, idx) => {
+        const isLatest = idx === events.length - 1;
+        return (
+          <div key={idx} className="relative">
+            <div className={`absolute -left-[26px] top-1 w-3 h-3 ${isLatest ? "bg-beacon" : "bg-surface border-2 border-line-strong"}`} />
+            <div>
+              <p className="text-sm font-semibold">{event.status}</p>
+              {event.note && <p className="text-sm text-text-2 mt-0.5">{event.note}</p>}
+              <p className="font-manifest text-xs text-text-3 mt-1">
+                {event.profiles?.full_name || "System"} · {timeAgo(new Date(event.created_at))} ago
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
+      {events.length === 0 && <p className="text-sm text-text-3">No status updates yet.</p>}
     </div>
   );
 }

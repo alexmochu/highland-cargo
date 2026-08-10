@@ -48,11 +48,11 @@ export default function SettingsTab() {
       <Card>
         <CardHeader><CardTitle>Tax Rates</CardTitle></CardHeader>
         <CardContent className="space-y-3">
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Name</th><th>Rate</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Name</th><th>Rate</th><th>Actions</th></tr></thead>
             <tbody>
               {taxRates.map(t => (
-                <tr key={t.id} className="border-t">
+                <tr key={t.id}>
                   <td className="py-2">{t.name}</td>
                   <td>{t.rate_percent}%</td>
                   <td><Button size="sm" variant="destructive" onClick={() => removeTaxRate(t.id)}><Trash2 className="w-4 h-4" /></Button></td>
@@ -60,7 +60,7 @@ export default function SettingsTab() {
               ))}
               {taxRates.length === 0 && <tr><td colSpan={3} className="text-text-3 py-4">No tax rates configured.</td></tr>}
             </tbody>
-          </table>
+          </table></div>
           <div className="flex gap-2">
             <Input placeholder="Name (e.g. VAT)" value={newTax.name} onChange={e => setNewTax({ ...newTax, name: e.target.value })} />
             <Input placeholder="Rate %" value={newTax.rate_percent} onChange={e => setNewTax({ ...newTax, rate_percent: e.target.value })} />

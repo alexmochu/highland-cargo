@@ -21,11 +21,11 @@ export default function DeliveryNotesTab() {
           </Button>
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Order</th><th>Delivered To</th><th>Delivered At</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Order</th><th>Delivered To</th><th>Delivered At</th><th>Actions</th></tr></thead>
             <tbody>
               {!loading && notes.map(n => (
-                <tr key={n.id} className="border-t">
+                <tr key={n.id}>
                   <td className="py-2">{n.orders?.order_number || "-"}</td>
                   <td>{n.delivered_to || "-"}</td>
                   <td>{n.delivered_at ? new Date(n.delivered_at).toLocaleString() : "-"}</td>
@@ -37,7 +37,7 @@ export default function DeliveryNotesTab() {
               ))}
               {loading && <tr><td colSpan={4}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>
       </Card>

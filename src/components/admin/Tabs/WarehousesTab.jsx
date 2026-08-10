@@ -21,13 +21,13 @@ export default function WarehousesTab() {
           </Button>
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
             <thead>
-              <tr className="text-left"><th>Name</th><th>Location</th><th>Type</th><th>Status</th><th>Actions</th></tr>
+              <tr><th>Name</th><th>Location</th><th>Type</th><th>Status</th><th>Actions</th></tr>
             </thead>
             <tbody>
               {!loading && warehouses.map(w => (
-                <tr key={w.id} className="border-t">
+                <tr key={w.id}>
                   <td className="py-2">{w.name}</td>
                   <td>{[w.city, w.country].filter(Boolean).join(", ")}</td>
                   <td className="capitalize">{w.type}</td>
@@ -40,7 +40,7 @@ export default function WarehousesTab() {
               ))}
               {loading && <tr><td colSpan={5}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
 
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>

@@ -30,11 +30,11 @@ export default function OrdersTab() {
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <thead><tr className="text-left"><th>Order #</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+              <thead><tr><th>Order #</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
               <tbody>
                 {!loading && orders.map(o => (
-                  <tr key={o.id} className="border-t">
+                  <tr key={o.id}>
                     <td className="py-2">{o.order_number}</td>
                     <td>{o.customers?.name || "-"}</td>
                     <td>{o.order_items?.length || 0}</td>
@@ -48,7 +48,7 @@ export default function OrdersTab() {
                 ))}
                 {loading && <tr><td colSpan={6}>Loading…</td></tr>}
               </tbody>
-            </table>
+            </table></div>
           </div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>

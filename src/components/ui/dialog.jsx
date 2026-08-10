@@ -11,19 +11,20 @@ import { cn } from "@/lib/utils"; // Adjust this if you don’t have a cn util
 export const Dialog = RadixDialog;
 
 export const DialogContent = ({ className, children, ...props }) => (
-  <RadixDialogContent className={cn("rounded-lg bg-white p-6 shadow-lg", className)} {...props}>
+  <RadixDialogContent className={cn("relative bg-surface border border-line p-6 shadow-lg overflow-hidden", className)} {...props}>
+    <div className="absolute inset-x-0 top-0 h-[3px] bg-beacon" />
     {children}
   </RadixDialogContent>
 );
 
 export const DialogHeader = ({ className, children }) => (
-  <div className={cn("mb-4 flex flex-col space-y-1.5 text-center", className)}>
+  <div className={cn("mb-5 flex flex-col space-y-1.5 text-left border-b border-line pb-4", className)}>
     {children}
   </div>
 );
 
 export const DialogTitle = ({ className, children }) => (
-  <RadixDialogTitle className={cn("text-lg font-semibold leading-none tracking-tight", className)}>
+  <RadixDialogTitle className={cn("font-display font-extrabold text-xl leading-none tracking-tight", className)}>
     {children}
   </RadixDialogTitle>
 );

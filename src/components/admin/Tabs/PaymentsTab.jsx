@@ -27,11 +27,11 @@ export default function PaymentsTab() {
           </Button>
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Invoice</th><th>Amount</th><th>Method</th><th>Status</th><th>Date</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Invoice</th><th>Amount</th><th>Method</th><th>Status</th><th>Date</th></tr></thead>
             <tbody>
               {!loading && payments.map(p => (
-                <tr key={p.id} className="border-t">
+                <tr key={p.id}>
                   <td className="py-2">{p.invoices?.invoice_number || "-"}</td>
                   <td>{p.currency} {Number(p.amount).toLocaleString()}</td>
                   <td className="capitalize">{p.method.replace("_", " ")}</td>
@@ -41,7 +41,7 @@ export default function PaymentsTab() {
               ))}
               {loading && <tr><td colSpan={5}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>
       </Card>

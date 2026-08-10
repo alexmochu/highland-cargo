@@ -20,8 +20,8 @@ export default function SuppliersTab() {
         </CardHeader>
 
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Name</th><th>Location</th><th>Contact</th>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Name</th><th>Location</th><th>Contact</th>
             <th>Status</th>
             <th>Onboarding Step</th>
             <th>Actions</th>
@@ -29,7 +29,7 @@ export default function SuppliersTab() {
             <tbody>
               {loading && <tr><td colSpan={6}>Loading…</td></tr>}
               {!loading && suppliers.map(s => (
-                <tr key={s.id} className="border-t">
+                <tr key={s.id}>
                   <td>{s.name}</td>
                   <td>{s.location || "-"}</td>
                   <td>{s.contact_email || "-"}</td>
@@ -60,7 +60,7 @@ export default function SuppliersTab() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
 
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>

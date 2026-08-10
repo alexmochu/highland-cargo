@@ -21,11 +21,11 @@ export default function CustomersTab() {
           </Button>
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Name</th><th>Email</th><th>Phone</th><th>Group</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Group</th><th>Actions</th></tr></thead>
             <tbody>
               {!loading && customers.map(c => (
-                <tr key={c.id} className="border-t">
+                <tr key={c.id}>
                   <td className="py-2">{c.name}</td>
                   <td>{c.email || "-"}</td>
                   <td>{c.phone || "-"}</td>
@@ -38,7 +38,7 @@ export default function CustomersTab() {
               ))}
               {loading && <tr><td colSpan={5}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>
       </Card>

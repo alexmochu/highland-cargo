@@ -15,17 +15,17 @@ function SimpleList({ title, items, fields, onAdd, onRemove, renderRow }) {
     <Card>
       <CardHeader><CardTitle className="text-base">{title}</CardTitle></CardHeader>
       <CardContent className="space-y-3">
-        <table className="min-w-full text-sm">
+        <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
           <tbody>
             {items.map(item => (
-              <tr key={item.id} className="border-t">
+              <tr key={item.id}>
                 <td className="py-2">{renderRow(item)}</td>
                 <td className="text-right"><Button size="sm" variant="destructive" onClick={() => onRemove(item.id)}><Trash2 className="w-3.5 h-3.5" /></Button></td>
               </tr>
             ))}
             {items.length === 0 && <tr><td className="text-text-3 py-3">None yet.</td></tr>}
           </tbody>
-        </table>
+        </table></div>
         <div className="flex gap-2">
           {fields.map(f => (
             <Input key={f.key} placeholder={f.placeholder} type={f.type || "text"} value={form[f.key] || ""} onChange={e => setForm({ ...form, [f.key]: e.target.value })} />
@@ -68,11 +68,11 @@ export default function HRMTab() {
             </Button>
           </CardHeader>
           <CardContent>
-            <table className="min-w-full text-sm">
-              <thead><tr className="text-left"><th>Name</th><th>Department</th><th>Designation</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead>
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+              <thead><tr><th>Name</th><th>Department</th><th>Designation</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead>
               <tbody>
                 {hrm.employeeList.map(e => (
-                  <tr key={e.id} className="border-t">
+                  <tr key={e.id}>
                     <td className="py-2">{e.full_name}</td>
                     <td>{e.hrm_departments?.name || "-"}</td>
                     <td>{e.hrm_designations?.name || "-"}</td>
@@ -86,7 +86,7 @@ export default function HRMTab() {
                 ))}
                 {hrm.employeeList.length === 0 && <tr><td colSpan={6} className="text-text-3 py-4">No employees yet.</td></tr>}
               </tbody>
-            </table>
+            </table></div>
           </CardContent>
         </Card>
       </TabsContent>
@@ -95,13 +95,13 @@ export default function HRMTab() {
         <Card>
           <CardHeader><CardTitle>Today's Attendance</CardTitle></CardHeader>
           <CardContent>
-            <table className="min-w-full text-sm">
-              <thead><tr className="text-left"><th>Employee</th><th>Check In</th><th>Check Out</th><th>Action</th></tr></thead>
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+              <thead><tr><th>Employee</th><th>Check In</th><th>Check Out</th><th>Action</th></tr></thead>
               <tbody>
                 {hrm.employeeList.filter(e => e.status === "active").map(e => {
                   const rec = attendanceToday(e.id);
                   return (
-                    <tr key={e.id} className="border-t">
+                    <tr key={e.id}>
                       <td className="py-2">{e.full_name}</td>
                       <td>{rec?.check_in ? new Date(rec.check_in).toLocaleTimeString() : "-"}</td>
                       <td>{rec?.check_out ? new Date(rec.check_out).toLocaleTimeString() : "-"}</td>
@@ -118,7 +118,7 @@ export default function HRMTab() {
                   );
                 })}
               </tbody>
-            </table>
+            </table></div>
           </CardContent>
         </Card>
       </TabsContent>
@@ -145,11 +145,11 @@ export default function HRMTab() {
                 <Plus className="w-4 h-4 mr-1" />Request
               </Button>
             </div>
-            <table className="min-w-full text-sm">
-              <thead><tr className="text-left"><th>Employee</th><th>Type</th><th>Dates</th><th>Status</th><th>Actions</th></tr></thead>
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+              <thead><tr><th>Employee</th><th>Type</th><th>Dates</th><th>Status</th><th>Actions</th></tr></thead>
               <tbody>
                 {hrm.leaveRequests.map(l => (
-                  <tr key={l.id} className="border-t">
+                  <tr key={l.id}>
                     <td className="py-2">{l.hrm_employees?.full_name || "-"}</td>
                     <td>{l.hrm_leave_types?.name || "-"}</td>
                     <td>{l.start_date} → {l.end_date}</td>
@@ -166,7 +166,7 @@ export default function HRMTab() {
                 ))}
                 {hrm.leaveRequests.length === 0 && <tr><td colSpan={5} className="text-text-3 py-4">No leave requests.</td></tr>}
               </tbody>
-            </table>
+            </table></div>
           </CardContent>
         </Card>
       </TabsContent>
@@ -202,11 +202,11 @@ export default function HRMTab() {
                 <Plus className="w-4 h-4 mr-1" />Add
               </Button>
             </div>
-            <table className="min-w-full text-sm">
-              <thead><tr className="text-left"><th>Employee</th><th>Period</th><th>Net Pay</th><th>Status</th><th>Actions</th></tr></thead>
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+              <thead><tr><th>Employee</th><th>Period</th><th>Net Pay</th><th>Status</th><th>Actions</th></tr></thead>
               <tbody>
                 {hrm.payrollRows.map(p => (
-                  <tr key={p.id} className="border-t">
+                  <tr key={p.id}>
                     <td className="py-2">{p.hrm_employees?.full_name || "-"}</td>
                     <td>{p.period_month?.slice(0, 7)}</td>
                     <td>{Number(p.net_pay).toLocaleString()}</td>
@@ -216,7 +216,7 @@ export default function HRMTab() {
                 ))}
                 {hrm.payrollRows.length === 0 && <tr><td colSpan={5} className="text-text-3 py-4">No payroll entries.</td></tr>}
               </tbody>
-            </table>
+            </table></div>
           </CardContent>
         </Card>
       </TabsContent>

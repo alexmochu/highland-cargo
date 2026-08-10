@@ -28,11 +28,11 @@ export default function PurchasesTab() {
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <thead><tr className="text-left"><th>PO #</th><th>Supplier</th><th>Warehouse</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+              <thead><tr><th>PO #</th><th>Supplier</th><th>Warehouse</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
               <tbody>
                 {!loading && purchases.map(p => (
-                  <tr key={p.id} className="border-t">
+                  <tr key={p.id}>
                     <td className="py-2">{p.purchase_number}</td>
                     <td>{p.suppliers?.name || "-"}</td>
                     <td>{p.warehouses?.name || "-"}</td>
@@ -46,7 +46,7 @@ export default function PurchasesTab() {
                 ))}
                 {loading && <tr><td colSpan={6}>Loading…</td></tr>}
               </tbody>
-            </table>
+            </table></div>
           </div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>

@@ -20,11 +20,11 @@ export default function ShipmentsTab() {
         </CardHeader>
 
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>ID</th><th>Product</th><th>Partner</th><th>Supplier</th><th>Source</th><th>Dest</th><th>Status</th><th>Updated</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>ID</th><th>Product</th><th>Partner</th><th>Supplier</th><th>Source</th><th>Dest</th><th>Status</th><th>Updated</th><th>Actions</th></tr></thead>
             <tbody>
               {!loading && shipments.map(s => (
-                <tr key={s.id} className="border-t">
+                <tr key={s.id}>
                   <td className="font-mono text-xs">{s.id?.slice(0,8)}</td>
                   <td>{s.products?.name || "-"}</td>
                   <td>{s.partners?.name || "-"}</td>
@@ -41,7 +41,7 @@ export default function ShipmentsTab() {
               ))}
               {loading && <tr><td colSpan={9}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
 
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>

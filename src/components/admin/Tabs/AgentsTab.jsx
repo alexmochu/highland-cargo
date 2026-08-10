@@ -21,11 +21,11 @@ export default function AgentsTab() {
           </Button>
         </CardHeader>
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Name</th><th>Type</th><th>Contact</th><th>Country</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Name</th><th>Type</th><th>Contact</th><th>Country</th><th>Actions</th></tr></thead>
             <tbody>
               {!loading && agents.map(a => (
-                <tr key={a.id} className="border-t">
+                <tr key={a.id}>
                   <td className="py-2">{a.name}</td>
                   <td className="capitalize">{a.type.replace("_", " ")}</td>
                   <td>{a.contact_email || a.phone || "-"}</td>
@@ -38,7 +38,7 @@ export default function AgentsTab() {
               ))}
               {loading && <tr><td colSpan={5}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>
       </Card>

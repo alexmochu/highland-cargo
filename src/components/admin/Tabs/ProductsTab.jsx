@@ -35,9 +35,9 @@ export default function ProductsTab() {
         </CardHeader>
 
         <CardContent>
-          <table className="min-w-full text-sm">
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
             <thead>
-              <tr className="text-left">
+              <tr>
                 <th>Image</th>
                 <th>Name</th><th>Category</th><th>Region</th><th>Price</th><th>Partner</th><th>Supplier</th>
             <th>Actions</th>
@@ -47,7 +47,7 @@ export default function ProductsTab() {
                 const hasImage = p.product_images && p.product_images.length > 0 && p.product_images[0].image_url;
                 const imageSrc = hasImage ? p.product_images[0].image_url : '/highland-cargo.png';
                 return (
-                  <tr key={p.id} className="border-t">
+                  <tr key={p.id}>
                     <td className="flex overflow-x-auto snap-x snap-mandatory h-16 w-16">
                       <Image 
                         key={p.id} 
@@ -73,7 +73,7 @@ export default function ProductsTab() {
               })}
               {loading && <tr><td colSpan={8}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
 
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>

@@ -20,11 +20,11 @@ export default function UsersTab() {
         </CardHeader>
 
         <CardContent>
-          <table className="min-w-full text-sm">
-            <thead><tr className="text-left"><th>Email</th><th>Name</th><th>Role</th><th>Partner</th><th>Supplier</th><th>Created</th><th>Actions</th></tr></thead>
+          <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
+            <thead><tr><th>Email</th><th>Name</th><th>Role</th><th>Partner</th><th>Supplier</th><th>Created</th><th>Actions</th></tr></thead>
             <tbody>
               {!loading && users.map(u => (
-                <tr key={u.id} className="border-t">
+                <tr key={u.id}>
                   <td>{u.email}</td>
                   <td>{u.full_name || "-"}</td>
                   <td className="capitalize">{u.role || "-"}</td>
@@ -39,7 +39,7 @@ export default function UsersTab() {
               ))}
               {loading && <tr><td colSpan={7}>Loading…</td></tr>}
             </tbody>
-          </table>
+          </table></div>
 
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
         </CardContent>

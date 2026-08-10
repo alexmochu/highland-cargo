@@ -17,13 +17,13 @@ export default function ShipmentsTab({ partnerId, partnerProfile }) {
         <CardHeader><CardTitle>Shipments</CardTitle></CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
+            <div className="border border-line overflow-x-auto"><table className="hc-table w-full">
               <thead>
-                <tr className="text-left"><th>ID</th><th>Product</th><th>Status</th><th>Created</th><th>Actions</th></tr>
+                <tr><th>ID</th><th>Product</th><th>Status</th><th>Created</th><th>Actions</th></tr>
               </thead>
               <tbody>
                 {!loading && shipments.map(s => (
-                  <tr key={s.id} className="border-t">
+                  <tr key={s.id}>
                     <td className="font-mono text-xs">{s.id?.slice(0,8)}</td>
                     <td>{s.products?.name || s.product_id}</td>
                     <td>{s.status}</td>
@@ -35,7 +35,7 @@ export default function ShipmentsTab({ partnerId, partnerProfile }) {
                 ))}
                 {loading && <tr><td colSpan={5}>Loading…</td></tr>}
               </tbody>
-            </table>
+            </table></div>
           </div>
 
           <Pagination page={page} total={total} pageSize={pageSize} onPageChange={setPage} />
