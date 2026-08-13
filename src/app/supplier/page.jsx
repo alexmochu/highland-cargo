@@ -1,8 +1,9 @@
 "use client";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, BookOpen } from "lucide-react";
 import { useAuth } from "@/components/auth-provider";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 import OverviewTab from "@/components/supplier-dashboard/OverviewTab";
 import ShipmentsTab from "@/components/supplier-dashboard/ShipmentsTab";
@@ -21,12 +22,17 @@ export default function SupplierDashboard() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-4 mb-8"
+          className="flex items-center justify-between gap-4 mb-8"
         >
-          <div className="bg-ink p-3 rounded-2xl">
-            <LayoutDashboard className="w-8 h-8 text-beacon" />
+          <div className="flex items-center gap-4">
+            <div className="bg-ink p-3 rounded-2xl">
+              <LayoutDashboard className="w-8 h-8 text-beacon" />
+            </div>
+            <h2 className="text-4xl font-bold text-ink">Supplier Dashboard</h2>
           </div>
-          <h2 className="text-4xl font-bold text-ink">Supplier Dashboard</h2>
+          <Link href="/docs" className="hidden sm:flex items-center gap-2 text-sm font-semibold text-text-2 hover:text-freight border border-line-strong px-3 py-2">
+            <BookOpen className="w-4 h-4" />Documentation
+          </Link>
         </motion.div>
 
         <Tabs defaultValue="overview">

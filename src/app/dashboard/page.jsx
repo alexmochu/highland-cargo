@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { LogOut, LayoutDashboard, Warehouse, AlertTriangle } from "lucide-react";
+import { LogOut, LayoutDashboard, Warehouse, AlertTriangle, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/components/auth-provider";
 import { useRouter } from "next/navigation";
@@ -84,6 +84,9 @@ export default function ClientDashboard() {
             </div>
             <h2 className="text-4xl font-bold text-ink">My Dashboard</h2>
           </div>
+          <Link href="/docs" className="hidden sm:flex items-center gap-2 text-sm font-semibold text-text-2 hover:text-freight border border-line-strong px-3 py-2">
+            <BookOpen className="w-4 h-4" />Documentation
+          </Link>
         </motion.div>
 
         <Tabs defaultValue="overview">

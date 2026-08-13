@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button";
-import { Menu, User, LogOut, ChevronDown } from "lucide-react"
+import { Menu, User, LogOut, ChevronDown, BookOpen } from "lucide-react"
 import { useState, useTransition } from "react";
 import { useAuth } from "@/components/auth-provider"
 import { useTranslation } from "@/i18n/LocaleProvider";
@@ -156,6 +156,15 @@ export const Header = () => {
                       </DropdownMenuItem>
                     </>
                   )}
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/docs"
+                      className="flex items-center p-3 rounded-md hover:bg-paper-dim cursor-pointer"
+                    >
+                      <BookOpen className="mr-3 h-4 w-4 text-text-3" />
+                      {t("header.documentation")}
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleLogout}
@@ -234,6 +243,9 @@ export const Header = () => {
                         {t("header.partner")}
                       </Link>
                     )}
+                    <Link href="/docs" className="block px-4 py-3 rounded-xl text-sm font-medium text-text-2 hover:text-ink hover:bg-paper-dim">
+                      {t("header.documentation")}
+                    </Link>
                     <button
                       onClick={handleLogout}
                       disabled={isPending}

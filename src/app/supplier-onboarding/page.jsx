@@ -3,6 +3,7 @@ import Stepper from "./Stepper";
 import { useAuth } from "@/components/auth-provider"
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
+import { CircleCheck } from "lucide-react";
 
 export default function SupplierOnboardingPage() {
   const supabase = createClient()
@@ -56,7 +57,9 @@ export default function SupplierOnboardingPage() {
     return (
       <div className="min-h-screen bg-paper-dim flex items-center justify-center">
         <div className="text-center p-10 bg-white rounded-3xl shadow-xl">
-          <h1 className="text-4xl font-bold text-ink mb-4">You’re already verified ✅</h1>
+          <h1 className="text-4xl font-bold text-ink mb-4 flex items-center justify-center gap-3">
+            You’re already verified <CircleCheck className="w-8 h-8 text-freight" />
+          </h1>
           <p className="text-lg text-text-2">Redirecting to dashboard...</p>
         </div>
       </div>

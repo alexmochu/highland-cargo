@@ -8,7 +8,7 @@ import { canViewModule } from "@/lib/permissions";
 import {
   LayoutDashboard, Package, Truck, Warehouse, Contact, UserCog,
   ChevronDown, ChevronLeft, ChevronRight, LogOut, Loader2, ShieldAlert,
-  ShoppingCart, FileText, ShoppingBag, Boxes, Wallet, Terminal, BarChart3, Settings, Briefcase,
+  ShoppingCart, FileText, ShoppingBag, Boxes, Wallet, Terminal, BarChart3, Settings, Briefcase, BookOpen,
 } from "lucide-react";
 
 // Roles that can reach /admin at all (module-level visibility is then
@@ -78,6 +78,7 @@ const NAV_ITEMS = [
     ],
   },
   { name: "Settings", href: "/admin/settings", icon: Settings, module: "settings" },
+  { name: "Documentation", href: "/docs", icon: BookOpen, module: null },
 ];
 
 export default function AdminLayout({ children }) {

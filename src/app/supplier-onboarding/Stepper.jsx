@@ -7,6 +7,7 @@ import ProductQuickAdd from "./steps/ProductQuickAdd";
 import BankSetup from "./steps/BankSetup";
 import KYCUpload from "./steps/KYCUpload";
 import { motion } from "framer-motion";
+import { CircleCheck } from "lucide-react";
 
 const steps = [
   { id: 1, title: "Company Details", component: CompanyDetails },
@@ -48,7 +49,8 @@ export default function Stepper({ userId, supplierId }) {
   if (!CurrentStep) return (
     <div className="min-h-screen bg-paper-dim flex items-center justify-center">
       <div className="text-center p-10 bg-white rounded-3xl shadow-xl">
-        <h1 className="text-4xl font-bold text-ink mb-4">All steps completed 🎉</h1>
+        <CircleCheck className="w-12 h-12 text-freight mx-auto mb-4" />
+        <h1 className="text-4xl font-bold text-ink mb-4">All steps completed</h1>
         <p className="text-lg text-text-2">You&apos;re all set up! Check your dashboard for more details.</p>
       </div>
     </div>

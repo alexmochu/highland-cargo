@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase'
 
 // Routes that require a signed-in user.
-const protectedRoutes = ['/coming-soon', '/dashboard', '/messages', '/profile', '/admin', '/supplier', '/partner', '/choose-role', '/pos']
+const protectedRoutes = ['/coming-soon', '/dashboard', '/messages', '/profile', '/admin', '/supplier', '/partner', '/choose-role', '/pos', '/docs']
 // Routes that additionally require profiles.is_admin === true, or one of the operational roles below.
 const adminRoutes = ['/admin', '/pos']
 const ADMIN_AREA_ROLES = ['admin', 'manager', 'accountant', 'warehouse_staff', 'sales_agent', 'cashier']

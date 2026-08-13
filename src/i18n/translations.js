@@ -10,6 +10,7 @@ export const translations = {
       administrator: "Administrator",
       supplier: "Supplier",
       dashboard: "Dashboard",
+      documentation: "Documentation",
       partner: "Partner",
       logout: "Logout",
     },
@@ -34,6 +35,26 @@ export const translations = {
       tag3Label: "Air, sea and last-mile, one manifest",
       tag4Num: "24/7",
       tag4Label: "Live tracking, no phone calls needed",
+    },
+    partnerCatalogs: {
+      badge: "Global Partners",
+      title: "Partner product catalogs",
+      subtitle: "Explore exclusive products from our partners in Dubai, China, and the UK. Sign up or log in to see full details and place your order directly.",
+      viewProducts: "View products",
+      regions: {
+        dubai: { name: "Dubai", desc: "Best selection of electronics, fashion and more from Dubai." },
+        china: { name: "China", desc: "Manufacturing powerhouse. Direct deals on all categories from China." },
+        uk: { name: "UK", desc: "Premium UK products, trusted European brands and more." },
+      },
+    },
+    testimonials: {
+      badge: "Testimonials",
+      title: "What our clients say",
+      items: [
+        { name: "Lucy Wangari", title: "Procurement Specialist, Nairobi", review: "Highland Cargo made international shipping smooth and fast. The team is responsive and trustworthy!", rating: 5 },
+        { name: "David Musoke", title: "Retail Business Owner, Kampala", review: "Superb local delivery and tracking. I always get my goods on time.", rating: 4 },
+        { name: "Elizabeth Chen", title: "Ecommerce Operations, Shanghai", review: "Professional, efficient, and reliable in warehousing and customs help.", rating: 5 },
+      ],
     },
     services: {
       badge: "Our Services",
@@ -197,6 +218,7 @@ export const translations = {
       administrator: "Msimamizi",
       supplier: "Msambazaji",
       dashboard: "Dashibodi",
+      documentation: "Nyaraka",
       partner: "Mshirika",
       logout: "Toka",
     },
@@ -221,6 +243,26 @@ export const translations = {
       tag3Label: "Anga, bahari na usafirishaji wa mwisho, hati moja",
       tag4Num: "24/7",
       tag4Label: "Ufuatiliaji wa moja kwa moja, bila simu",
+    },
+    partnerCatalogs: {
+      badge: "Washirika wa Kimataifa",
+      title: "Katalogi za bidhaa za washirika",
+      subtitle: "Chunguza bidhaa maalum kutoka kwa washirika wetu wa Dubai, China, na Uingereza. Jisajili au ingia ili kuona maelezo kamili na kuagiza moja kwa moja.",
+      viewProducts: "Angalia bidhaa",
+      regions: {
+        dubai: { name: "Dubai", desc: "Uteuzi bora wa vifaa vya elektroniki, mitindo na zaidi kutoka Dubai." },
+        china: { name: "China", desc: "Kiwanda kikuu cha utengenezaji. Mikataba ya moja kwa moja kwa kategoria zote kutoka China." },
+        uk: { name: "Uingereza", desc: "Bidhaa bora za Uingereza, chapa za Ulaya zinazoaminika na zaidi." },
+      },
+    },
+    testimonials: {
+      badge: "Ushuhuda",
+      title: "Wateja wetu wanasema nini",
+      items: [
+        { name: "Lucy Wangari", title: "Mtaalamu wa Ununuzi, Nairobi", review: "Highland Cargo ilifanya usafirishaji wa kimataifa kuwa laini na wa haraka. Timu ni yenye kuitikia na ya kuaminika!", rating: 5 },
+        { name: "David Musoke", title: "Mmiliki wa Biashara ya Rejareja, Kampala", review: "Uwasilishaji na ufuatiliaji bora wa ndani. Mimi hupata bidhaa zangu kwa wakati kila mara.", rating: 4 },
+        { name: "Elizabeth Chen", title: "Uendeshaji wa Biashara Mtandaoni, Shanghai", review: "Wataalamu, wenye ufanisi, na wa kuaminika katika uhifadhi na usaidizi wa forodha.", rating: 5 },
+      ],
     },
     services: {
       badge: "Huduma Zetu",
@@ -384,6 +426,7 @@ export const translations = {
       administrator: "管理员",
       supplier: "供应商",
       dashboard: "控制台",
+      documentation: "使用文档",
       partner: "合作伙伴",
       logout: "退出登录",
     },
@@ -408,6 +451,26 @@ export const translations = {
       tag3Label: "空运、海运与末端配送，一张舱单",
       tag4Num: "24/7",
       tag4Label: "实时追踪，无需致电",
+    },
+    partnerCatalogs: {
+      badge: "全球合作伙伴",
+      title: "合作伙伴产品目录",
+      subtitle: "探索我们在迪拜、中国和英国合作伙伴的独家产品。注册或登录以查看完整详情并直接下单。",
+      viewProducts: "查看产品",
+      regions: {
+        dubai: { name: "迪拜", desc: "迪拜精选电子产品、时尚单品等。" },
+        china: { name: "中国", desc: "制造业强国，各品类直接优惠。" },
+        uk: { name: "英国", desc: "优质英国产品及值得信赖的欧洲品牌等。" },
+      },
+    },
+    testimonials: {
+      badge: "客户评价",
+      title: "客户怎么说",
+      items: [
+        { name: "Lucy Wangari", title: "采购专员，内罗毕", review: "Highland Cargo 让国际运输变得顺畅快捷。团队响应迅速、值得信赖！", rating: 5 },
+        { name: "David Musoke", title: "零售企业主，坎帕拉", review: "本地配送和追踪都很出色，货物总能准时送达。", rating: 4 },
+        { name: "Elizabeth Chen", title: "电商运营，上海", review: "在仓储和清关方面专业、高效、可靠。", rating: 5 },
+      ],
     },
     services: {
       badge: "我们的服务",
@@ -571,6 +634,7 @@ export const translations = {
       administrator: "المدير",
       supplier: "المورّد",
       dashboard: "لوحة التحكم",
+      documentation: "الدليل",
       partner: "الشريك",
       logout: "تسجيل الخروج",
     },
@@ -595,6 +659,26 @@ export const translations = {
       tag3Label: "جوي وبحري وتوصيل أخير، بمستند واحد",
       tag4Num: "24/7",
       tag4Label: "تتبّع مباشر دون اتصال هاتفي",
+    },
+    partnerCatalogs: {
+      badge: "شركاؤنا حول العالم",
+      title: "كتالوجات منتجات الشركاء",
+      subtitle: "تصفح منتجات حصرية من شركائنا في دبي والصين والمملكة المتحدة. سجّل أو سجّل الدخول للاطلاع على التفاصيل الكاملة وتقديم طلبك مباشرة.",
+      viewProducts: "عرض المنتجات",
+      regions: {
+        dubai: { name: "دبي", desc: "أفضل تشكيلة من الإلكترونيات والأزياء والمزيد من دبي." },
+        china: { name: "الصين", desc: "قوة تصنيع عالمية. صفقات مباشرة في جميع الفئات من الصين." },
+        uk: { name: "المملكة المتحدة", desc: "منتجات بريطانية فاخرة وعلامات تجارية أوروبية موثوقة والمزيد." },
+      },
+    },
+    testimonials: {
+      badge: "آراء العملاء",
+      title: "ماذا يقول عملاؤنا",
+      items: [
+        { name: "Lucy Wangari", title: "أخصائية مشتريات، نيروبي", review: "جعلت Highland Cargo الشحن الدولي سلساً وسريعاً. الفريق سريع الاستجابة وموثوق!", rating: 5 },
+        { name: "David Musoke", title: "صاحب متجر تجزئة، كمبالا", review: "توصيل محلي وتتبع ممتازان. أستلم بضائعي دائماً في الموعد.", rating: 4 },
+        { name: "Elizabeth Chen", title: "عمليات تجارة إلكترونية، شنغهاي", review: "احترافية وكفاءة وموثوقية في التخزين والدعم الجمركي.", rating: 5 },
+      ],
     },
     services: {
       badge: "خدماتنا",
