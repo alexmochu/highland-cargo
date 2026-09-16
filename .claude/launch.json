@@ -7,6 +7,15 @@
       "runtimeArgs": ["run", "dev"],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "highland-cargo-mobile-web",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "cd /home/gralex/Desktop/highland/highland-android && source ~/.nvm/nvm.sh && nvm use 24.14.0 && exec npx expo start --web --port 8082"
+      ],
+      "port": 8082
     }
   ]
 }
